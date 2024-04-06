@@ -25,7 +25,8 @@ class EbayController extends Controller
     $redirectUri = env('EBAY_REDIRECT_URI');
 
     $code = $request->query('code');
-
+    $code = $request->query('code');
+    dd($code);
     $response = Http::asForm()->post('https://api.sandbox.ebay.com/identity/v1/oauth2/token', [
         'grant_type' => 'authorization_code',
         'code' => $code,
