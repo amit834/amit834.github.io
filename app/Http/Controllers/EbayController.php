@@ -11,7 +11,7 @@ class EbayController extends Controller
     private $clientSecret = 'SBX-ac328802bbb4-f074-4aca-ac7e-ecfd';
     private $redirectUri = 'https://pixxeluclients.com/php-dev/ebay-connection/ebay/callback';
     private $authUrl = 'https://auth.sandbox.ebay.com/oauth2/authorize?client_id={$clientId}&redirect_uri=" . urlencode($redirectUri) . "&response_type=code&scope=https://api.ebay.com/oauth/api_scope';
-    private $tokenUrl = 'https://api.ebay.com/identity/v1/oauth2/token';
+    private $tokenUrl = 'https://api.sandbox.ebay.com/identity/v1/oauth2/token';
     public function auth(Request $request)
     {
      
