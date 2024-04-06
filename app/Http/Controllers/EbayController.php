@@ -10,8 +10,10 @@ class EbayController extends Controller
     public function auth()
     {
         $clientId = env('EBAY_CLIENT_ID');
-        $redirectUri = env('EBAY_REDIRECT_URI');        
+        $redirectUri = urlencode(env('EBAY_REDIRECT_URI'));
+        
         $authUrl = "https://auth.sandbox.ebay.com/oauth2/authorize?client_id={$clientId}&redirect_uri={$redirectUri}&response_type=code&scope=https://api.ebay.com/oauth/api_scope";
+        
         return redirect()->away($authUrl);
     }
 
