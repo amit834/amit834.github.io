@@ -7,4 +7,4 @@ Route::get('/', function () {
 });
 
 Route::get('/ebay/auth', [App\Http\Controllers\EbayController::class, 'auth'])->name('ebay.auth');
-Route::get('/ebay/callback', 'EbayController@callback')->name('ebay.callback');
+Route::get('/ebay/callback', [App\Http\Controllers\EbayController::class, 'callback'])->name('ebay.callback');
