@@ -49,7 +49,6 @@ class EbayController extends Controller
                 $accessToken = $responseData['access_token'];
     
                 // You can store $accessToken in the session or database for future use.
-    
                 return "Access Token: $accessToken";
             } else {
                 // Access token not found in the response
@@ -57,9 +56,13 @@ class EbayController extends Controller
             }
         } else {
             // Request was not successful, handle the error
-            return "Error: Request failed with status code " . $response->status();
+            $statusCode = $response->status();
+            $errorResponse = $response->json();
+    
+            return "Error: Request failed with status code $statusCode. Response: " . json_encode($errorResponse);
         }
     }
+    
     
 }
  
