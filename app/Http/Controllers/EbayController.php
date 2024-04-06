@@ -34,7 +34,7 @@ class EbayController extends Controller
             'client_id' => $clientId,
             'client_secret' => $clientSecret,
         ]);
-        print $response->getBody();
+        
         $accessToken = $response->json()['access_token'];
 
         // You can store $accessToken in the session or database for future use.
