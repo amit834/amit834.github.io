@@ -46,14 +46,12 @@ class EbayController extends Controller
             // For example, you might want to save it to the user's session or associate it with their account.
             return "Access Token: $accessToken";
         } else {
-            // If access_token is not present in the response, log the response for debugging
-            Log::error("Access token not found in eBay OAuth response: " . json_encode($responseData));
-            return "Error: Access token not found in response. Please check logs for details.";
+            // If access_token is not present in the response, print error message
+            return "Error: Access token not found in response. Please try again.";
         }
     } else {
-        // If the request was not successful, log the error response for debugging
-        Log::error("Error occurred during eBay OAuth request: " . $response->body());
-        return "Error: Failed to retrieve access token from eBay. Please check logs for details.";
+        // If the request was not successful, print error message
+        return "Error: Failed to retrieve access token from eBay. Please try again.";
     }
 }
 
