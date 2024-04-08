@@ -70,7 +70,7 @@ class EbayConnectionController extends Controller
         $refresh_token = $responseData['refresh_token'] ?? null;
         $refresh_token_expires_in = $responseData['refresh_token_expires_in'] ?? null;
         //Check if token is not null
-        if($access_token != null){
+        if($access_token){
             //update user token
             $update_user = User::Where('id',$login_user_id)->update(['ebay_token' => $access_token, 'ebay_expires_in' => $expires_in, 'ebay_refresh_token' => $refresh_token, 'ebay_refresh_token_expires_in' => $refresh_token_expires_in]);
 
