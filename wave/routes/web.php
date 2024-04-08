@@ -76,7 +76,7 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::get('customer/manage-rules', [Wave\Http\Controllers\Customer\DashboardController::class, 'manage_rules']);
 		Route::get('customer/product-images', [Wave\Http\Controllers\Customer\DashboardController::class, 'product_images']);
 		Route::get('customer/product-data', [Wave\Http\Controllers\Customer\DashboardController::class, 'product_data']);
-		Route::get('customer/account', [Wave\Http\Controllers\Customer\DashboardController::class, 'account']);
+		Route::get('customer/my-account', [Wave\Http\Controllers\Customer\ProfileController::class, 'my_account']);
 		Route::post('customer/update-email', [Wave\Http\Controllers\Customer\ProfileController::class, 'update_profile_email'])->name('update.email');
 		Route::post('customer/update-password', [Wave\Http\Controllers\Customer\ProfileController::class, 'update_profile_password'])->name('update.password');
 		Route::post('customer/submit-profile-details', [Wave\Http\Controllers\Customer\ProfileController::class, 'submit_profile_details'])->name('submit.profile.details');

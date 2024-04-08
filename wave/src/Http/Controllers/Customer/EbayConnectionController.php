@@ -17,14 +17,14 @@ class EbayConnectionController extends Controller
         //Call Api Perameters
         $api_endpoint = env('EBAY_API_URI');
         $clientId = env('EBAY_APP_ID');
-        $redirectUri = url('/').'customer/get-ebay-connection';
+        $redirectUri = url('/').'/customer/get-ebay-connection';
         $scope = 'https://api.ebay.com/oauth/api_scope';
 
         //Api Url
         $authUrl = $api_endpoint."/oauth2/authorize?client_id=".$clientId."&response_type=code&redirect_uri=".$redirectUri."&scope=".$scope;
 
         // Redirect user to eBay sign-in page
-        echo '<p stype="color:green;">Please Wait..</p>';
+        echo '<p style="color:green;">Please Wait..</p>';
         echo '<script>setTimeout(function() { window.location.href = "' . $authUrl . '"; }, 3000);</script>';
     }
 
@@ -37,10 +37,11 @@ class EbayConnectionController extends Controller
 
         // Authorization code received from eBay
         $code = $_GET['code']; 
+        $api_endpoint = env('EBAY_API_URI');
         $tokenUrl =  $api_endpoint."/identity/v1/oauth2/token";
         $clientId = env('EBAY_APP_ID');
         $clientSecret = env('EBAY_CLIENT_SECRET');
-        $redirectUri = url('/').'customer/get-ebay-connection';; 
+        $redirectUri = url('/').'/customer/get-ebay-connection';; 
 
         //Data for passing
         $data = [
@@ -74,10 +75,10 @@ class EbayConnectionController extends Controller
             $update_user = User::Where('id',$login_user_id)->update(['ebay_token' => $access_token, 'ebay_expires_in' => $expires_in, 'ebay_refresh_token' => $refresh_token, 'ebay_refresh_token_expires_in' => $refresh_token_expires_in]);
 
             // Redirect after successful authentication
-            return redirect()->route('customer/account')->with('success', 'eBay Authentication Successfully Done.');
+            return redirect()->route('customer/my-account')->with('success', 'eBay Authentication Successfully Done.');
         } else { 
             // Redirect after successful authentication
-            return redirect()->route('customer/account')->with('unsuccess', 'Oops Something Wrong With eBay Authentication.');
+            return redirect()->route('customer/my-account')->with('unsuccess', 'Oops Something Wrong With eBay Authentication.');
         }
     }
 }

@@ -11,7 +11,7 @@
    <div class="right-header">
       <ul>
          <li>
-            <a href="{{ url('customer/account') }}">
+            <a href="{{ url('customer/my-account') }}">
                <div class="profile-imge"><img src="{{ asset('themes/tailwind/customer/assets/images/profile.png') }}" /></div>
             </a>
          </li>

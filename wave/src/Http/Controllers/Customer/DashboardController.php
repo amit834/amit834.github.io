@@ -44,11 +44,4 @@ class DashboardController extends Controller
     public function product_data(){
         return view('theme::customer.product-data');
     }
-	
-	public function account(){
-        //Auth details
-        $user_id = auth()->id();
-        $user_details = User::Where('id', $user_id)->first();
-        return view('theme::customer.account', compact('user_details'));
-    }
 }
