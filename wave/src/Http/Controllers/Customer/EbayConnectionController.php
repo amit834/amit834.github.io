@@ -69,7 +69,7 @@ class EbayConnectionController extends Controller
         curl_close($ch);
         //Responce json to array decode
         echo $responseData = json_decode($response, true);
-        echo "<pre>"; print_r($responseData); exit; 
+        echo "<pre>"; print_r($response); exit; 
         $access_token = $responseData['access_token'] ?? null;
         $expires_in = $responseData['expires_in'] ?? null;
         $refresh_token = $responseData['refresh_token'] ?? null;
