@@ -592,15 +592,15 @@
                                     @csrf
                                     <div class="input-popup-row">
                                        <label>User Name</label>
-                                       <input type="text" name="ebay_user_name" id="ebay_user_name"
-                                          placeholder="" required />
+                                       <input type="text" name="ebay_user_name" id="ebay_user_name" value="{{ $user_details->ebay_username }}"
+                                          placeholder="" />
                                     </div>
                                     <div class="input-popup-row">
                                        <label>Marketplace</label>
                                        <div class="select">
-                                          <select name="ebay_user_marketplace" id="ebay_user_marketplace"
-                                             required>
-                                             <option value="Australia -- ebay.com.au">Australia --
+                                          <select name="ebay_user_marketplace" id="ebay_user_marketplace">
+                                             <option value="Australia -- ebay.com.au" <?php if($user_details->ebay_marketplace == 'Australia --
+                                                ebay.com.au') echo "selected"; ?>>Australia --
                                                 ebay.com.au
                                              </option>
                                              <option value="Austria -- ebay.at">Austria -- ebay.at
