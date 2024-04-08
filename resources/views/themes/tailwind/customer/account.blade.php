@@ -573,11 +573,11 @@
                   <div class="ebay-account-box-right">
                      <div class="radio-box">
                         <label class="switch" for="ebay_checkbox">
-                           <input type="checkbox" id="ebay_checkbox" name="ebay_checkbox" class="ebay_checkbox" <?php if($user_details->is_ebay_connection != "enable"){ echo 'checked="checked"'; } ?>>
+                           <input type="checkbox" id="ebay_checkbox" name="ebay_checkbox" class="ebay_checkbox" <?php if($user_details->is_ebay_connection == "enable"){ echo 'checked="checked"'; } ?>>
                            <div class="slider round"></div>
                         </label>
                      </div>
-                     <div class="popup-box is_ebay_connection" <?php if($user_details->is_ebay_connection == "enable"){ echo 'style="display:none;"'; } ?>>
+                     <div class="popup-box is_ebay_connection" <?php if($user_details->is_ebay_connection != "enable"){ echo 'style="display:none;"'; } ?>>
                         <a href="#modal-10" class="link"><span>+</span> New Connection</a>
                         <div data-ml-modal id="modal-10">
                            <a href="#!" class="modal-overlay"></a>
