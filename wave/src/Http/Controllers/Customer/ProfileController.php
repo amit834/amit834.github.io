@@ -20,60 +20,79 @@ class ProfileController extends Controller
         return view('theme::customer.account', compact('user_details'));
     }
 
-    //update profile email address
-    public function update_profile_email(Request $request)
-    {
-        $user = Auth::user();
-        $newEmail = $request->input('email');          
-        $update_email = User::where('id', $user->id)->update([
-            'email' => $newEmail
-        ]);
-        //check if password updated or not
-        if ($update_email) {
-            echo '<div class="success" style="color:green">Email updated successfully</div>';
-            echo '<script> setTimeout(function () { window.location.href = "/customer/my-account"; }, 3000);</script>';
+    //Chnage email address
+    public function update_profile_email(Request $request){
+        //Login user id
+        $login_user_id = Auth::id();
+        
+        $email = $request->email;  
+        //Check if email is exit or not
+        $IsEmailExits = User::where('email', $email)->exists();
+        if($IsEmailExits){
+            echo '<p style="color:red">Email Already Exist. Please try with new email address.</p>';
         } else {
-            echo '<div class="error" style="color:red">Oops, something went wrong</div>';
-        }
+            //Update email address
+            $update_email = User::where('id', $login_user_id)->update(['email' => $email]);
+            //check if email updated or not
+            if ($update_email) {
+                $url = url('/').'/customer/my-account';
+                echo '<p style="color:green">Email Changed Successfully.</p>';
+                echo '<script>setTimeout(function() { window.location.href = "' . $url . '"; }, 3000);</script>';
+            } else {
+                echo '<p style="color:red">Oops, something went wrong</p>';
+            }
+        }        
     }
 
     //update profile password
     public function update_profile_password(Request $request){
         $user = Auth::user();
-        $newPassword =  $hashedPassword = Hash::make($request->password); 
-        $update_password = User::where('id', $user->id)->update([
-            'password' =>  $newPassword 
-        ]);
-        //check if password updated or not
-        if ($update_password) {
-            echo '<div class="success" style="color:green">Password updated successfully</div>';
-            echo '<script> setTimeout(function () { window.location.href = "/customer/my-account"; }, 3000);</script>';
+
+        //Check if new password and confirm password matched
+        if($request->new_password != $request->confirm_password) {
+            echo '<p style="color:red">Your new password and confirm password does not matched.</p>';
         } else {
-            echo '<div class="error" style="color:red">Oops, something went wrong</div>';
+            //Check old password 
+            if(!Hash::check($request->old_password, $user->password)){
+                echo '<p style="color:red">Your current password does not match with the password you provided.</p>';
+            } else {
+                //hash password
+                $newPassword = Hash::make($request->new_password); 
+                $update_password = User::where('id', $user->id)->update(['password' =>  $newPassword]);
+                //check if password updated or not
+                if($update_password) {
+                    $url = url('/').'/customer/my-account';
+                    
+                    echo '<p style="color:green">Password updated successfully</p>';
+                    echo '<script>setTimeout(function() { window.location.href = "' . $url . '"; }, 3000);</script>';
+                } else {
+                    echo '<div class="error" style="color:red">Oops, something went wrong</div>';
+                }
+            }
         }
     }
 
-   //function to insert into user table
+   //Function for update user profile info
    public function submit_profile_details(Request $request){
-        $user = Auth::user();
-        $name = $request->input('fname');
-        $country = $request->input('country');
-        $language = $request->input('language');
-        $timezone = $request->input('timezone');
-        $currency = $request->input('currency');
-        //insert data into database table
-        $post_data = User::where('id', $user->id)->update([
-            'name' => $name,
-            'country' => $country,
-            'language' => $language,
-            'time_zone' => $timezone,
-            'currency' => $currency,
+        //Login user id
+        $login_user_id = Auth::id();
+
+        //Update login user data
+        $is_update = User::where('id', $login_user_id)->update([
+            'name' => $request->name,
+            'country' => $request->country,
+            'language' => $request->language,
+            'time_zone' => $request->time_zone,
+            'currency' => $request->currency,
         ]);
-        //check if data is inserted or not
-        if ($post_data) {
-            return back()->with('success','Profile details updated Successfully');
+        //check if data is updated or not
+        if ($is_update) {
+            $url = url('/').'/customer/my-account';
+
+            echo '<p style="color:green">Profile details has been updated Successfully</p>';
+            echo '<script>setTimeout(function() { window.location.href = "' . $url . '"; }, 3000);</script>';
         } else {
-            return back()->with('error','Opps Something wrong!');
+            echo '<p style="color:green">Opps Something wrong!</p>';
         }
     }
 }

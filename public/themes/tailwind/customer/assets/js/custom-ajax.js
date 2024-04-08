@@ -1,7 +1,6 @@
 //employee bank account details
 $(document).ready(function () {
-    
-    //Form validation
+    //Submit ebay connection
     $('#submit_ebay_connetion').validate({
         rules: {
             ebay_user_name: {
@@ -30,7 +29,6 @@ $(document).ready(function () {
                 },
                 success: function (response) {
                     $('.submit_ebay_connetion_res').html(response);
-                    $(".disable-submit").prop('disabled', false);
                 }
             });
         }
@@ -44,70 +42,108 @@ $(document).ready(function () {
         } else {
             $(".is_ebay_connection").hide();
         }
-       
-        /*var attachmentt_id = $(this).data('attachmentt_id');
-        
-        //Ajax call
-        jQuery.ajax({  
-            type: "GET",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }, 
-            url: base_url+"/company/delete-attchements", 
-            data: {
-                _token : $('meta[name="csrf-token"]').attr('content'), 
-                attachmentt_id:attachmentt_id
-            }, 
-            beforeSend: function() {
-                ThisIs.attr('disabled', true);
+    });
+
+    //Submit User profile details
+    $('#submit_profile_details').validate({
+        rules: {
+            name: {
+                required: true,
             },
-            success: function(response) {
-                ThisIs.attr('disabled', false);
-                $(".delete_attchemen_responce").html(response);
-            }
-        });*/
+        },
+        messages: { },
+        submitHandler: function (form, e) {
+            e.preventDefault();
+
+            var formData = $(form).serialize();
+          
+            //Ajax submit form
+            $.ajax({
+                type: 'POST',
+                url: base_url + '/customer/submit-profile-details',
+                data: formData,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                beforeSend: function () {
+                    $('.disable-submit').prop('disabled', true);
+                },
+                success: function (response) {
+                    $('.submit_profile_details_res').html(response);
+                    $('.disable-submit').prop('disabled', false);
+                }
+            });
+        }
     });
 
-    //update profile email address
-    $('#update_profile_email').submit(function(e) {
-        e.preventDefault();
-        var email = $('#email').val();
-        $.ajax({
-            type: "POST",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }, 
-            url: base_url+"/customer/update-email",
-            data:{ email: email },
-            success: function(response) {
-                if (response.success) {
-                    $('.submit_email_res').html(response);
-                }else{
-                    $('.submit_email_res').html(response);
+     //Change user email address
+     $('#chanage_email_address').validate({
+        rules: {
+            email: {
+                required: true,
+            },
+        },
+        messages: { },
+        submitHandler: function (form, e) {
+            e.preventDefault();
+
+            var formData = $(form).serialize();
+          
+            //Ajax submit form
+            $.ajax({
+                type: 'POST',
+                url: base_url + '/customer/update-email',
+                data: formData,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                beforeSend: function () {
+                    $('.disable-submit').prop('disabled', true);
+                },
+                success: function (response) {
+                    $('.chanage_email_address_res').html(response);
+                    $('.disable-submit').prop('disabled', false);
                 }
-            }
-        });
+            });
+        }
     });
 
-    //update profile password
-    $('#update_profile_password').submit(function(e) {
-        e.preventDefault();
-        var password = $('#password').val();
-        $.ajax({
-            type: "POST",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }, 
-            url: base_url+"/customer/update-password",
-            data:{ password: password },
-            success: function(response) {
-                if (response.success) {
-                    $('.submit_password_res').html(response);
-                }else{
-                    $('.submit_password_res').html(response);
+    //Change password
+    $('#submit_change_password').validate({
+        rules: {
+            old_password: {
+                required: true,
+            },
+            new_password: {
+                required: true,
+            },
+            confirm_password: {
+                required: true,
+            },
+        },
+        messages: { },
+        submitHandler: function (form, e) {
+            e.preventDefault();
+
+            var formData = $(form).serialize();
+          
+            //Ajax submit form
+            $.ajax({
+                type: 'POST',
+                url: base_url + '/customer/update-password',
+                data: formData,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                beforeSend: function () {
+                    $('.disable-submit').prop('disabled', true);
+                },
+                success: function (response) {
+                    $('.submit_change_password_res').html(response);
+                    $('.disable-submit').prop('disabled', false);
                 }
-            }
-        });
+            });
+        }
     });
 });
 
