@@ -75,10 +75,10 @@ class EbayConnectionController extends Controller
             $update_user = User::Where('id',$login_user_id)->update(['ebay_token' => $access_token, 'ebay_expires_in' => $expires_in, 'ebay_refresh_token' => $refresh_token, 'ebay_refresh_token_expires_in' => $refresh_token_expires_in]);
 
             // Redirect after successful authentication
-            return redirect()->route('customer/my-account')->with('success', 'eBay Authentication Successfully Done.');
+            return redirect('customer/my-account')->with('success', 'eBay Authentication Successfully Done.');
         } else { 
             // Redirect after successful authentication
-            return redirect()->route('customer/my-account')->with('unsuccess', 'Oops Something Wrong With eBay Authentication.');
+            return redirect('customer/my-account')->with('unsuccess', 'Oops Something Wrong With eBay Authentication.');
         }
     }
 }
