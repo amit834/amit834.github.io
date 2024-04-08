@@ -14,6 +14,12 @@ class EbayConnectionController extends Controller
 {
     //Function to handle eBay connection and authorization
     public function submit_ebay_connection(Request $request) {
+        //Login user id
+        $login_user_id = Auth::id();
+        
+        //update user token
+        $update_user = User::Where('id',$login_user_id)->update(['is_ebay_connection' => 'enable', 'ebay_username' => $request->ebay_user_name, 'ebay_marketplace' => $request->ebay_user_marketplace]);
+        
         //Call Api Perameters
         $api_endpoint = env('EBAY_API_URI');
         $clientId = env('EBAY_APP_ID');
@@ -32,8 +38,6 @@ class EbayConnectionController extends Controller
     public function ebay_authorization_callback(Request $request) {
         //Login user id
         $login_user_id = Auth::id();
-        //update user token
-        $update_user = User::Where('id',$login_user_id)->update(['is_ebay_connection' => 'enable', 'ebay_username' => $request->ebay_user_name, 'ebay_marketplace' => $request->ebay_user_marketplace]);
 
         // Authorization code received from eBay
         $code = $_GET['code']; 
@@ -41,7 +45,7 @@ class EbayConnectionController extends Controller
         $tokenUrl =  $api_endpoint."/identity/v1/oauth2/token";
         $clientId = env('EBAY_APP_ID');
         $clientSecret = env('EBAY_CLIENT_SECRET');
-        $redirectUri = url('/').'/customer/get-ebay-connection';; 
+        $redirectUri = url('/').'/customer/submit-ebay-connection';
 
         //Data for passing
         $data = [
@@ -64,8 +68,8 @@ class EbayConnectionController extends Controller
         $response = curl_exec($ch);
         curl_close($ch);
         //Responce json to array decode
-        $responseData = json_decode($response, true);
-        echo "<pre>"; print_r($responseData); exit;
+        echo $responseData = json_decode($response, true);
+        echo "<pre>"; print_r($responseData); exit; 
         $access_token = $responseData['access_token'] ?? null;
         $expires_in = $responseData['expires_in'] ?? null;
         $refresh_token = $responseData['refresh_token'] ?? null;
