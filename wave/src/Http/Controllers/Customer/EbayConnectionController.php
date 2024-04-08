@@ -42,10 +42,10 @@ class EbayConnectionController extends Controller
         // Authorization code received from eBay
         $code = $_GET['code']; 
         $api_endpoint = env('EBAY_API_URI');
-        $tokenUrl =  $api_endpoint."/identity/v1/oauth2/token";
+        $tokenUrl =  "https://api.sandbox.ebay.com/identity/v1/oauth2/token";
         $clientId = env('EBAY_APP_ID');
         $clientSecret = env('EBAY_CLIENT_SECRET');
-        $redirectUri = url('/').'/customer/submit-ebay-connection';
+        $redirectUri = url('/').'/customer/get-ebay-connection';
 
         //Data for passing
         $data = [
