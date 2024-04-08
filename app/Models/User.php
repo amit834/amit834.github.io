@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Wave\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +17,23 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'username',
         'password',
+        'verification_code',
+        'verified',
+        'trial_ends_at',
+        'country',
+        'language',
+        'time_zone',
+        'currency',
+        'is_ebay_connection',
+        'ebay_username',
+        'ebay_marketplace',
+        'ebay_token',
+        'ebay_expires_in',
+        'ebay_refresh_token',
+        'ebay_refresh_token_expires_in',
+        'phone_number'
     ];
 
     /**
@@ -33,15 +47,11 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
-     * @return array<string, string>
+     * @var array<string, string>
      */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+    protected $casts = [
+        'trial_ends_at' => 'datetime',
+    ];
 }

@@ -1,0 +1,32 @@
+<svg width="165" height="73" viewBox="0 0 165 73" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g opacity="0.8">
+<rect width="165" height="72" fill="white"/>
+<line y1="0.7" x2="163" y2="0.7" stroke="#F5F5F5" stroke-width="0.6"/>
+<line x1="60.3" y1="1" x2="60.3" y2="73" stroke="#F5F5F5" stroke-width="0.6"/>
+<line x1="75.3" y1="1" x2="75.3" y2="73" stroke="#F5F5F5" stroke-width="0.6"/>
+<line x1="30.3" y1="1" x2="30.3" y2="73" stroke="#F5F5F5" stroke-width="0.6"/>
+<line x1="45.3" y1="1" x2="45.3" y2="73" stroke="#F5F5F5" stroke-width="0.6"/>
+<line x1="15.3" y1="1" x2="15.3" y2="73" stroke="#F5F5F5" stroke-width="0.6"/>
+<line x1="0.3" y1="1" x2="0.299997" y2="73" stroke="#F5F5F5" stroke-width="0.6"/>
+<line x1="89.3" y1="1" x2="89.3" y2="73" stroke="#F5F5F5" stroke-width="0.6"/>
+<line x1="104.3" y1="1" x2="104.3" y2="73" stroke="#F5F5F5" stroke-width="0.6"/>
+<line x1="119.3" y1="1" x2="119.3" y2="73" stroke="#F5F5F5" stroke-width="0.6"/>
+<line x1="134.3" y1="1" x2="134.3" y2="73" stroke="#F5F5F5" stroke-width="0.6"/>
+<line x1="148.3" y1="1" x2="148.3" y2="73" stroke="#F5F5F5" stroke-width="0.6"/>
+<line x1="163.3" y1="1" x2="163.3" y2="73" stroke="#F5F5F5" stroke-width="0.6"/>
+<line y1="9.7" x2="163" y2="9.7" stroke="#F5F5F5" stroke-width="0.6"/>
+<line y1="18.7" x2="163" y2="18.7" stroke="#F5F5F5" stroke-width="0.6"/>
+<line y1="27.7" x2="163" y2="27.7" stroke="#F5F5F5" stroke-width="0.6"/>
+<line y1="36.7" x2="163" y2="36.7" stroke="#F5F5F5" stroke-width="0.6"/>
+<line y1="45.7" x2="163" y2="45.7" stroke="#F5F5F5" stroke-width="0.6"/>
+<line y1="54.7" x2="163" y2="54.7" stroke="#F5F5F5" stroke-width="0.6"/>
+<line y1="63.7" x2="163" y2="63.7" stroke="#F5F5F5" stroke-width="0.6"/>
+<line y1="72.7" x2="163" y2="72.7" stroke="#F5F5F5" stroke-width="0.6"/>
+</g>
+<path d="M8 63.4757L41.806 49.9934L80.3516 28.4783L130.188 32.7045L159 8.5" stroke="#0046FE" stroke-width="1.5" stroke-linecap="round"/>
+<circle cx="8.5" cy="63" r="2.5" fill="white" stroke="#0046FE" stroke-width="2"/>
+<circle cx="42.5" cy="50" r="2.5" fill="white" stroke="#0046FE" stroke-width="2"/>
+<circle cx="80.5" cy="29" r="2.5" fill="white" stroke="#0046FE" stroke-width="2"/>
+<circle cx="129.5" cy="33" r="2.5" fill="white" stroke="#0046FE" stroke-width="2"/>
+<circle cx="157.5" cy="10" r="2.5" fill="white" stroke="#0046FE" stroke-width="2"/>
+</svg>
