@@ -59,7 +59,7 @@
                                                 value="{{$user_details->email}}" required />
                                           </div>
                                           <div class="from-button">
-                                             <button class="close-btn" type="button">Close</button>
+                                             <a href="#!" class="modal-close close-a-tage">Close</a>
                                              <button class="save-btn disable-submit" type="submit"
                                                 >Submit</button>                                                            
                                           </div>
@@ -101,7 +101,7 @@
                                              <input type="password" name="confirm_password" id="confirm_password" value="" />
                                           </div>
                                           <div class="from-button">
-                                             <button class="close-btn" type="button">Close</button>
+                                             <a href="#!" class="modal-close close-a-tage">Close</a>
                                              <button class="save-btn disable-submit"
                                                 type="submit">Submit</button>
                                           </div>
@@ -122,12 +122,19 @@
                </div>
                <div class="profile-details-box">
                   <form class="form-popup" id="submit_profile_details" action="#" method="POST" enctype="multipart/form-data">
-                     <div class="edit-profile">
-                        <img src="{{ asset('storage/'. $user_details->avatar) }}" />
-                        <button type="button" class="edite-profile"><img
-                           src="{{ asset('themes/tailwind/customer/assets/images/edit.png') }}" /></button>
-                        <button type="button" class="close-profile"><img
-                           src="{{ asset('themes/tailwind/customer/assets/images/close-image.png') }}" /></button>
+
+
+                     <div class="upload-profile">
+                        <div class="avatar-upload">
+                           <div class="avatar-edit">
+                               <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                               <label for="imageUpload"></label>
+                           </div>
+                           <div class="avatar-preview">
+                               <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+                               </div>
+                           </div>
+                       </div>
                      </div>
                      <div class="from-input-row">
                         <div class="from-input">
@@ -655,7 +662,7 @@
                                        <p>You will be redirected to eBay. Please verify</p>
                                     </div>
                                     <div class="from-button">
-                                       <button class="close-btn" type="button">Close</button>
+                                       <a href="#!" class="modal-close close-a-tage">Close</a>
                                        <button class="save-btn disable-submit"
                                           type="submit">Submit</button>
                                        <div class="submit_ebay_connetion_res"></div>
