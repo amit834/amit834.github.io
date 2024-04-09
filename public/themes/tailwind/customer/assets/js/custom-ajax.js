@@ -145,6 +145,47 @@ $(document).ready(function () {
             });
         }
     });
+
+    //Submit delete my account
+    $('#submit_delete_my_account').validate({
+        rules: {
+            confirm_account: {
+                required: true,
+            },
+        },
+        messages: {
+            confirm_account: {
+                required: "Please confirm your account deactivation by checking the box.",
+            },
+        },
+        submitHandler: function(form, e) {
+            e.preventDefault();
+    
+            // Check if the checkbox is checked before proceeding
+            if ($('#confirm_account').is(':checked')) {
+                var formData = $(form).serialize();
+    
+                // Ajax submit form
+                $.ajax({
+                    type: 'POST',
+                    url: base_url + '/customer/submit-delete-my-account',
+                    data: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    beforeSend: function() {
+                        $('.disable-submit').prop('disabled', true);
+                    },
+                    success: function(response) {
+                        $('.submit_delete_my_account_res').html(response);
+                        $('.disable-submit').prop('disabled', false);
+                    }
+                });
+            } else {
+                alert('Please confirm your account deactivation by checking the box.');
+            }
+        }
+    });    
 });
 
 

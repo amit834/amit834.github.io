@@ -95,4 +95,28 @@ class ProfileController extends Controller
             echo '<p style="color:green">Opps Something wrong!</p>';
         }
     }
+
+    //Function for delete my account
+   public function submit_delete_my_account(Request $request){
+        //Login user id
+        $login_user_id = Auth::id();
+
+        //Update login user data
+        $is_update = User::where('id', $login_user_id)->update([
+            'user_status' => 'Pending',
+            'ebay_token' => '', 
+            'ebay_expires_in' => '', 
+            'ebay_refresh_token' => '', 
+            'ebay_refresh_token_expires_in' => ''
+        ]);
+        //check if data is updated or not
+        if ($is_update) {
+            $url = url('/').'/customer/my-account';
+
+            echo '<p style="color:green">Your Account has been deleted Successfully</p>';
+            echo '<script>setTimeout(function() { window.location.href = "' . $url . '"; }, 3000);</script>';
+        } else {
+            echo '<p style="color:green">Opps Something wrong!</p>';
+        }
+    }
 }

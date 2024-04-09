@@ -80,6 +80,7 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::post('customer/update-email', [Wave\Http\Controllers\Customer\ProfileController::class, 'update_profile_email'])->name('update.email');
 		Route::post('customer/update-password', [Wave\Http\Controllers\Customer\ProfileController::class, 'update_profile_password'])->name('update.password');
 		Route::post('customer/submit-profile-details', [Wave\Http\Controllers\Customer\ProfileController::class, 'submit_profile_details'])->name('submit.profile.details');
+		Route::post('customer/submit-delete-my-account', [Wave\Http\Controllers\Customer\ProfileController::class, 'submit_delete_my_account'])->name('submit.dlete.my.account');
 		Route::post('customer/submit-ebay-connection', [Wave\Http\Controllers\Customer\EbayConnectionController::class, 'submit_ebay_connection'])->name('customer.submit.ebay.connection');;
 		Route::get('customer/get-ebay-connection', [Wave\Http\Controllers\Customer\EbayConnectionController::class, 'ebay_authorization_callback']);
 		

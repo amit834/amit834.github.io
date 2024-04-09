@@ -33,7 +33,8 @@ class User extends Authenticatable
         'ebay_expires_in',
         'ebay_refresh_token',
         'ebay_refresh_token_expires_in',
-        'phone_number'
+        'phone_number',
+        'user_status',
     ];
 
     /**

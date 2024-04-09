@@ -589,7 +589,6 @@
                               <div class="modal-content newspaper">
                                  <form class="form-popup" id="submit_ebay_connetion" action="#" method="POST"
                                     enctype="multipart/form-data">
-                                    @csrf
                                     <div class="input-popup-row">
                                        <label>User Name</label>
                                        <input type="text" name="ebay_user_name" id="ebay_user_name" value="{{ $user_details->ebay_username }}"
@@ -673,24 +672,27 @@
                <div class="overview-header">
                   <h2>Delete Account</h2>
                </div>
-               <div class="delete-account-box">
-                  <div class="delete-account-box-inner">
-                     <img src="{{ asset('themes/tailwind/customer/assets/images/alert-icon.svg') }}" />
-                     <div class="you-are-text">
-                        <span>You Are Deactivating Your Account</span>
-                        <p>For extra security, this requires you to confirm deletion with deactivation code,</p>
+               <form id="submit_delete_my_account" action="#" method="POST" enctype="multipart/form-data">
+                  <div class="delete-account-box">
+                     <div class="delete-account-box-inner">
+                        <img src="{{ asset('themes/tailwind/customer/assets/images/alert-icon.svg') }}" />
+                        <div class="you-are-text">
+                           <span>You Are Deactivating Your Account</span>
+                           <p>For extra security, this requires you to confirm deletion with deactivation code,</p>
+                        </div>
+                     </div>
+                     <div class="delete-check-box">
+                        <div class="form-group">
+                           <input type="checkbox" id="confirm_account" name="confirm_account" required>
+                           <label for="confirm_account">I confirm my account deactivation</label>
+                        </div>
+                     </div>
+                     <div class="delete-button-box">
+                        <button type="submit" class="disable-submit">Delete Account</button>
+                        <div class="submit_delete_my_account_res"></div>
                      </div>
                   </div>
-                  <div class="delete-check-box">
-                     <div class="form-group">
-                        <input type="checkbox" id="html">
-                        <label for="html">I confirm my account deactivation</label>
-                     </div>
-                  </div>
-                  <div class="delete-button-box">
-                     <button>Delete Account</button>
-                  </div>
-               </div>
+               </form>
             </div>
          </div>
       </div>
