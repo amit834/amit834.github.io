@@ -21,7 +21,7 @@
                </div>
                <div class="overview-profile">
                   <div class="overview-profile-img">
-                     <img src="{{ asset('storage/app/public/'. $user_details->avatar) }}" />
+                     <img src="{{ asset('storage/'. $user_details->avatar) }}" />
                   </div>
                   <div class="overview-profile-text">
                      <h4>{{ $user_details->name }}</h4>
@@ -130,7 +130,7 @@
                            </div>
                            <div class="avatar-preview">
                               @if($user_details->avatar)
-                              <div id="imagePreview" style="background-image: url(<?php echo asset('storage/app/public/'. $user_details->avatar); ?>);"></div>
+                              <div id="imagePreview" style="background-image: url(<?php echo asset('storage/'. $user_details->avatar); ?>);"></div>
                               @else
                               <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);"></div>
                               @endif

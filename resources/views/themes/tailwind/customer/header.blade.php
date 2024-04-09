@@ -12,7 +12,7 @@
       <ul>
          <li>
             <a href="{{ url('customer/my-account') }}">
-               <div class="profile-imge"><img src="{{ asset('storage/app/public/'.Auth::user()->avatar) }}" /></div>
+               <div class="profile-imge"><img src="{{ asset('storage/'.Auth::user()->avatar) }}" /></div>
             </a>
          </li>
          <li>
