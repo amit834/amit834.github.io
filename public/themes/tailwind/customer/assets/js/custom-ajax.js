@@ -51,30 +51,30 @@ $(document).ready(function () {
                 required: true,
             },
         },
-        messages: { },
-        submitHandler: function (form, e) {
-            e.preventDefault();
-
-            var formData = $(form).serialize();
-          
-            //Ajax submit form
-            $.ajax({
-                type: 'POST',
-                url: base_url + '/customer/submit-profile-details',
-                data: formData,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                beforeSend: function () {
-                    $('.disable-submit').prop('disabled', true);
-                },
-                success: function (response) {
-                    $('.submit_profile_details_res').html(response);
-                    $('.disable-submit').prop('disabled', false);
-                }
-            });
-        }
+        messages: {},
     });
+    $('#submit_profile_details').on('submit', function(e) {
+        e.preventDefault();
+    
+        var formData = new FormData(this);
+        $.ajax({
+            type: 'POST',
+            url: base_url + '/customer/submit-profile-details',
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            beforeSend: function() {
+                $('.disable-submit').prop('disabled', true);
+            },
+            success: function(response) {
+                $('.submit_profile_details_res').html(response);
+                $('.disable-submit').prop('disabled', false);
+            }
+        });
+    });    
 
      //Change user email address
      $('#chanage_email_address').validate({

@@ -21,7 +21,7 @@
                </div>
                <div class="overview-profile">
                   <div class="overview-profile-img">
-                     <img src="{{ asset('storage/'. $user_details->avatar) }}" />
+                     <img src="{{ asset('storage/app/public/'. $user_details->avatar) }}" />
                   </div>
                   <div class="overview-profile-text">
                      <h4>{{ $user_details->name }}</h4>
@@ -122,19 +122,20 @@
                </div>
                <div class="profile-details-box">
                   <form class="form-popup" id="submit_profile_details" action="#" method="POST" enctype="multipart/form-data">
-
-
                      <div class="upload-profile">
                         <div class="avatar-upload">
                            <div class="avatar-edit">
-                               <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-                               <label for="imageUpload"></label>
+                              <input type='file' id="imageUpload" name="imageUpload" accept=".png, .jpg, .jpeg" />
+                              <label for="imageUpload"></label>
                            </div>
                            <div class="avatar-preview">
-                               <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
-                               </div>
+                              @if($user_details->avatar)
+                              <div id="imagePreview" style="background-image: url(<?php echo asset('storage/app/public/'. $user_details->avatar); ?>);"></div>
+                              @else
+                              <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);"></div>
+                              @endif
                            </div>
-                       </div>
+                        </div>
                      </div>
                      <div class="from-input-row">
                         <div class="from-input">
@@ -149,197 +150,196 @@
                                  <option value="Afghanistan" <?php if($user_details->country == 'Afghanistan') echo "selected";?>>Afghanistan</option>
                                  <option value="Albania" <?php if($user_details->country == 'Albania') echo "selected";?>>Albania</option>
                                  <option value="Algeria" <?php if($user_details->country == 'Algeria') echo "selected";?>>Algeria</option>
-                                 <option value="4" <?php if($user_details->country == '4') echo"selected";?>>Andorra</option>
-                                 <option value="5" <?php if($user_details->country == '5') echo"selected";?>>Angola</option>
-                                 <option value="6" <?php if($user_details->country == '6') echo"selected";?>>Antigua and Barbuda</option>
-                                 <option value="7" <?php if($user_details->country == '7') echo"selected";?>>Argentina</option>
-                                 <option value="8" <?php if($user_details->country == '8') echo"selected";?>>Armenia</option>
-                                 <option value="9" <?php if($user_details->country == '9') echo"selected";?>>Australia</option>
-                                 <option value="10" <?php if($user_details->country == '10') echo"selected";?>>Austria</option>
-                                 <option value="11" <?php if($user_details->country == '11') echo"selected";?>>Azerbaijan</option>
-                                 <option value="12" <?php if($user_details->country == '12') echo"selected";?>>Bahamas</option>
-                                 <option value="13" <?php if($user_details->country == '13') echo"selected";?>>Bahrain</option>
-                                 <option value="14" <?php if($user_details->country == '14') echo"selected";?>>Bangladesh</option>
-                                 <option value="15" <?php if($user_details->country == '15') echo"selected";?>>Barbados</option>
-                                 <option value="16" <?php if($user_details->country == '16') echo"selected";?>>Belarus</option>
-                                 <option value="17" <?php if($user_details->country == '17') echo"selected";?>>Belgium</option>
-                                 <option value="18" <?php if($user_details->country == '18') echo"selected";?>>Belize</option>
-                                 <option value="19" <?php if($user_details->country == '19') echo"selected";?>>Benin</option>
-                                 <option value="20" <?php if($user_details->country == '20') echo"selected";?>>Bhutan</option>
-                                 <option value="21" <?php if($user_details->country == '21') echo"selected";?>>Bolivia (Plurinational State of)</option>
-                                 <option value="22" <?php if($user_details->country == '22') echo"selected";?>>Bosnia and Herzegovina</option>
-                                 <option value="23" <?php if($user_details->country == '23') echo"selected";?>>Botswana</option>
-                                 <option value="24" <?php if($user_details->country == '24') echo"selected";?>>Brazil</option>
-                                 <option value="25" <?php if($user_details->country == '25') echo"selected";?>>Brunei Darussalam</option>
-                                 <option value="26" <?php if($user_details->country == '26') echo"selected";?>>Bulgaria</option>
-                                 <option value="27" <?php if($user_details->country == '27') echo"selected";?>>Burkina Faso</option>
-                                 <option value="28" <?php if($user_details->country == '28') echo"selected";?>>Burundi</option>
-                                 <option value="29" <?php if($user_details->country == '29') echo"selected";?>>Cabo Verde</option>
-                                 <option value="30" <?php if($user_details->country == '30') echo"selected";?>>Cambodia</option>
-                                 <option value="31" <?php if($user_details->country == '31') echo"selected";?>>Cameroon</option>
-                                 <option value="32" <?php if($user_details->country == '32') echo"selected";?>>Canada</option>
-                                 <option value="33" <?php if($user_details->country == '33') echo"selected";?>>Central African Republic</option>
-                                 <option value="34" <?php if($user_details->country == '34') echo"selected";?>>Chad</option>
-                                 <option value="35" <?php if($user_details->country == '35') echo"selected";?>>Chile</option>
-                                 <option value="36" <?php if($user_details->country == '36') echo"selected";?>>China</option>
-                                 <option value="37" <?php if($user_details->country == '37') echo"selected";?>>Colombia</option>
-                                 <option value="38" <?php if($user_details->country == '38') echo"selected";?>>Comoros</option>
-                                 <option value="39" <?php if($user_details->country == '39') echo"selected";?>>Congo</option>
-                                 <option value="40" <?php if($user_details->country == '40') echo"selected";?>>Congo, Democratic Republic of the</option>
-                                 <option value="41" <?php if($user_details->country == '41') echo"selected";?>>Costa Rica</option>
-                                 <option value="42" <?php if($user_details->country == '42') echo"selected";?>>Côte d'Ivoire</option>
-                                 <option value="43" <?php if($user_details->country == '43') echo"selected";?>>Croatia</option>
-                                 <option value="44" <?php if($user_details->country == '44') echo"selected";?>>Cuba</option>
-                                 <option value="45" <?php if($user_details->country == '45') echo"selected";?>>Cyprus</option>
-                                 <option value="46" <?php if($user_details->country == '46') echo"selected";?>>Czechia</option>
-                                 <option value="47" <?php if($user_details->country == '47') echo"selected";?>>Denmark</option>
-                                 <option value="48" <?php if($user_details->country == '48') echo"selected";?>>Djibouti</option>
-                                 <option value="49" <?php if($user_details->country == '49') echo"selected";?>>Dominica</option>
-                                 <option value="50" <?php if($user_details->country == '50') echo"selected";?>>Dominican Republic</option>
-                                 <option value="51" <?php if($user_details->country == '51') echo"selected";?>>Ecuador</option>
-                                 <option value="52" <?php if($user_details->country == '52') echo"selected";?>>Egypt</option>
-                                 <option value="53" <?php if($user_details->country == '53') echo"selected";?>>El Salvador</option>
-                                 <option value="54" <?php if($user_details->country == '54') echo"selected";?>>Equatorial Guinea</option>
-                                 <option value="55" <?php if($user_details->country == '55') echo"selected";?>>Eritrea</option>
-                                 <option value="56" <?php if($user_details->country == '56') echo"selected";?>>Estonia</option>
-                                 <option value="57" <?php if($user_details->country == '57') echo"selected";?>>Eswatini</option>
-                                 <option value="58" <?php if($user_details->country == '58') echo"selected";?>>Ethiopia</option>
-                                 <option value="59" <?php if($user_details->country == '59') echo"selected";?>>Fiji</option>
-                                 <option value="60" <?php if($user_details->country == '60') echo"selected";?>>Finland</option>
-                                 <option value="61" <?php if($user_details->country == '61') echo"selected";?>>France</option>
-                                 <option value="62" <?php if($user_details->country == '62') echo"selected";?>>Gabon</option>
-                                 <option value="63" <?php if($user_details->country == '63') echo"selected";?>>Gambia</option>
-                                 <option value="64" <?php if($user_details->country == '64') echo"selected";?>>Georgia</option>
-                                 <option value="65" <?php if($user_details->country == '65') echo"selected";?>>Germany</option>
-                                 <option value="66" <?php if($user_details->country == '66') echo"selected";?>>Ghana</option>
-                                 <option value="67" <?php if($user_details->country == '67') echo"selected";?>>Greece</option>
-                                 <option value="68" <?php if($user_details->country == '68') echo"selected";?>>Grenada</option>
-                                 <option value="69" <?php if($user_details->country == '69') echo"selected";?>>Guatemala</option>
-                                 <option value="70" <?php if($user_details->country == '70') echo"selected";?>>Guinea</option>
-                                 <option value="71" <?php if($user_details->country == '71') echo"selected";?>>Guinea-Bissau</option>
-                                 <option value="72" <?php if($user_details->country == '72') echo"selected";?>>Guyana</option>
-                                 <option value="73" <?php if($user_details->country == '73') echo"selected";?>>Haiti</option>
-                                 <option value="74" <?php if($user_details->country == '74') echo"selected";?>>Honduras</option>
-                                 <option value="75" <?php if($user_details->country == '75') echo"selected";?>>Hungary</option>
-                                 <option value="76" <?php if($user_details->country == '76') echo"selected";?>>Iceland</option>
-                                 <option value="77" <?php if($user_details->country == '77') echo"selected";?>>India</option>
-                                 <option value="78" <?php if($user_details->country == '78') echo"selected";?>>Indonesia</option>
-                                 <option value="79" <?php if($user_details->country == '79') echo"selected";?>>Iran (Islamic Republic of)</option>
-                                 <option value="80" <?php if($user_details->country == '80') echo"selected";?>>Iraq</option>
-                                 <option value="81" <?php if($user_details->country == '81') echo"selected";?>>Ireland</option>
-                                 <option value="82" <?php if($user_details->country == '82') echo"selected";?>>Israel</option>
-                                 <option value="83" <?php if($user_details->country == '83') echo"selected";?>>Italy</option>
-                                 <option value="84" <?php if($user_details->country == '84') echo"selected";?>>Jamaica</option>
-                                 <option value="85" <?php if($user_details->country == '85') echo"selected";?>>Japan</option>
-                                 <option value="86" <?php if($user_details->country == '86') echo"selected";?>>Jordan</option>
-                                 <option value="87" <?php if($user_details->country == '87') echo"selected";?>>Kazakhstan</option>
-                                 <option value="88" <?php if($user_details->country == '88') echo"selected";?>>Kenya</option>
-                                 <option value="89" <?php if($user_details->country == '89') echo"selected";?>>Kiribati</option>
-                                 <option value="90" <?php if($user_details->country == '90') echo"selected";?>>Korea (Democratic People's Republic of)</option>
-                                 <option value="91" <?php if($user_details->country == '91') echo"selected";?>>Korea, Republic of</option>
-                                 <option value="92" <?php if($user_details->country == '92') echo"selected";?>>Kuwait</option>
-                                 <option value="93" <?php if($user_details->country == '93') echo"selected";?>>Kyrgyzstan</option>
-                                 <option value="94" <?php if($user_details->country == '94') echo"selected";?>>Lao People's Democratic Republic</option>
-                                 <option value="95" <?php if($user_details->country == '95') echo"selected";?>>Latvia</option>
-                                 <option value="96" <?php if($user_details->country == '96') echo"selected";?>>Lebanon</option>
-                                 <option value="97" <?php if($user_details->country == '97') echo"selected";?>>Lesotho</option>
-                                 <option value="98" <?php if($user_details->country == '98') echo"selected";?>>Liberia</option>
-                                 <option value="99" <?php if($user_details->country == '99') echo"selected";?>>Libya</option>
-                                 <option value="100" <?php if($user_details->country == '100') echo"selected";?>>Liechtenstein</option>
-                                 <option value="101" <?php if($user_details->country == '101') echo"selected";?>>Lithuania</option>
-                                 <option value="102" <?php if($user_details->country == '102') echo"selected";?>>Luxembourg</option>
-                                 <option value="103" <?php if($user_details->country == '103') echo"selected";?>>Madagascar</option>
-                                 <option value="104">Malawi</option>
-                                 <option value="105">Malaysia</option>
-                                 <option value="106">Maldives</option>
-                                 <option value="107">Mali</option>
-                                 <option value="108">Malta</option>
-                                 <option value="109">Marshall Islands</option>
-                                 <option value="110">Mauritania</option>
-                                 <option value="111">Mauritius</option>
-                                 <option value="112">Mexico</option>
-                                 <option value="113">Micronesia (Federated States of)</option>
-                                 <option value="114">Moldova, Republic of</option>
-                                 <option value="115">Monaco</option>
-                                 <option value="116">Mongolia</option>
-                                 <option value="117">Montenegro</option>
-                                 <option value="118">Morocco</option>
-                                 <option value="119">Mozambique</option>
-                                 <option value="120">Myanmar</option>
-                                 <option value="121">Namibia</option>
-                                 <option value="122">Nauru</option>
-                                 <option value="123">Nepal</option>
-                                 <option value="124">Netherlands</option>
-                                 <option value="125">New Zealand</option>
-                                 <option value="126">Nicaragua</option>
-                                 <option value="127">Niger</option>
-                                 <option value="128">Nigeria</option>
-                                 <option value="129">North Macedonia</option>
-                                 <option value="130">Norway</option>
-                                 <option value="131">Oman</option>
-                                 <option value="132">Pakistan</option>
-                                 <option value="133">Palau</option>
-                                 <option value="134">Panama</option>
-                                 <option value="135">Papua New Guinea</option>
-                                 <option value="136">Paraguay</option>
-                                 <option value="137">Peru</option>
-                                 <option value="138">Philippines</option>
-                                 <option value="139">Poland</option>
-                                 <option value="140">Portugal</option>
-                                 <option value="141">Qatar</option>
-                                 <option value="142">Romania</option>
-                                 <option value="143">Russian Federation</option>
-                                 <option value="144">Rwanda</option>
-                                 <option value="145">Saint Kitts and Nevis</option>
-                                 <option value="146">Saint Lucia</option>
-                                 <option value="147">Saint Vincent and the Grenadines</option>
-                                 <option value="148">Samoa</option>
-                                 <option value="149">San Marino</option>
-                                 <option value="150">Sao Tome and Principe</option>
-                                 <option value="151">Saudi Arabia</option>
-                                 <option value="152">Senegal</option>
-                                 <option value="153">Serbia</option>
-                                 <option value="154">Seychelles</option>
-                                 <option value="155">Sierra Leone</option>
-                                 <option value="156">Singapore</option>
-                                 <option value="157">Slovakia</option>
-                                 <option value="158">Slovenia</option>
-                                 <option value="159">Solomon Islands</option>
-                                 <option value="160">Somalia</option>
-                                 <option value="161">South Africa</option>
-                                 <option value="162">South Sudan</option>
-                                 <option value="163">Spain</option>
-                                 <option value="164">Sri Lanka</option>
-                                 <option value="165">Sudan</option>
-                                 <option value="166">Suriname</option>
-                                 <option value="167">Sweden</option>
-                                 <option value="168">Switzerland</option>
-                                 <option value="169">Syrian Arab Republic</option>
-                                 <option value="170">Tajikistan</option>
-                                 <option value="171">Tanzania, United Republic of</option>
-                                 <option value="172">Thailand</option>
-                                 <option value="173">Timor-Leste</option>
-                                 <option value="174">Togo</option>
-                                 <option value="175">Tonga</option>
-                                 <option value="176">Trinidad and Tobago</option>
-                                 <option value="177">Tunisia</option>
-                                 <option value="178">Turkey</option>
-                                 <option value="179">Turkmenistan</option>
-                                 <option value="180">Tuvalu</option>
-                                 <option value="181">Uganda</option>
-                                 <option value="182">Ukraine</option>
-                                 <option value="183">United Arab Emirates</option>
-                                 <option value="184">United Kingdom of Great Britain and Northern Ireland
-                                 </option>
-                                 <option value="185">United States of America</option>
-                                 <option value="186">Uruguay</option>
-                                 <option value="187">Uzbekistan</option>
-                                 <option value="188">Vanuatu</option>
-                                 <option value="189">Venezuela (Bolivarian Republic of)</option>
-                                 <option value="190">Viet Nam</option>
-                                 <option value="191">Yemen</option>
-                                 <option value="192">Zambia</option>
-                                 <option value="193">Zimbabwe</option>
+                                 <option value="Andorra" <?php if($user_details->country == 'Andorra') echo"selected";?>>Andorra</option>
+                                 <option value="Angola" <?php if($user_details->country == 'Angola') echo"selected";?>>Angola</option>
+                                 <option value="Antigua and Barbuda" <?php if($user_details->country == 'Antigua and Barbuda') echo"selected";?>>Antigua and Barbuda</option>
+                                 <option value="Argentina" <?php if($user_details->country == 'Argentina') echo"selected";?>>Argentina</option>
+                                 <option value="Armenia" <?php if($user_details->country == 'Armenia') echo"selected";?>>Armenia</option>
+                                 <option value="Australia" <?php if($user_details->country == 'Australia') echo"selected";?>>Australia</option>
+                                 <option value="Austria" <?php if($user_details->country == 'Austria') echo"selected";?>>Austria</option>
+                                 <option value="Azerbaijan" <?php if($user_details->country == 'Azerbaijan') echo"selected";?>>Azerbaijan</option>
+                                 <option value="Bahamas" <?php if($user_details->country == 'Bahamas') echo"selected";?>>Bahamas</option>
+                                 <option value="Bahrain" <?php if($user_details->country == 'Bahrain') echo"selected";?>>Bahrain</option>
+                                 <option value="Bangladesh" <?php if($user_details->country == 'Bangladesh') echo"selected";?>>Bangladesh</option>
+                                 <option value="Barbados" <?php if($user_details->country == 'Barbados') echo"selected";?>>Barbados</option>
+                                 <option value="Belarus" <?php if($user_details->country == 'Belarus') echo"selected";?>>Belarus</option>
+                                 <option value="Belgium" <?php if($user_details->country == 'Belgium') echo"selected";?>>Belgium</option>
+                                 <option value="Belize" <?php if($user_details->country == 'Belize') echo"selected";?>>Belize</option>
+                                 <option value="Benin" <?php if($user_details->country == 'Benin') echo"selected";?>>Benin</option>
+                                 <option value="Bhutan" <?php if($user_details->country == 'Bhutan') echo"selected";?>>Bhutan</option>
+                                 <option value="Bolivia (Plurinational State of)" <?php if($user_details->country == 'Bolivia (Plurinational State of)') echo"selected";?>>Bolivia (Plurinational State of)</option>
+                                 <option value="Bosnia and Herzegovina" <?php if($user_details->country == 'Bosnia and Herzegovina') echo"selected";?>>Bosnia and Herzegovina</option>
+                                 <option value="Botswana" <?php if($user_details->country == 'Botswana') echo"selected";?>>Botswana</option>
+                                 <option value="Brazil" <?php if($user_details->country == 'Brazil') echo"selected";?>>Brazil</option>
+                                 <option value="Brunei Darussalam" <?php if($user_details->country == 'Brunei Darussalam') echo"selected";?>>Brunei Darussalam</option>
+                                 <option value="Bulgaria" <?php if($user_details->country == 'Bulgaria') echo"selected";?>>Bulgaria</option>
+                                 <option value="Burkina Faso" <?php if($user_details->country == 'Burkina Faso') echo"selected";?>>Burkina Faso</option>
+                                 <option value="Burundi" <?php if($user_details->country == 'Burundi') echo"selected";?>>Burundi</option>
+                                 <option value="Cabo Verde" <?php if($user_details->country == 'Cabo Verde') echo"selected";?>>Cabo Verde</option>
+                                 <option value="Cambodia" <?php if($user_details->country == 'Cambodia') echo"selected";?>>Cambodia</option>
+                                 <option value="Cameroon" <?php if($user_details->country == 'Cameroon') echo"selected";?>>Cameroon</option>
+                                 <option value="Canada" <?php if($user_details->country == 'Canada') echo"selected";?>>Canada</option>
+                                 <option value="Central African Republic" <?php if($user_details->country == 'Central African Republic') echo"selected";?>>Central African Republic</option>
+                                 <option value="Chad" <?php if($user_details->country == 'Chad') echo"selected";?>>Chad</option>
+                                 <option value="Chile" <?php if($user_details->country == 'Chile') echo"selected";?>>Chile</option>
+                                 <option value="China" <?php if($user_details->country == 'China') echo"selected";?>>China</option>
+                                 <option value="Colombia" <?php if($user_details->country == 'Colombia') echo"selected";?>>Colombia</option>
+                                 <option value="Comoros" <?php if($user_details->country == 'Comoros') echo"selected";?>>Comoros</option>
+                                 <option value="Congo" <?php if($user_details->country == 'Congo') echo"selected";?>>Congo</option>
+                                 <option value="Congo Democratic Republic of the" <?php if($user_details->country == 'Congo Democratic Republic of the') echo"selected";?>>Congo Democratic Republic of the</option>
+                                 <option value="Costa Rica" <?php if($user_details->country == 'Costa Rica') echo"selected";?>>Costa Rica</option>
+                                 <option value="Côte d Ivoire" <?php if($user_details->country == 'Côte d Ivoire') echo"selected";?>>Côte d'Ivoire</option>
+                                 <option value="Croatia" <?php if($user_details->country == 'Croatia') echo"selected";?>>Croatia</option>
+                                 <option value="Cuba" <?php if($user_details->country == 'Cuba') echo"selected";?>>Cuba</option>
+                                 <option value="Cyprus" <?php if($user_details->country == 'Cyprus') echo"selected";?>>Cyprus</option>
+                                 <option value="Czechia" <?php if($user_details->country == 'Czechia') echo"selected";?>>Czechia</option>
+                                 <option value="Denmark" <?php if($user_details->country == 'Denmark') echo"selected";?>>Denmark</option>
+                                 <option value="Djibouti" <?php if($user_details->country == 'Djibouti') echo"selected";?>>Djibouti</option>
+                                 <option value="Dominica" <?php if($user_details->country == 'Dominica') echo"selected";?>>Dominica</option>
+                                 <option value="Dominican Republic" <?php if($user_details->country == 'Dominican Republic') echo"selected";?>>Dominican Republic</option>
+                                 <option value="Ecuador" <?php if($user_details->country == 'Ecuador') echo"selected";?>>Ecuador</option>
+                                 <option value="Egypt" <?php if($user_details->country == 'Egypt') echo"selected";?>>Egypt</option>
+                                 <option value="El Salvador" <?php if($user_details->country == 'El Salvador') echo"selected";?>>El Salvador</option>
+                                 <option value="Equatorial Guinea" <?php if($user_details->country == 'Equatorial Guinea') echo"selected";?>>Equatorial Guinea</option>
+                                 <option value="Eritrea" <?php if($user_details->country == 'Eritrea') echo"selected";?>>Eritrea</option>
+                                 <option value="Estonia" <?php if($user_details->country == 'Estonia') echo"selected";?>>Estonia</option>
+                                 <option value="Eswatini" <?php if($user_details->country == 'Eswatini') echo"selected";?>>Eswatini</option>
+                                 <option value="Ethiopia" <?php if($user_details->country == 'Ethiopia') echo"selected";?>>Ethiopia</option>
+                                 <option value="Fiji" <?php if($user_details->country == 'Fiji') echo"selected";?>>Fiji</option>
+                                 <option value="Finland" <?php if($user_details->country == 'Finland') echo"selected";?>>Finland</option>
+                                 <option value="France" <?php if($user_details->country == 'France') echo"selected";?>>France</option>
+                                 <option value="Gabon" <?php if($user_details->country == 'Gabon') echo"selected";?>>Gabon</option>
+                                 <option value="Gambia" <?php if($user_details->country == 'Gambia') echo"selected";?>>Gambia</option>
+                                 <option value="Georgia" <?php if($user_details->country == 'Georgia') echo"selected";?>>Georgia</option>
+                                 <option value="Germany" <?php if($user_details->country == 'Germany') echo"selected";?>>Germany</option>
+                                 <option value="Ghana" <?php if($user_details->country == 'Ghana') echo"selected";?>>Ghana</option>
+                                 <option value="Greece" <?php if($user_details->country == 'Greece') echo"selected";?>>Greece</option>
+                                 <option value="Grenada" <?php if($user_details->country == 'Grenada') echo"selected";?>>Grenada</option>
+                                 <option value="Guatemala" <?php if($user_details->country == 'Guatemala') echo"selected";?>>Guatemala</option>
+                                 <option value="Guinea" <?php if($user_details->country == 'Guinea') echo"selected";?>>Guinea</option>
+                                 <option value="Guinea-Bissau" <?php if($user_details->country == 'Guinea-Bissau') echo"selected";?>>Guinea-Bissau</option>
+                                 <option value="Guyana" <?php if($user_details->country == 'Guyana') echo"selected";?>>Guyana</option>
+                                 <option value="Haiti" <?php if($user_details->country == 'Haiti') echo"selected";?>>Haiti</option>
+                                 <option value="Honduras" <?php if($user_details->country == 'Honduras') echo"selected";?>>Honduras</option>
+                                 <option value="Hungary" <?php if($user_details->country == 'Hungary') echo"selected";?>>Hungary</option>
+                                 <option value="Iceland" <?php if($user_details->country == 'Iceland') echo"selected";?>>Iceland</option>
+                                 <option value="India" <?php if($user_details->country == 'India') echo"selected";?>>India</option>
+                                 <option value="Indonesia" <?php if($user_details->country == 'Indonesia') echo"selected";?>>Indonesia</option>
+                                 <option value="Iran (Islamic Republic of" <?php if($user_details->country == 'Iran (Islamic Republic of') echo"selected";?>>Iran (Islamic Republic of)</option>
+                                 <option value="Iraq" <?php if($user_details->country == 'Iraq') echo"selected";?>>Iraq</option>
+                                 <option value="Ireland" <?php if($user_details->country == 'Ireland') echo"selected";?>>Ireland</option>
+                                 <option value="Israel" <?php if($user_details->country == 'Israel') echo"selected";?>>Israel</option>
+                                 <option value="Italy" <?php if($user_details->country == 'Italy') echo"selected";?>>Italy</option>
+                                 <option value="Jamaica" <?php if($user_details->country == 'Jamaica') echo"selected";?>>Jamaica</option>
+                                 <option value="Japan" <?php if($user_details->country == 'Japan') echo"selected";?>>Japan</option>
+                                 <option value="Jordan" <?php if($user_details->country == 'Jordan') echo"selected";?>>Jordan</option>
+                                 <option value="Kazakhstan" <?php if($user_details->country == 'Kazakhstan') echo"selected";?>>Kazakhstan</option>
+                                 <option value="Kenya" <?php if($user_details->country == 'Kenya') echo"selected";?>>Kenya</option>
+                                 <option value="Kiribati" <?php if($user_details->country == 'Kiribati') echo"selected";?>>Kiribati</option>
+                                 <option value="Korea (Democratic People s Republic of)" <?php if($user_details->country == 'Korea (Democratic People s Republic of)') echo"selected";?>>Korea (Democratic People's Republic of)</option>
+                                 <option value="Korea Republic of" <?php if($user_details->country == 'Korea Republic of') echo"selected";?>>Korea Republic of</option>
+                                 <option value="Kuwait" <?php if($user_details->country == 'Kuwait') echo"selected";?>>Kuwait</option>
+                                 <option value="Kyrgyzstan" <?php if($user_details->country == 'Kyrgyzstan') echo"selected";?>>Kyrgyzstan</option>
+                                 <option value="Lao People s Democratic Republic" <?php if($user_details->country == 'Lao People s Democratic Republic') echo"selected";?>>Lao People's Democratic Republic</option>
+                                 <option value="Latvia" <?php if($user_details->country == 'Latvia') echo"selected";?>>Latvia</option>
+                                 <option value="Lebanon" <?php if($user_details->country == 'Lebanon') echo"selected";?>>Lebanon</option>
+                                 <option value="Lesotho" <?php if($user_details->country == 'Lesotho') echo"selected";?>>Lesotho</option>
+                                 <option value="Liberia" <?php if($user_details->country == 'Liberia') echo"selected";?>>Liberia</option>
+                                 <option value="Libya" <?php if($user_details->country == 'Libya') echo"selected";?>>Libya</option>
+                                 <option value="Liechtenstein" <?php if($user_details->country == 'Liechtenstein') echo"selected";?>>Liechtenstein</option>
+                                 <option value="Lithuania" <?php if($user_details->country == 'Lithuania') echo"selected";?>>Lithuania</option>
+                                 <option value="Luxembourg" <?php if($user_details->country == 'Luxembourg') echo"selected";?>>Luxembourg</option>
+                                 <option value="Madagascar" <?php if($user_details->country == 'Madagascar') echo"selected";?>>Madagascar</option>
+                                 <option value="Malawi" <?php if($user_details->country == 'Malawi') echo"selected";?>>Malawi</option>
+                                 <option value="Malaysia" <?php if($user_details->country == 'Malaysia') echo"selected";?>>Malaysia</option>
+                                 <option value="Maldives" <?php if($user_details->country == 'Maldives') echo"selected";?>>Maldives</option>
+                                 <option value="Mali" <?php if($user_details->country == 'Mali') echo"selected";?>>Mali</option>
+                                 <option value="Malta" <?php if($user_details->country == 'Malta') echo"selected";?>>Malta</option>
+                                 <option value="Marshall Islands" <?php if($user_details->country == 'Marshall Islands') echo"selected";?>>Marshall Islands</option>
+                                 <option value="Mauritania" <?php if($user_details->country == 'Mauritania') echo"selected";?>>Mauritania</option>
+                                 <option value="Mauritius" <?php if($user_details->country == 'Mauritius') echo"selected";?>>Mauritius</option>
+                                 <option value="Mexico" <?php if($user_details->country == 'Mexico') echo"selected";?>>Mexico</option>
+                                 <option value="Micronesia (Federated States of)" <?php if($user_details->country == 'Micronesia (Federated States of)') echo"selected";?>>Micronesia (Federated States of)</option>
+                                 <option value="Moldova Republic of" <?php if($user_details->country == 'Moldova Republic of') echo"selected";?>>Moldova Republic of</option>
+                                 <option value="Monaco" <?php if($user_details->country == 'Monaco') echo"selected";?>>Monaco</option>
+                                 <option value="Mongolia" <?php if($user_details->country == 'Mongolia') echo"selected";?>>Mongolia</option>
+                                 <option value="Montenegro" <?php if($user_details->country == 'Montenegro') echo"selected";?>>Montenegro</option>
+                                 <option value="Morocco" <?php if($user_details->country == 'Morocco') echo"selected";?>>Morocco</option>
+                                 <option value="Mozambique" <?php if($user_details->country == 'Mozambique') echo"selected";?>>Mozambique</option>
+                                 <option value="Myanmar" <?php if($user_details->country == 'Myanmar') echo"selected";?>>Myanmar</option>
+                                 <option value="Namibia" <?php if($user_details->country == 'Namibia') echo"selected";?>>Namibia</option>
+                                 <option value="Nauru" <?php if($user_details->country == 'Nauru') echo"selected";?>>Nauru</option>
+                                 <option value="Nepal" <?php if($user_details->country == 'Nepal') echo"selected";?>>Nepal</option>
+                                 <option value="Netherlands" <?php if($user_details->country == 'Netherlands') echo"selected";?>>Netherlands</option>
+                                 <option value="New Zealand" <?php if($user_details->country == 'New Zealand') echo"selected";?>>New Zealand</option>
+                                 <option value="Nicaragua" <?php if($user_details->country == 'Nicaragua') echo"selected";?>>Nicaragua</option>
+                                 <option value="Niger" <?php if($user_details->country == 'Niger') echo"selected";?>>Niger</option>
+                                 <option value="Nigeria" <?php if($user_details->country == 'Nigeria') echo"selected";?>>Nigeria</option>
+                                 <option value="North Macedonia" <?php if($user_details->country == 'North Macedonia') echo"selected";?>>North Macedonia</option>
+                                 <option value="Norway" <?php if($user_details->country == 'Norway') echo"selected";?>>Norway</option>
+                                 <option value="Oman" <?php if($user_details->country == 'Oman') echo"selected";?>>Oman</option>
+                                 <option value="Pakistan" <?php if($user_details->country == 'Pakistan') echo"selected";?>>Pakistan</option>
+                                 <option value="Palau" <?php if($user_details->country == 'Palau') echo"selected";?>>Palau</option>
+                                 <option value="Panama" <?php if($user_details->country == 'Panama') echo"selected";?>>Panama</option>
+                                 <option value="Papua New Guinea" <?php if($user_details->country == 'Papua New Guinea') echo"selected";?>>Papua New Guinea</option>
+                                 <option value="Paraguay" <?php if($user_details->country == 'Paraguay') echo"selected";?>>Paraguay</option>
+                                 <option value="Peru" <?php if($user_details->country == 'Peru') echo"selected";?>>Peru</option>
+                                 <option value="Philippines" <?php if($user_details->country == 'Philippines') echo"selected";?>>Philippines</option>
+                                 <option value="Poland" <?php if($user_details->country == 'Poland') echo"selected";?>>Poland</option>
+                                 <option value="Portugal" <?php if($user_details->country == 'Portugal') echo"selected";?>>Portugal</option>
+                                 <option value="Qatar" <?php if($user_details->country == 'Qatar') echo"selected";?>>Qatar</option>
+                                 <option value="Romania" <?php if($user_details->country == 'Romania') echo"selected";?>>Romania</option>
+                                 <option value="Russian Federation" <?php if($user_details->country == 'Russian Federation') echo"selected";?>>Russian Federation</option>
+                                 <option value="Rwanda" <?php if($user_details->country == 'Rwanda') echo"selected";?>>Rwanda</option>
+                                 <option value="Saint Kitts and Nevis" <?php if($user_details->country == 'Saint Kitts and Nevis') echo"selected";?>>Saint Kitts and Nevis</option>
+                                 <option value="Saint Lucia" <?php if($user_details->country == 'Saint Lucia') echo"selected";?>>Saint Lucia</option>
+                                 <option value="Saint Vincent and the Grenadines" <?php if($user_details->country == 'Saint Vincent and the Grenadines') echo"selected";?>>Saint Vincent and the Grenadines</option>
+                                 <option value="Samoa" <?php if($user_details->country == 'Samoa') echo"selected";?>>Samoa</option>
+                                 <option value="San Marino" <?php if($user_details->country == 'San Marino') echo"selected";?>>San Marino</option>
+                                 <option value="Sao Tome and Principe" <?php if($user_details->country == 'Sao Tome and Principe') echo"selected";?>>Sao Tome and Principe</option>
+                                 <option value="Saudi Arabia" <?php if($user_details->country == 'Saudi Arabia') echo"selected";?>>Saudi Arabia</option>
+                                 <option value="Senegal" <?php if($user_details->country == 'Senegal') echo"selected";?>>Senegal</option>
+                                 <option value="Serbia" <?php if($user_details->country == 'Serbia') echo"selected";?>>Serbia</option>
+                                 <option value="Seychelles" <?php if($user_details->country == 'Seychelles') echo"selected";?>>Seychelles</option>
+                                 <option value="Sierra Leone" <?php if($user_details->country == 'Sierra Leone') echo"selected";?>>Sierra Leone</option>
+                                 <option value="Singapore" <?php if($user_details->country == 'Singapore') echo"selected";?>>Singapore</option>
+                                 <option value="Slovakia" <?php if($user_details->country == 'Slovakia') echo"selected";?>>Slovakia</option>
+                                 <option value="Slovenia" <?php if($user_details->country == 'Slovenia') echo"selected";?>>Slovenia</option>
+                                 <option value="Solomon Islands" <?php if($user_details->country == 'Solomon Islands') echo"selected";?>>Solomon Islands</option>
+                                 <option value="Somalia" <?php if($user_details->country == 'Somalia') echo"selected";?>>Somalia</option>
+                                 <option value="South Africa" <?php if($user_details->country == 'South Africa') echo"selected";?>>South Africa</option>
+                                 <option value="South Sudan" <?php if($user_details->country == 'South Sudan') echo"selected";?>>South Sudan</option>
+                                 <option value="Spain" <?php if($user_details->country == 'Spain') echo"selected";?>>Spain</option>
+                                 <option value="Sri Lanka" <?php if($user_details->country == 'Sri Lanka') echo"selected";?>>Sri Lanka</option>
+                                 <option value="Sudan" <?php if($user_details->country == 'Sudan') echo"selected";?>>Sudan</option>
+                                 <option value="Suriname" <?php if($user_details->country == 'Suriname') echo"selected";?>>Suriname</option>
+                                 <option value="Sweden" <?php if($user_details->country == 'Sweden') echo"selected";?>>Sweden</option>
+                                 <option value="Switzerland" <?php if($user_details->country == 'Switzerland') echo"selected";?>>>Switzerland</option>
+                                 <option value="Syrian Arab Republic" <?php if($user_details->country == 'Syrian Arab Republic') echo"selected";?>>Syrian Arab Republic</option>
+                                 <option value="Tajikistan" <?php if($user_details->country == 'Tajikistan') echo"selected";?>>Tajikistan</option>
+                                 <option value="Tanzania United Republic of" <?php if($user_details->country == 'Tanzania United Republic of') echo"selected";?>>Tanzania United Republic of</option>
+                                 <option value="Thailand" <?php if($user_details->country == 'Thailand') echo"selected";?>>Thailand</option>
+                                 <option value="Timor-Leste" <?php if($user_details->country == 'Timor-Leste') echo"selected";?>>Timor-Leste</option>
+                                 <option value="Togo" <?php if($user_details->country == 'Togo') echo"selected";?>>Togo</option>
+                                 <option value="Tonga" <?php if($user_details->country == 'Tonga') echo"selected";?>>Tonga</option>
+                                 <option value="Trinidad and Tobago" <?php if($user_details->country == 'Trinidad and Tobago') echo"selected";?>>Trinidad and Tobago</option>
+                                 <option value="Tunisia" <?php if($user_details->country == 'Tunisia') echo"selected";?>>Tunisia</option>
+                                 <option value="Turkey" <?php if($user_details->country == 'Turkey') echo"selected";?>>Turkey</option>
+                                 <option value="Turkmenistan" <?php if($user_details->country == 'Turkmenistan') echo"selected";?>>Turkmenistan</option>
+                                 <option value="Tuvalu" <?php if($user_details->country == 'Tuvalu') echo"selected";?>>Tuvalu</option>
+                                 <option value="Uganda" <?php if($user_details->country == 'Uganda') echo"selected";?>>Uganda</option>
+                                 <option value="Ukraine" <?php if($user_details->country == 'Ukraine') echo"selected";?>>Ukraine</option>
+                                 <option value="United Arab Emirates" <?php if($user_details->country == 'United Arab Emirates') echo"selected";?>>United Arab Emirates</option>
+                                 <option value="United Kingdom of Great Britain and Northern Ireland" <?php if($user_details->country == 'United Kingdom of Great Britain and Northern Ireland') echo"selected";?>>United Kingdom of Great Britain and Northern Ireland</option>
+                                 <option value="United States of America" <?php if($user_details->country == 'United States of America') echo"selected";?>>United States of America</option>
+                                 <option value="Uruguay" <?php if($user_details->country == 'Uruguay') echo"selected";?>>Uruguay</option>
+                                 <option value="Uzbekistan" <?php if($user_details->country == 'Uzbekistan') echo"selected";?>>Uzbekistan</option>
+                                 <option value="Vanuatu" <?php if($user_details->country == 'Vanuatu') echo"selected";?>>Vanuatu</option>
+                                 <option value="Venezuela (Bolivarian Republic of)" <?php if($user_details->country == 'Venezuela (Bolivarian Republic of)') echo"selected";?>>Venezuela (Bolivarian Republic of)</option>
+                                 <option value="Viet Nam" <?php if($user_details->country == 'Viet Nam') echo"selected";?>>Viet Nam</option>
+                                 <option value="Yemen" <?php if($user_details->country == 'Yemen') echo"selected";?>>Yemen</option>
+                                 <option value="Zambia" <?php if($user_details->country == 'Zambia') echo"selected";?>>Zambia</option>
+                                 <option value="Zimbabwe" <?php if($user_details->country == 'Zimbabwe') echo"selected";?>>Zimbabwe</option>
                               </select>
                            </div>
                         </div>
@@ -350,68 +350,68 @@
                                  <option value="">Select a Language...</option>
                                  <option value="Albanian (Shqip)" <?php if($user_details->language == 'Albanian (Shqip)') echo "selected"; ?>>Albanian (Shqip)</option>
                                  <option value="Arabic (اَلْعَرَبِيَّةُ)" <?php if($user_details->language == 'Arabic (اَلْعَرَبِيَّةُ)') echo "selected"; ?>>Arabic (اَلْعَرَبِيَّةُ) </option>
-                                 <option value="3">Portuguese (Português)</option>
-                                 <option value="4">English (USA) </option>
-                                 <option value="5">English (British English)</option>
-                                 <option value="6">Spanish (Español)</option>
-                                 <option value="7">Armenian (հայերէն/հայերեն)</option>
-                                 <option value="8">Russian (Русский)</option>
-                                 <option value="9">German (Deutsch)</option>
-                                 <option value="10">Azerbaijani (Azeri) </option>
-                                 <option value="11">Bengali (Bangla)</option>
-                                 <option value="12">Dutch (Nederlands)</option>
-                                 <option value="13">French (Français)</option>
-                                 <option value="14">Bosnian (Bosanski)</option>
-                                 <option value="15">Croatian (Hrvatski)</option>
-                                 <option value="16">Serbian (српски)</option>
-                                 <option value="17">Bulgarian (български)</option>
-                                 <option value="18">Mandarin Chinese (官話 / 官话) </option>
-                                 <option value="19">Greek (ελληνικά)</option>
-                                 <option value="20">Turkish (Türkçe)</option>
-                                 <option value="21">Czech (čeština) </option>
-                                 <option value="22">Slovak (slovenčina)</option>
-                                 <option value="23">Danish (dansk)</option>
-                                 <option value="24">Estonian (eesti keel)</option>
-                                 <option value="25">Amharic (አማርኛ)</option>
-                                 <option value="26">Finnish (suomen kieli)</option>
-                                 <option value="27">Swedish (svenska)</option>
-                                 <option value="28">Georgian (ქართული ენა)</option>
-                                 <option value="29">Portuguese (português do Brasil)</option>
-                                 <option value="30">Hungarian (magyar nyelv)</option>
-                                 <option value="31">Icelandic (íslenska)</option>
-                                 <option value="32">Hindi (हिन्दी)</option>
-                                 <option value="33">Indonesian (bahasa Indonesia)</option>
-                                 <option value="34">Persian (فارسی)</option>
-                                 <option value="35">Hebrew (עברית חדשה)</option>
-                                 <option value="36">Japanese (日本語)</option>
-                                 <option value="37">Kazakh (қазақ тілі)</option>
-                                 <option value="38">Korean (한국어)</option>
-                                 <option value="39">Latvian (latviešu valoda)</option>
-                                 <option value="40">Lithuanian (lietuvių kalba)</option>
-                                 <option value="41">Malay (Bahasa Melayu)</option>
-                                 <option value="42">Romanian (românește)</option>
-                                 <option value="43">Norwegian (norsk)</option>
-                                 <option value="44">Urdu (اُردُو)</option>
-                                 <option value="45">Punjabi (ਪੰਜਾਬੀپن٘جابی)</option>
-                                 <option value="46">Filipino (Wikang Filipino)</option>
-                                 <option value="47">Polish (polski)</option>
-                                 <option value="48">Slovene (slovenščina)</option>
-                                 <option value="49">Sinhala (සිංහල)</option>
-                                 <option value="50">Tamil (தமிழ்)</option>
-                                 <option value="51">Thai (ภาษาไทย)</option>
-                                 <option value="52">Ukrainian (украї́нська мо́ва)</option>
-                                 <option value="53">Uzbek (oʻzbek tili)</option>
-                                 <option value="54">Vietnamese (Tiếng Việt)</option>
-                                 <option value="55">English (Australia)</option>
-                                 <option value="56">Deutsch (Austria)</option>
-                                 <option value="57">Dutch (Belgium)</option>
-                                 <option value="58">Français (Belgium)</option>
-                                 <option value="59">English (Canada)</option>
-                                 <option value="60">Française (Canada)</option>
-                                 <option value="61">English (India)</option>
-                                 <option value="62">English (Ireland)</option>
-                                 <option value="63">English (Philippines)</option>
-                                 <option value="64">Dutch (Switzerland)</option>
+                                 <option value="Portuguese (Português)" <?php if($user_details->language == 'Portuguese (Português)') echo "selected"; ?>>Portuguese (Português)</option>
+                                 <option value="English (USA)" <?php if($user_details->language == 'English (USA)') echo "selected"; ?>>English (USA) </option>
+                                 <option value="English (British English)" <?php if($user_details->language == 'English (British English)') echo "selected"; ?>>English (British English)</option>
+                                 <option value="Spanish (Español)" <?php if($user_details->language == 'Spanish (Español)') echo "selected"; ?>>Spanish (Español)</option>
+                                 <option value="Armenian (հայերէն/հայերեն)" <?php if($user_details->language == 'Armenian (հայերէն/հայերեն)') echo "selected"; ?>>Armenian (հայերէն/հայերեն)</option>
+                                 <option value="Russian (Русский)" <?php if($user_details->language == 'Russian (Русский)') echo "selected"; ?>>Russian (Русский)</option>
+                                 <option value="German (Deutsch)" <?php if($user_details->language == 'German (Deutsch))') echo "selected"; ?>>German (Deutsch)</option>
+                                 <option value="Azerbaijani (Azeri)" <?php if($user_details->language == 'Azerbaijani (Azeri)') echo "selected"; ?>>Azerbaijani (Azeri)</option>
+                                 <option value="Bengali (Bangla)" <?php if($user_details->language == 'Bengali (Bangla)') echo "selected"; ?>>Bengali (Bangla)</option>
+                                 <option value="Dutch (Nederlands)" <?php if($user_details->language == 'Dutch (Nederlands)') echo "selected"; ?>>Dutch (Nederlands)</option>
+                                 <option value="French (Français)" <?php if($user_details->language == 'French (Français)') echo "selected"; ?>>French (Français)</option>
+                                 <option value="Bosnian (Bosanski)" <?php if($user_details->language == 'Bosnian (Bosanski)') echo "selected"; ?>>Bosnian (Bosanski)</option>
+                                 <option value="Croatian (Hrvatski)" <?php if($user_details->language == 'Croatian (Hrvatski)') echo "selected"; ?>>Croatian (Hrvatski)</option>
+                                 <option value="Serbian (српски)" <?php if($user_details->language == 'Serbian (српски)') echo "selected"; ?>>Serbian (српски)</option>
+                                 <option value="Bulgarian (български)" <?php if($user_details->language == 'Bulgarian (български)') echo "selected"; ?>>Bulgarian (български)</option>
+                                 <option value="Mandarin Chinese (官話 / 官话)" <?php if($user_details->language == 'Mandarin Chinese (官話 / 官话)') echo "selected"; ?>>Mandarin Chinese (官話 / 官话)</option>
+                                 <option value="Greek (ελληνικά)" <?php if($user_details->language == 'Greek (ελληνικά)') echo "selected"; ?>>Greek (ελληνικά)</option>
+                                 <option value="Turkish (Türkçe)" <?php if($user_details->language == 'Turkish (Türkçe)') echo "selected"; ?>>Turkish (Türkçe)</option>
+                                 <option value="Czech (čeština)" <?php if($user_details->language == 'Czech (čeština)') echo "selected"; ?>>Czech (čeština) </option>
+                                 <option value="Slovak (slovenčina)" <?php if($user_details->language == 'Slovak (slovenčina)') echo "selected"; ?>>Slovak (slovenčina)</option>
+                                 <option value="Danish (dansk)" <?php if($user_details->language == 'Danish (dansk)') echo "selected"; ?>>Danish (dansk)</option>
+                                 <option value="Estonian (eesti keel)" <?php if($user_details->language == 'Estonian (eesti keel)') echo "selected"; ?>>Estonian (eesti keel)</option>
+                                 <option value="Amharic (አማርኛ)" <?php if($user_details->language == 'Amharic (አማርኛ)') echo "selected"; ?>>Amharic (አማርኛ)</option>
+                                 <option value="Finnish (suomen kieli" <?php if($user_details->language == 'Finnish (suomen kieli)') echo "selected"; ?>>Finnish (suomen kieli)</option>
+                                 <option value="Swedish (svenska)" <?php if($user_details->language == 'Swedish (svenska)') echo "selected"; ?>>Swedish (svenska)</option>
+                                 <option value="Georgian (ქართული ენა)" <?php if($user_details->language == 'Georgian (ქართული ენა)') echo "selected"; ?>>Georgian (ქართული ენა)</option>
+                                 <option value="Portuguese (português do Brasil)" <?php if($user_details->language == 'Portuguese (português do Brasil)') echo "selected"; ?>>Portuguese (português do Brasil)</option>
+                                 <option value="Hungarian (magyar nyelv)" <?php if($user_details->language == 'Hungarian (magyar nyelv)') echo "selected"; ?>>Hungarian (magyar nyelv)</option>
+                                 <option value="Icelandic (íslenska)" <?php if($user_details->language == 'Icelandic (íslenska)') echo "selected"; ?>>Icelandic (íslenska)</option>
+                                 <option value="Hindi (हिन्दी)" <?php if($user_details->language == 'Hindi (हिन्दी)') echo "selected"; ?>>Hindi (हिन्दी)</option>
+                                 <option value="Indonesian (bahasa Indonesia)" <?php if($user_details->language == 'Indonesian (bahasa Indonesia)') echo "selected"; ?>>Indonesian (bahasa Indonesia)</option>
+                                 <option value="Persian (فارسی)" <?php if($user_details->language == 'Persian (فارسی)') echo "selected"; ?>>Persian (فارسی)</option>
+                                 <option value="Hebrew (עברית חדשה)" <?php if($user_details->language == 'Hebrew (עברית חדשה)') echo "selected"; ?>>Hebrew (עברית חדשה)</option>
+                                 <option value="Japanese (日本語)" <?php if($user_details->language == 'Japanese (日本語)') echo "selected"; ?>>Japanese (日本語)</option>
+                                 <option value="Kazakh (қазақ тілі)" <?php if($user_details->language == 'Kazakh (қазақ тілі)') echo "selected"; ?>>Kazakh (қазақ тілі)</option>
+                                 <option value="Korean (한국어)" <?php if($user_details->language == 'Korean (한국어)') echo "selected"; ?>>Korean (한국어)</option>
+                                 <option value="Latvian (latviešu valoda)" <?php if($user_details->language == 'Latvian (latviešu valoda)') echo "selected"; ?>>Latvian (latviešu valoda)</option>
+                                 <option value="Lithuanian (lietuvių kalba)" <?php if($user_details->language == 'Lithuanian (lietuvių kalba)') echo "selected"; ?>>Lithuanian (lietuvių kalba)</option>
+                                 <option value="Malay (Bahasa Melayu)" <?php if($user_details->language == 'Malay (Bahasa Melayu)') echo "selected"; ?>>Malay (Bahasa Melayu)</option>
+                                 <option value="Romanian (românește)" <?php if($user_details->language == 'Romanian (românește)') echo "selected"; ?>>Romanian (românește)</option>
+                                 <option value="Norwegian (norsk)" <?php if($user_details->language == 'Norwegian (norsk)') echo "selected"; ?>>Norwegian (norsk)</option>
+                                 <option value="Urdu (اُردُو)" <?php if($user_details->language == 'Urdu (اُردُو)') echo "selected"; ?>>Urdu (اُردُو)</option>
+                                 <option value="Punjabi (ਪੰਜਾਬੀپن٘جابی)" <?php if($user_details->language == 'Punjabi (ਪੰਜਾਬੀپن٘جابی)') echo "selected"; ?>>Punjabi (ਪੰਜਾਬੀپن٘جابی)</option>
+                                 <option value="Filipino (Wikang Filipino)" <?php if($user_details->language == 'Filipino (Wikang Filipino)') echo "selected"; ?>>Filipino (Wikang Filipino)</option>
+                                 <option value="Polish (polski" <?php if($user_details->language == 'Polish (polski') echo "selected"; ?>>Polish (polski)</option>
+                                 <option value="Slovene (slovenščina)" <?php if($user_details->language == 'Slovene (slovenščina)') echo "selected"; ?>>Slovene (slovenščina)</option>
+                                 <option value="Sinhala (සිංහල)" <?php if($user_details->language == 'Sinhala (සිංහල)') echo "selected"; ?>>Sinhala (සිංහල)</option>
+                                 <option value="Tamil (தமிழ்" <?php if($user_details->language == '>Tamil (தமிழ்') echo "selected"; ?>>Tamil (தமிழ்)</option>
+                                 <option value="Thai (ภาษาไทย)" <?php if($user_details->language == 'Thai (ภาษาไทย)') echo "selected"; ?>>Thai (ภาษาไทย)</option>
+                                 <option value="Ukrainian (украї́нська мо́ва)" <?php if($user_details->language == 'Ukrainian (украї́нська мо́ва)') echo "selected"; ?>>Ukrainian (украї́нська мо́ва)</option>
+                                 <option value="Uzbek (oʻzbek tili)" <?php if($user_details->language == 'Uzbek (oʻzbek tili)') echo "selected"; ?>>Uzbek (oʻzbek tili)</option>
+                                 <option value="Vietnamese (Tiếng Việt)" <?php if($user_details->language == 'Vietnamese (Tiếng Việt)') echo "selected"; ?>>Vietnamese (Tiếng Việt)</option>
+                                 <option value="English (Australia)" <?php if($user_details->language == 'English (Australia)') echo "selected"; ?>>English (Australia)</option>
+                                 <option value="Deutsch (Austria)" <?php if($user_details->language == 'Deutsch (Austria)') echo "selected"; ?>>Deutsch (Austria)</option>
+                                 <option value="Dutch (Belgium)" <?php if($user_details->language == 'Dutch (Belgium)') echo "selected"; ?>>Dutch (Belgium)</option>
+                                 <option value="Français (Belgium)" <?php if($user_details->language == 'Français (Belgium)') echo "selected"; ?>>Français (Belgium)</option>
+                                 <option value="English (Canada)" <?php if($user_details->language == 'English (Canada)') echo "selected"; ?>>English (Canada)</option>
+                                 <option value="Française (Canada)" <?php if($user_details->language == 'Française (Canada)') echo "selected"; ?>>Française (Canada)</option>
+                                 <option value="English (India)" <?php if($user_details->language == 'English (India)') echo "selected"; ?>>English (India)</option>
+                                 <option value="English (Ireland)" <?php if($user_details->language == 'English (Ireland)') echo "selected"; ?>>English (Ireland)</option>
+                                 <option value="English (Philippines)" <?php if($user_details->language == 'English (Philippines)') echo "selected"; ?>>English (Philippines)</option>
+                                 <option value="Dutch (Switzerland)" <?php if($user_details->language == 'Dutch (Switzerland)') echo "selected"; ?>>Dutch (Switzerland)</option>
                               </select>
                            </div>
                         </div>
@@ -421,117 +421,117 @@
                               <select name="time_zone" id="time_zone">
                                  <option value="">Select a Timezone...</option>
                                  <option value="(GMT-11:00) Midway Island" <?php if($user_details->time_zone == '(GMT-11:00) Midway Island') echo "selected"; ?>>(GMT-11:00) Midway Island</option>
-                                 <option value="2">(GMT-11:00) Samoa</option>
-                                 <option value="3">(GMT-10:00) Hawaii</option>
-                                 <option value="4">(GMT-09:00) Alaska</option>
-                                 <option value="5">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                                 <option value="6">(GMT-07:00) Tijuana</option>
-                                 <option value="7">(GMT-07:00) Arizona</option>
-                                 <option value="8">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-                                 <option value="9">(GMT-07:00) Chihuahua</option>
-                                 <option value="10">(GMT-07:00) Mazatlan</option>
-                                 <option value="11">(GMT-06:00) Mexico City</option>
-                                 <option value="12">(GMT-06:00) Monterrey</option>
-                                 <option value="13">(GMT-06:00) Saskatchewan</option>
-                                 <option value="14">(GMT-06:00) Central Time (US &amp; Canada)</option>
-                                 <option value="15">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-                                 <option value="16">(GMT-05:00) Indiana (East)</option>
-                                 <option value="17">(GMT-05:00) Bogota</option>
-                                 <option value="18">(GMT-05:00) Lima</option>
-                                 <option value="19">(GMT-04:00) Caracas</option>
-                                 <option value="20">(GMT-04:00) Atlantic Time (Canada)</option>
-                                 <option value="21">(GMT-04:00) La Paz</option>
-                                 <option value="22">(GMT-04:00) Santiago</option>
-                                 <option value="23">(GMT-03:00) Newfoundland</option>
-                                 <option value="24">(GMT-03:00) Buenos Aires</option>
-                                 <option value="25">(GMT-03:00) Greenland</option>
-                                 <option value="26">(GMT-02:00) Stanley</option>
-                                 <option value="27">(GMT-01:00) Azores</option>
-                                 <option value="28">(GMT-01:00) Cape Verde Is.</option>
-                                 <option value="29">(GMT) Casablanca</option>
-                                 <option value="30">(GMT) Dublin</option>
-                                 <option value="31">(GMT) Lisbon</option>
-                                 <option value="32">(GMT) London</option>
-                                 <option value="33">(GMT) Monrovia</option>
-                                 <option value="34">(GMT+01:00) Amsterdam</option>
-                                 <option value="35">(GMT+01:00) Belgrade</option>
-                                 <option value="36">(GMT+01:00) Berlin</option>
-                                 <option value="37">(GMT+01:00) Bratislava</option>
-                                 <option value="38">(GMT+01:00) Brussels</option>
-                                 <option value="39">(GMT+01:00) Budapest</option>
-                                 <option value="40">(GMT+01:00) Copenhagen</option>
-                                 <option value="41">(GMT+01:00) Ljubljana</option>
-                                 <option value="42">(GMT+01:00) Madrid</option>
-                                 <option value="43">(GMT+01:00) Paris</option>
-                                 <option value="44">(GMT+01:00) Prague</option>
-                                 <option value="45">(GMT+01:00) Rome</option>
-                                 <option value="46">(GMT+01:00) Sarajevo</option>
-                                 <option value="47">(GMT+01:00) Skopje</option>
-                                 <option value="48">(GMT+01:00) Stockholm</option>
-                                 <option value="49">(GMT+01:00) Vienna</option>
-                                 <option value="50">(GMT+01:00) Warsaw</option>
-                                 <option value="51">(GMT+01:00) Zagreb</option>
-                                 <option value="52">(GMT+02:00) Athens</option>
-                                 <option value="53">(GMT+02:00) Bucharest</option>
-                                 <option value="54">(GMT+02:00) Cairo</option>
-                                 <option value="55">(GMT+02:00) Harare</option>
-                                 <option value="56">(GMT+02:00) Helsinki</option>
-                                 <option value="57">(GMT+02:00) Istanbul</option>
-                                 <option value="58">(GMT+02:00) Jerusalem</option>
-                                 <option value="59">(GMT+02:00) Kyiv</option>
-                                 <option value="60">(GMT+02:00) Minsk</option>
-                                 <option value="61">(GMT+02:00) Riga</option>
-                                 <option value="62">(GMT+02:00) Sofia</option>
-                                 <option value="63">(GMT+02:00) Tallinn</option>
-                                 <option value="64">(GMT+02:00) Vilnius</option>
-                                 <option value="65">(GMT+03:00) Baghdad</option>
-                                 <option value="66">(GMT+03:00) Kuwait</option>
-                                 <option value="67">(GMT+03:00) Nairobi</option>
-                                 <option value="68">(GMT+03:00) Riyadh</option>
-                                 <option value="69">(GMT+03:00) Moscow</option>
-                                 <option value="70">(GMT+03:30) Tehran</option>
-                                 <option value="71">(GMT+04:00) Baku</option>
-                                 <option value="72">(GMT+04:00) Volgograd</option>
-                                 <option value="73">(GMT+04:00) Muscat</option>
-                                 <option value="74">(GMT+04:00) Tbilisi</option>
-                                 <option value="75">(GMT+04:00) Yerevan</option>
-                                 <option value="76">(GMT+04:30) Kabul</option>
-                                 <option value="77">(GMT+05:00) Karachi</option>
-                                 <option value="78">(GMT+05:00) Tashkent</option>
-                                 <option value="79">(GMT+05:30) Kolkata</option>
-                                 <option value="80">(GMT+05:45) Kathmandu</option>
-                                 <option value="81">(GMT+06:00) Ekaterinburg</option>
-                                 <option value="82">(GMT+06:00) Almaty</option>
-                                 <option value="83">(GMT+06:00) Dhaka</option>
-                                 <option value="84">(GMT+07:00) Novosibirsk</option>
-                                 <option value="85">(GMT+07:00) Bangkok</option>
-                                 <option value="86">(GMT+07:00) Jakarta</option>
-                                 <option value="87">(GMT+08:00) Krasnoyarsk</option>
-                                 <option value="88">(GMT+08:00) Chongqing</option>
-                                 <option value="89">(GMT+08:00) Hong Kong</option>
-                                 <option value="90">(GMT+08:00) Kuala Lumpur</option>
-                                 <option value="91">(GMT+08:00) Perth</option>
-                                 <option value="92">(GMT+08:00) Singapore</option>
-                                 <option value="93">(GMT+08:00) Taipei</option>
-                                 <option value="94">(GMT+08:00) Ulaan Bataar</option>
-                                 <option value="95">(GMT+08:00) Urumqi</option>
-                                 <option value="96">(GMT+09:00) Irkutsk</option>
-                                 <option value="97">(GMT+09:00) Seoul</option>
-                                 <option value="98">(GMT+09:00) Tokyo</option>
-                                 <option value="99">(GMT+09:30) Adelaide</option>
-                                 <option value="100">(GMT+09:30) Darwin</option>
-                                 <option value="101">(GMT+10:00) Yakutsk</option>
-                                 <option value="102">(GMT+10:00) Brisbane</option>
-                                 <option value="103">(GMT+10:00) Canberra</option>
-                                 <option value="104">(GMT+10:00) Guam</option>
-                                 <option value="105">(GMT+10:00) Hobart</option>
-                                 <option value="106">(GMT+10:00) Melbourne</option>
-                                 <option value="107">(GMT+10:00) Port Moresby</option>
-                                 <option value="108">(GMT+10:00) Sydney</option>
-                                 <option value="109">(GMT+11:00) Vladivostok</option>
-                                 <option value="110">(GMT+12:00) Magadan</option>
-                                 <option value="111">(GMT+12:00) Auckland</option>
-                                 <option value="112">(GMT+12:00) Fiji</option>
+                                 <option value="(GMT-11:00) Samoa" <?php if($user_details->time_zone == '(GMT-11:00) Samoa') echo "selected"; ?>>(GMT-11:00) Samoa</option>
+                                 <option value="(GMT-10:00) Hawaii" <?php if($user_details->time_zone == '(GMT-10:00) Hawaii') echo "selected"; ?>>(GMT-10:00) Hawaii</option>
+                                 <option value="(GMT-09:00) Alaska" <?php if($user_details->time_zone == '((GMT-09:00) Alaska') echo "selected"; ?>>(GMT-09:00) Alaska</option>
+                                 <option value="(GMT-08:00) Pacific Time (US &amp; Canada)" <?php if($user_details->time_zone == '((GMT-08:00) Pacific Time (US &amp; Canada)') echo "selected"; ?>>(GMT-08:00) Pacific Time (US &amp; Canada)</option>
+                                 <option value="(GMT-07:00) Tijuana" <?php if($user_details->time_zone == '((GMT-07:00) Tijuana') echo "selected"; ?>>(GMT-07:00) Tijuana</option>
+                                 <option value="(GMT-07:00) Arizona" <?php if($user_details->time_zone == '(GMT-07:00) Arizona') echo "selected"; ?>>(GMT-07:00) Arizona</option>
+                                 <option value="(GMT-07:00) Mountain Time (US &amp; Canada)" <?php if($user_details->time_zone == '(GMT-07:00) Mountain Time (US &amp; Canada)') echo "selected"; ?>>(GMT-07:00) Mountain Time (US &amp; Canada)</option>
+                                 <option value="(GMT-07:00) Chihuahua" <?php if($user_details->time_zone == '(GMT-07:00) Chihuahua') echo "selected"; ?>>(GMT-07:00) Chihuahua</option>
+                                 <option value="(GMT-07:00) Mazatlan" <?php if($user_details->time_zone == '(GMT-07:00) Mazatlan') echo "selected"; ?>>(GMT-07:00) Mazatlan</option>
+                                 <option value="(GMT-06:00) Mexico City" <?php if($user_details->time_zone == '(GMT-06:00) Mexico City') echo "selected"; ?>>(GMT-06:00) Mexico City</option>
+                                 <option value="(GMT-06:00) Monterrey" <?php if($user_details->time_zone == '(GMT-06:00) Monterrey') echo "selected"; ?>>(GMT-06:00) Monterrey</option>
+                                 <option value="(GMT-06:00) Saskatchewan" <?php if($user_details->time_zone == '(GMT-06:00) Saskatchewan') echo "selected"; ?>>(GMT-06:00) Saskatchewan</option>
+                                 <option value="(GMT-06:00) Central Time (US &amp; Canada)" <?php if($user_details->time_zone == '(GMT-06:00) Central Time (US &amp; Canada)') echo "selected"; ?>>(GMT-06:00) Central Time (US &amp; Canada)</option>
+                                 <option value="(GMT-05:00) Eastern Time (US &amp; Canada)" <?php if($user_details->time_zone == '(GMT-05:00) Eastern Time (US &amp; Canada)') echo "selected"; ?>>(GMT-05:00) Eastern Time (US &amp; Canada)</option>
+                                 <option value="(GMT-05:00) Indiana (East)" <?php if($user_details->time_zone == '(GMT-05:00) Indiana (East)') echo "selected"; ?>>(GMT-05:00) Indiana (East)</option>
+                                 <option value="(GMT-05:00) Bogota" <?php if($user_details->time_zone == '(GMT-05:00) Bogota') echo "selected"; ?>>(GMT-05:00) Bogota</option>
+                                 <option value="(GMT-05:00) Lima" <?php if($user_details->time_zone == '(GMT-05:00) Lima') echo "selected"; ?>>(GMT-05:00) Lima</option>
+                                 <option value="(GMT-04:00) Caracas" <?php if($user_details->time_zone == '(GMT-04:00) Caracas') echo "selected"; ?>>(GMT-04:00) Caracas</option>
+                                 <option value="(GMT-04:00) Atlantic Time (Canada)" <?php if($user_details->time_zone == '(GMT-04:00) Atlantic Time (Canada)') echo "selected"; ?>>(GMT-04:00) Atlantic Time (Canada)</option>
+                                 <option value="(GMT-04:00) La Paz" <?php if($user_details->time_zone == '(GMT-04:00) La Paz') echo "selected"; ?>>(GMT-04:00) La Paz</option>
+                                 <option value="(GMT-04:00) Santiago" <?php if($user_details->time_zone == '(GMT-04:00) Santiago') echo "selected"; ?>>(GMT-04:00) Santiago</option>
+                                 <option value="(GMT-03:00) Newfoundland" <?php if($user_details->time_zone == '(GMT-03:00) Newfoundland') echo "selected"; ?>>(GMT-03:00) Newfoundland</option>
+                                 <option value="(GMT-03:00) Buenos Aires" <?php if($user_details->time_zone == '(GMT-03:00) Buenos Aires') echo "selected"; ?>>(GMT-03:00) Buenos Aires</option>
+                                 <option value="(GMT-03:00) Greenland" <?php if($user_details->time_zone == '(GMT-03:00) Greenland') echo "selected"; ?>>(GMT-03:00) Greenland</option>
+                                 <option value="(GMT-02:00) Stanley" <?php if($user_details->time_zone == '(GMT-02:00) Stanley') echo "selected"; ?>>(GMT-02:00) Stanley</option>
+                                 <option value="(GMT-01:00) Azores" <?php if($user_details->time_zone == '(GMT-01:00) Azores') echo "selected"; ?>>(GMT-01:00) Azores</option>
+                                 <option value="(GMT-01:00) Cape Verde Is" <?php if($user_details->time_zone == '(GMT-01:00) Cape Verde Is') echo "selected"; ?>>(GMT-01:00) Cape Verde Is</option>
+                                 <option value="(GMT) Casablanca" <?php if($user_details->time_zone == '(GMT) Casablanca') echo "selected"; ?>>(GMT) Casablanca</option>
+                                 <option value="(GMT) Dublin" <?php if($user_details->time_zone == '(GMT) Dublin') echo "selected"; ?>>(GMT) Dublin</option>
+                                 <option value="(GMT) Lisbon" <?php if($user_details->time_zone == '(GMT) Lisbon') echo "selected"; ?>>(GMT) Lisbon</option>
+                                 <option value="(GMT) London" <?php if($user_details->time_zone == '(GMT) London') echo "selected"; ?>>(GMT) London</option>
+                                 <option value="(GMT) Monrovia" <?php if($user_details->time_zone == '(GMT) Monrovia') echo "selected"; ?>>(GMT) Monrovia</option>
+                                 <option value="(GMT+01:00) Amsterdam" <?php if($user_details->time_zone == '(GMT+01:00) Amsterdam') echo "selected"; ?>>(GMT+01:00) Amsterdam</option>
+                                 <option value="(GMT+01:00) Belgrade" <?php if($user_details->time_zone == '(GMT+01:00) Belgrade') echo "selected"; ?>>(GMT+01:00) Belgrade</option>
+                                 <option value="(GMT+01:00) Berlin" <?php if($user_details->time_zone == '(GMT+01:00) Berlin') echo "selected"; ?>>(GMT+01:00) Berlin</option>
+                                 <option value="(GMT+01:00) Bratislava" <?php if($user_details->time_zone == '(GMT+01:00) Bratislava') echo "selected"; ?>>(GMT+01:00) Bratislava</option>
+                                 <option value="(GMT+01:00) Brussels" <?php if($user_details->time_zone == '(GMT+01:00) Brussels') echo "selected"; ?>>(GMT+01:00) Brussels</option>
+                                 <option value="(GMT+01:00) Budapest" <?php if($user_details->time_zone == '(GMT+01:00) Budapest') echo "selected"; ?>>(GMT+01:00) Budapest</option>
+                                 <option value="(GMT+01:00) Copenhagen" <?php if($user_details->time_zone == '(GMT+01:00) Copenhagen') echo "selected"; ?>>(GMT+01:00) Copenhagen</option>
+                                 <option value="(GMT+01:00) Ljubljana" <?php if($user_details->time_zone == '(GMT+01:00) Ljubljana') echo "selected"; ?>>(GMT+01:00) Ljubljana</option>
+                                 <option value="(GMT+01:00) Madrid" <?php if($user_details->time_zone == '(GMT+01:00) Madrid') echo "selected"; ?>>(GMT+01:00) Madrid</option>
+                                 <option value="(GMT+01:00) Paris" <?php if($user_details->time_zone == '(GMT+01:00) Paris') echo "selected"; ?>>(GMT+01:00) Paris</option>
+                                 <option value="(GMT+01:00) Prague" <?php if($user_details->time_zone == '(GMT+01:00) Prague') echo "selected"; ?>>(GMT+01:00) Prague</option>
+                                 <option value="(GMT+01:00) Rome" <?php if($user_details->time_zone == '(GMT+01:00) Rome') echo "selected"; ?>>(GMT+01:00) Rome</option>
+                                 <option value="(GMT+01:00) Sarajevo" <?php if($user_details->time_zone == '(GMT+01:00) Sarajevo') echo "selected"; ?>>(GMT+01:00) Sarajevo</option>
+                                 <option value="(GMT+01:00) Skopje" <?php if($user_details->time_zone == '(GMT+01:00) Skopje') echo "selected"; ?>>(GMT+01:00) Skopje</option>
+                                 <option value="(GMT+01:00) Stockholm" <?php if($user_details->time_zone == '(GMT+01:00) Stockholm') echo "selected"; ?>>(GMT+01:00) Stockholm</option>
+                                 <option value="(GMT+01:00) Vienna" <?php if($user_details->time_zone == '(GMT+01:00) Vienna') echo "selected"; ?>>(GMT+01:00) Vienna</option>
+                                 <option value="(GMT+01:00) Warsaw" <?php if($user_details->time_zone == '(GMT+01:00) Warsaw') echo "selected"; ?>>(GMT+01:00) Warsaw</option>
+                                 <option value="(GMT+01:00) Zagreb" <?php if($user_details->time_zone == '(GMT+01:00) Zagreb') echo "selected"; ?>>(GMT+01:00) Zagreb</option>
+                                 <option value="(GMT+02:00) Athens" <?php if($user_details->time_zone == '(GMT+02:00) Athens') echo "selected"; ?>>(GMT+02:00) Athens</option>
+                                 <option value="(GMT+02:00) Bucharest" <?php if($user_details->time_zone == '(GMT+02:00) Bucharest') echo "selected"; ?>>(GMT+02:00) Bucharest</option>
+                                 <option value="(GMT+02:00) Cairo" <?php if($user_details->time_zone == '(GMT+02:00) Cairo') echo "selected"; ?>>(GMT+02:00) Cairo</option>
+                                 <option value="(GMT+02:00) Harare" <?php if($user_details->time_zone == '(GMT+02:00) Harare') echo "selected"; ?>>(GMT+02:00) Harare</option>
+                                 <option value="(GMT+02:00) Helsinki" <?php if($user_details->time_zone == '(GMT+02:00) Helsinki') echo "selected"; ?>>(GMT+02:00) Helsinki</option>
+                                 <option value="(GMT+02:00) Istanbul" <?php if($user_details->time_zone == '(GMT+02:00) Istanbul') echo "selected"; ?>>(GMT+02:00) Istanbul</option>
+                                 <option value="(GMT+02:00) Jerusalem" <?php if($user_details->time_zone == '(GMT+02:00) Jerusalem') echo "selected"; ?>>(GMT+02:00) Jerusalem</option>
+                                 <option value="(GMT+02:00) Kyiv" <?php if($user_details->time_zone == '(GMT+02:00) Kyiv') echo "selected"; ?>>(GMT+02:00) Kyiv</option>
+                                 <option value="(GMT+02:00) Minsk" <?php if($user_details->time_zone == '(GMT+02:00) Minsk') echo "selected"; ?>>(GMT+02:00) Minsk</option>
+                                 <option value="(GMT+02:00) Riga" <?php if($user_details->time_zone == '(GMT+02:00) Riga') echo "selected"; ?>>(GMT+02:00) Riga</option>
+                                 <option value="(GMT+02:00) Sofia" <?php if($user_details->time_zone == '(GMT+02:00) Sofia') echo "selected"; ?>>(GMT+02:00) Sofia</option>
+                                 <option value="(GMT+02:00) Tallinn" <?php if($user_details->time_zone == '(GMT+02:00) Tallinn') echo "selected"; ?>>(GMT+02:00) Tallinn</option>
+                                 <option value="(GMT+02:00) Vilnius" <?php if($user_details->time_zone == '(GMT+02:00) Vilnius') echo "selected"; ?>>(GMT+02:00) Vilnius</option>
+                                 <option value="(GMT+03:00) Baghdad" <?php if($user_details->time_zone == '(GMT+03:00) Baghdad') echo "selected"; ?>>(GMT+03:00) Baghdad</option>
+                                 <option value="(GMT+03:00) Kuwait" <?php if($user_details->time_zone == '(GMT+03:00) Kuwait') echo "selected"; ?>>(GMT+03:00) Kuwait</option>
+                                 <option value="(GMT+03:00) Nairobi" <?php if($user_details->time_zone == '((GMT+03:00) Nairobi') echo "selected"; ?>>(GMT+03:00) Nairobi</option>
+                                 <option value="(GMT+03:00) Riyadh" <?php if($user_details->time_zone == '(GMT+03:00) Riyadh') echo "selected"; ?>>(GMT+03:00) Riyadh</option>
+                                 <option value="(GMT+03:00) Moscow" <?php if($user_details->time_zone == '(GMT+03:00) Moscow') echo "selected"; ?>>(GMT+03:00) Moscow</option>
+                                 <option value="(GMT+03:30) Tehran" <?php if($user_details->time_zone == '(GMT+03:30) Tehran') echo "selected"; ?>>(GMT+03:30) Tehran</option>
+                                 <option value="(GMT+04:00) Baku" <?php if($user_details->time_zone == '(GMT+04:00) Baku') echo "selected"; ?>>(GMT+04:00) Baku</option>
+                                 <option value="(GMT+04:00) Volgograd" <?php if($user_details->time_zone == '(GMT+04:00) Volgograd') echo "selected"; ?>>(GMT+04:00) Volgograd</option>
+                                 <option value="(GMT+04:00) Muscat" <?php if($user_details->time_zone == '(GMT+04:00) Muscat') echo "selected"; ?>>(GMT+04:00) Muscat</option>
+                                 <option value="(GMT+04:00) Tbilisi" <?php if($user_details->time_zone == '(GMT+04:00) Tbilisi') echo "selected"; ?>>(GMT+04:00) Tbilisi</option>
+                                 <option value="(GMT+04:00) Yerevan" <?php if($user_details->time_zone == '(GMT+04:00) Yerevan') echo "selected"; ?>>(GMT+04:00) Yerevan</option>
+                                 <option value="(GMT+04:30) Kabul" <?php if($user_details->time_zone == '(GMT+04:30) Kabul') echo "selected"; ?>>(GMT+04:30) Kabul</option>
+                                 <option value="(GMT+05:00) Karachi" <?php if($user_details->time_zone == '(GMT+05:00) Karachi') echo "selected"; ?>>(GMT+05:00) Karachi</option>
+                                 <option value="(GMT+05:00) Tashkent" <?php if($user_details->time_zone == '(GMT+05:00) Tashkent') echo "selected"; ?>>(GMT+05:00) Tashkent</option>
+                                 <option value="(GMT+05:30) Kolkata" <?php if($user_details->time_zone == '(GMT+05:30) Kolkata') echo "selected"; ?>>(GMT+05:30) Kolkata</option>
+                                 <option value="(GMT+05:45) Kathmandu" <?php if($user_details->time_zone == '(GMT+05:45) Kathmandu') echo "selected"; ?>>(GMT+05:45) Kathmandu</option>
+                                 <option value="(GMT+06:00) Ekaterinburg" <?php if($user_details->time_zone == '(GMT+06:00) Ekaterinburg') echo "selected"; ?>>(GMT+06:00) Ekaterinburg</option>
+                                 <option value="(GMT+06:00) Almaty" <?php if($user_details->time_zone == '(GMT+06:00) Almaty') echo "selected"; ?>>(GMT+06:00) Almaty</option>
+                                 <option value="(GMT+06:00) Dhaka" <?php if($user_details->time_zone == '(GMT+06:00) Dhaka') echo "selected"; ?>>(GMT+06:00) Dhaka</option>
+                                 <option value="(GMT+07:00) Novosibirsk" <?php if($user_details->time_zone == '(GMT+07:00) Novosibirsk') echo "selected"; ?>>(GMT+07:00) Novosibirsk</option>
+                                 <option value="(GMT+07:00) Bangkok" <?php if($user_details->time_zone == '(GMT+07:00) Bangkok') echo "selected"; ?>>(GMT+07:00) Bangkok</option>
+                                 <option value="(GMT+07:00) Jakarta" <?php if($user_details->time_zone == '(GMT+07:00) Jakarta') echo "selected"; ?>>(GMT+07:00) Jakarta</option>
+                                 <option value="(GMT+08:00) Krasnoyarsk" <?php if($user_details->time_zone == '(GMT+08:00) Krasnoyarsk') echo "selected"; ?>>(GMT+08:00) Krasnoyarsk</option>
+                                 <option value="(GMT+08:00) Chongqing" <?php if($user_details->time_zone == '(GMT+08:00) Chongqing') echo "selected"; ?>>(GMT+08:00) Chongqing</option>
+                                 <option value="(GMT+08:00) Hong Kong" <?php if($user_details->time_zone == '(GMT+08:00) Hong Kong') echo "selected"; ?>>(GMT+08:00) Hong Kong</option>
+                                 <option value="(GMT+08:00) Kuala Lumpur" <?php if($user_details->time_zone == '(GMT+08:00) Kuala Lumpur') echo "selected"; ?>>(GMT+08:00) Kuala Lumpur</option>
+                                 <option value="(GMT+08:00) Perth" <?php if($user_details->time_zone == '(GMT+08:00) Perth') echo "selected"; ?>>(GMT+08:00) Perth</option>
+                                 <option value="(GMT+08:00) Singapore" <?php if($user_details->time_zone == '(GMT+08:00) Singapore') echo "selected"; ?>>(GMT+08:00) Singapore</option>
+                                 <option value="(GMT+08:00) Taipei" <?php if($user_details->time_zone == '(GMT+08:00) Taipei') echo "selected"; ?>>(GMT+08:00) Taipei</option>
+                                 <option value="(GMT+08:00) Ulaan Bataar" <?php if($user_details->time_zone == '(GMT+08:00) Ulaan Bataar') echo "selected"; ?>>(GMT+08:00) Ulaan Bataar</option>
+                                 <option value="(GMT+08:00) Urumqi" <?php if($user_details->time_zone == '(GMT+08:00) Urumqi') echo "selected"; ?>>(GMT+08:00) Urumqi</option>
+                                 <option value="(GMT+09:00) Irkutsk" <?php if($user_details->time_zone == '(GMT+09:00) Irkutsk') echo "selected"; ?>>(GMT+09:00) Irkutsk</option>
+                                 <option value="(GMT+09:00) Seoul" <?php if($user_details->time_zone == '(GMT+09:00) Seoul') echo "selected"; ?>>(GMT+09:00) Seoul</option>
+                                 <option value="(GMT+09:00) Tokyo" <?php if($user_details->time_zone == '(GMT+09:00) Tokyo') echo "selected"; ?>>(GMT+09:00) Tokyo</option>
+                                 <option value="(GMT+09:30) Adelaide" <?php if($user_details->time_zone == '(GMT+09:30) Adelaide') echo "selected"; ?>>(GMT+09:30) Adelaide</option>
+                                 <option value="(GMT+09:30) Darwin" <?php if($user_details->time_zone == '(GMT+09:30) Darwin') echo "selected"; ?>>(GMT+09:30) Darwin</option>
+                                 <option value="(GMT+10:00) Yakutsk" <?php if($user_details->time_zone == '(GMT+10:00) Yakutsk') echo "selected"; ?>>(GMT+10:00) Yakutsk</option>
+                                 <option value="(GMT+10:00) Brisbane" <?php if($user_details->time_zone == '(GMT+10:00) Brisbane') echo "selected"; ?>>(GMT+10:00) Brisbane</option>
+                                 <option value="(GMT+10:00) Canberra" <?php if($user_details->time_zone == '(GMT+10:00) Canberra') echo "selected"; ?>>(GMT+10:00) Canberra</option>
+                                 <option value="(GMT+10:00) Guam" <?php if($user_details->time_zone == '(GMT+10:00) Guam') echo "selected"; ?>>(GMT+10:00) Guam</option>
+                                 <option value="(GMT+10:00) Hobart" <?php if($user_details->time_zone == '(GMT+10:00) Hobart') echo "selected"; ?>>(GMT+10:00) Hobart</option>
+                                 <option value="(GMT+10:00) Melbourne" <?php if($user_details->time_zone == '(GMT+10:00) Melbourne') echo "selected"; ?>>(GMT+10:00) Melbourne</option>
+                                 <option value="(GMT+10:00) Port Moresby" <?php if($user_details->time_zone == '(GMT+10:00) Port Moresby') echo "selected"; ?>>(GMT+10:00) Port Moresby</option>
+                                 <option value="(GMT+10:00) Sydney" <?php if($user_details->time_zone == '(GMT+10:00) Sydney') echo "selected"; ?>>(GMT+10:00) Sydney</option>
+                                 <option value="(GMT+11:00) Vladivostok" <?php if($user_details->time_zone == '(GMT+11:00) Vladivostok') echo "selected"; ?>>(GMT+11:00) Vladivostok</option>
+                                 <option value="(GMT+12:00) Magadan" <?php if($user_details->time_zone == '(GMT+12:00) Magadan') echo "selected"; ?>>(GMT+12:00) Magadan</option>
+                                 <option value="(GMT+12:00) Auckland" <?php if($user_details->time_zone == '(GMT+12:00) Auckland') echo "selected"; ?>>(GMT+12:00) Auckland</option>
+                                 <option value="(GMT+12:00) Fiji" <?php if($user_details->time_zone == '(GMT+12:00) Fiji') echo "selected"; ?>>(GMT+12:00) Fiji</option>
                               </select>
                            </div>
                         </div>
@@ -541,19 +541,19 @@
                               <select name="currency" id="currency">
                                  <option value="">Select a Currency</option>
                                  <option value="US Dollar" <?php if($user_details->currency == 'US Dollar') echo "selected"; ?>>US Dollar [$]</option>
-                                 <option value="2">Canadian Dollar [$]</option>
-                                 <option value="3">British Pound [£]</option>
-                                 <option value="4">Australian Dollar [£]</option>
-                                 <option value="5">Euro [€]</option>
-                                 <option value="6">Swiss Franc [₣]</option>
-                                 <option value="7">Chinese Renminbi [元]</option>
-                                 <option value="8">Hong Kong Dollar [元]</option>
-                                 <option value="9">Philippines Peso [₱]</option>
-                                 <option value="10">Polish Zloty [zł]</option>
-                                 <option value="11">Sweden Krona [kr]</option>
-                                 <option value="12">Singapore Dollar [$]</option>
-                                 <option value="13">Taiwanese Dollar [NT$]</option>
-                                 <option value="14">Malaysian Ringgit [RM]</option>
+                                 <option value="Canadian Dollar" <?php if($user_details->currency == 'Canadian Dollar') echo "selected"; ?>>Canadian Dollar [$]</option>
+                                 <option value="British Pound" <?php if($user_details->currency == 'British Pound') echo "selected"; ?>>British Pound [£]</option>
+                                 <option value="Australian Dollar" <?php if($user_details->currency == 'Australian Dollar') echo "selected"; ?>>Australian Dollar [£]</option>
+                                 <option value="Euro" <?php if($user_details->currency == 'Euro') echo "selected"; ?>>Euro [€]</option>
+                                 <option value="Swiss Franc" <?php if($user_details->currency == 'Swiss Franc') echo "selected"; ?>>Swiss Franc [₣]</option>
+                                 <option value="Chinese Renminbi" <?php if($user_details->currency == 'Chinese Renminbi') echo "selected"; ?>>Chinese Renminbi [元]</option>
+                                 <option value="Hong Kong Dollar" <?php if($user_details->currency == 'Hong Kong Dollar') echo "selected"; ?>>Hong Kong Dollar [元]</option>
+                                 <option value="Philippines Peso" <?php if($user_details->currency == 'Philippines Peso') echo "selected"; ?>>Philippines Peso [₱]</option>
+                                 <option value="Polish Zloty " <?php if($user_details->currency == 'Polish Zloty ') echo "selected"; ?>>Polish Zloty [zł]</option>
+                                 <option value="Sweden Krona" <?php if($user_details->currency == 'Sweden Krona') echo "selected"; ?>>Sweden Krona [kr]</option>
+                                 <option value="Singapore Dollar" <?php if($user_details->currency == 'Singapore Dollar') echo "selected"; ?>>Singapore Dollar [$]</option>
+                                 <option value="Taiwanese Dollar " <?php if($user_details->currency == 'Taiwanese Dollar ') echo "selected"; ?>>Taiwanese Dollar [NT$]</option>
+                                 <option value="Malaysian Ringgit" <?php if($user_details->currency == 'Malaysian Ringgit') echo "selected"; ?>>Malaysian Ringgit [RM]</option>
                               </select>
                            </div>
                         </div>
@@ -605,55 +605,28 @@
                                        <label>Marketplace</label>
                                        <div class="select">
                                           <select name="ebay_user_marketplace" id="ebay_user_marketplace">
-                                             <option value="Australia -- ebay.com.au" <?php if($user_details->ebay_marketplace == 'Australia --
-                                                ebay.com.au') echo "selected"; ?>>Australia --
-                                                ebay.com.au
-                                             </option>
-                                             <option value="Austria -- ebay.at">Austria -- ebay.at
-                                             </option>
-                                             <option value="Belgium (Française) -- befr.ebay.be">Belgium
-                                                (Française) -- befr.ebay.be
-                                             </option>
-                                             <option value="Belgium (Nederlandse) -- benl.ebay.be">
-                                                Belgium (Nederlandse) -- benl.ebay.be
-                                             </option>
-                                             <option value="Canada (Française) -- cafr.ebay.ca">Canada
-                                                (Française) -- cafr.ebay.ca
-                                             </option>
-                                             <option value="Canada -- ebay.ca">Canada -- ebay.ca</option>
-                                             <option value="France -- ebay.fr">France -- ebay.fr</option>
-                                             <option value="Germany -- ebay.de">Germany -- ebay.de
-                                             </option>
-                                             <option value="Great Britain -- ebay.co.uk">Great Britain --
-                                                ebay.co.uk
-                                             </option>
-                                             <option value="Hong Kong -- ebay.com.hk">Hong Kong --
-                                                ebay.com.hk
-                                             </option>
-                                             <option value="India -- ebay.in">India -- ebay.in</option>
-                                             <option value="Ireland -- ebay.ie">Ireland -- ebay.ie
-                                             </option>
-                                             <option value="Italy -- ebay.it">Italy -- ebay.it</option>
-                                             <option value="Malaysia -- ebay.com.my">Malaysia --
-                                                ebay.com.my
-                                             </option>
-                                             <option value="Netherlands -- ebay.nl">Netherlands --
-                                                ebay.nl
-                                             </option>
-                                             <option value="Philippines -- ebay.ph">Philippines --
-                                                ebay.ph
-                                             </option>
-                                             <option value="Poland -- ebay.pl">Poland -- ebay.pl</option>
-                                             <option value="Singapore -- ebay.com.sg">Singapore --
-                                                ebay.com.sg
-                                             </option>
-                                             <option value="Spain -- ebay.es">Spain -- ebay.es</option>
-                                             <option value="Switzerland -- ebay.ch">Switzerland --
-                                                ebay.ch
-                                             </option>
-                                             <option value="United States -- ebay.com">United States --
-                                                ebay.com
-                                             </option>
+                                             <option value="">Select a Marketplace...</option>
+                                             <option value="Australia -- ebay.com.au" <?php if($user_details->ebay_marketplace == 'Australia -- ebay.com.au') echo "selected"; ?>>Australia -- ebay.com.au</option>
+                                             <option value="Austria -- ebay.at" <?php if($user_details->ebay_marketplace == 'Austria -- ebay.at') echo "selected"; ?>>Austria -- ebay.at</option>
+                                             <option value="Belgium(Française) -- befr.ebay.be" <?php if($user_details->ebay_marketplace == 'Belgium(Française) -- befr.ebay.be') echo "selected"; ?>>Belgium(Française) -- befr.ebay.be</option>
+                                             <option value="Belgium (Nederlandse) -- benl.ebay.be" <?php if($user_details->ebay_marketplace == 'Belgium (Nederlandse) -- benl.ebay.be') echo "selected"; ?>> Belgium (Nederlandse) -- benl.ebay.be</option>
+                                             <option value="Canada (Française) -- cafr.ebay.ca" <?php if($user_details->ebay_marketplace == 'Canada (Française) -- cafr.ebay.ca') echo "selected"; ?>>Canada(Française) -- cafr.ebay.ca</option>
+                                             <option value="Canada -- ebay.ca" <?php if($user_details->ebay_marketplace == 'Canada -- ebay.ca') echo "selected"; ?>>Canada -- ebay.ca</option>
+                                             <option value="France -- ebay.fr" <?php if($user_details->ebay_marketplace == 'France -- ebay.fr') echo "selected"; ?>>France -- ebay.fr</option>
+                                             <option value="Germany -- ebay.de" <?php if($user_details->ebay_marketplace == 'Germany -- ebay.de') echo "selected"; ?>>Germany -- ebay.de</option>
+                                             <option value="Great Britain -- ebay.co.uk" <?php if($user_details->ebay_marketplace == 'Great Britain --ebay.co.uk') echo "selected"; ?>>Great Britain --ebay.co.uk</option>
+                                             <option value="Hong Kong -- ebay.com.hk" <?php if($user_details->ebay_marketplace == 'Hong Kong -- ebay.com.hk') echo "selected"; ?>>Hong Kong -- ebay.com.hk</option>
+                                             <option value="India -- ebay.in" <?php if($user_details->ebay_marketplace == 'India -- ebay.in') echo "selected"; ?>>India -- ebay.in</option>
+                                             <option value="Ireland -- ebay.ie" <?php if($user_details->ebay_marketplace == 'Ireland -- ebay.ie') echo "selected"; ?>>Ireland -- ebay.ie</option>
+                                             <option value="Italy -- ebay.it" <?php if($user_details->ebay_marketplace == 'Italy -- ebay.it') echo "selected"; ?>>Italy -- ebay.it</option>
+                                             <option value="Malaysia -- ebay.com.my" <?php if($user_details->ebay_marketplace == 'Malaysia -- ebay.com.my') echo "selected"; ?>>Malaysia -- ebay.com.my</option>
+                                             <option value="Netherlands -- ebay.nl" <?php if($user_details->ebay_marketplace == 'Netherlands -- ebay.nl') echo "selected"; ?>>Netherlands -- ebay.nl</option>
+                                             <option value="Philippines -- ebay.ph" <?php if($user_details->ebay_marketplace == 'Philippines -- ebay.ph') echo "selected"; ?>>Philippines -- ebay.ph</option>
+                                             <option value="Poland -- ebay.pl" <?php if($user_details->ebay_marketplace == 'Poland -- ebay.pl') echo "selected"; ?>>Poland -- ebay.pl</option>
+                                             <option value="Singapore -- ebay.com.sg" <?php if($user_details->ebay_marketplace == 'Singapore -- ebay.com.sg') echo "selected"; ?>>Singapore -- ebay.com.sg</option>
+                                             <option value="Spain -- ebay.es" <?php if($user_details->ebay_marketplace == 'Spain -- ebay.es') echo "selected"; ?>>Spain -- ebay.es</option>
+                                             <option value="Switzerland -- ebay.ch" <?php if($user_details->ebay_marketplace == 'Switzerland -- ebay.ch') echo "selected"; ?>>Switzerland -- ebay.ch</option>
+                                             <option value="United States -- ebay.com" <?php if($user_details->ebay_marketplace == 'United States -- ebay.com') echo "selected"; ?>>United States -- ebay.com</option>
                                           </select>
                                        </div>
                                     </div>

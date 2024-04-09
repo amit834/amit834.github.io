@@ -4,6 +4,7 @@ namespace Wave\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -72,27 +73,58 @@ class ProfileController extends Controller
         }
     }
 
+    private function saveAvatar($avatar, $filename){
+        $path = 'avatars/' . $filename . '.png';
+        Storage::disk(config('voyager.storage.disk'))->put($path, file_get_contents($avatar));
+        return $path;
+    }
+
    //Function for update user profile info
    public function submit_profile_details(Request $request){
         //Login user id
         $login_user_id = Auth::id();
 
-        //Update login user data
-        $is_update = User::where('id', $login_user_id)->update([
-            'name' => $request->name,
-            'country' => $request->country,
-            'language' => $request->language,
-            'time_zone' => $request->time_zone,
-            'currency' => $request->currency,
-        ]);
-        //check if data is updated or not
-        if ($is_update) {
-            $url = url('/').'/customer/my-account';
+        //Check if file upalod is exit or not
+        if($request->hasFile('imageUpload')) {
+            $authed_user = auth()->user();
+            $authed_user_pic = $this->saveAvatar($request->imageUpload, $authed_user->username);
 
-            echo '<p style="color:green">Profile details has been updated Successfully</p>';
-            echo '<script>setTimeout(function() { window.location.href = "' . $url . '"; }, 3000);</script>';
+            //Update login user data
+            $is_update = User::where('id', $login_user_id)->update([
+                'name' => $request->name,
+                'country' => $request->country,
+                'language' => $request->language,
+                'time_zone' => $request->time_zone,
+                'currency' => $request->currency,
+                'avatar' => $authed_user_pic,
+            ]);
+            //check if data is updated or not
+            if ($is_update) {
+                $url = url('/').'/customer/my-account';
+
+                echo '<p style="color:green">Profile details has been updated Successfully</p>';
+                echo '<script>setTimeout(function() { window.location.href = "' . $url . '"; }, 3000);</script>';
+            } else {
+                echo '<p style="color:green">Opps Something wrong!</p>';
+            }
         } else {
-            echo '<p style="color:green">Opps Something wrong!</p>';
+            //Update login user data
+            $is_update = User::where('id', $login_user_id)->update([
+                'name' => $request->name,
+                'country' => $request->country,
+                'language' => $request->language,
+                'time_zone' => $request->time_zone,
+                'currency' => $request->currency,
+            ]);
+            //check if data is updated or not
+            if ($is_update) {
+                $url = url('/').'/customer/my-account';
+
+                echo '<p style="color:green">Profile details has been updated Successfully</p>';
+                echo '<script>setTimeout(function() { window.location.href = "' . $url . '"; }, 3000);</script>';
+            } else {
+                echo '<p style="color:green">Opps Something wrong!</p>';
+            }
         }
     }
 
