@@ -630,10 +630,6 @@
                                           </select>
                                        </div>
                                     </div>
-                                    <div class="text-popup">
-                                       <span>Redirect to eBay</span>
-                                       <p>You will be redirected to eBay. Please verify</p>
-                                    </div>
                                     <div class="from-button">
                                        <a href="#!" class="modal-close close-a-tage">Close</a>
                                        <button class="save-btn disable-submit"

@@ -148,6 +148,14 @@ body {
   height: 40px;
   line-height: 32px;
 }
+.notifaction-green{
+	color: green;
+	font-weight: 600;
+}
+.notifaction-red{
+	color: red;
+	font-weight: 600;
+}
 .notifaction-imge {
 	float: right;
 	position: relative;
