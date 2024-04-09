@@ -135,12 +135,18 @@ body {
 	display: inline-block;
 	margin: 0 0 0 15px;
 }
+.profile-imge img {
+	width: 100%;
+  }
 .profile-imge {
-	border: 1px solid #39A3FF;
-	border-radius: 50%;
-	overflow: hidden;
-	padding: 3px;
-	display: inline-block;
+  border: 1px solid #39A3FF;
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 2px;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 32px;
 }
 .notifaction-imge {
 	float: right;
