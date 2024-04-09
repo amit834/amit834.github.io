@@ -30,7 +30,7 @@ class EbayConnectionController extends Controller
         $authUrl = $api_endpoint."/oauth2/authorize?client_id=".$clientId."&response_type=code&redirect_uri=".$redirectUri."&scope=".$scope;
 
         // Redirect user to eBay sign-in page
-        echo '<p style="color:green;">Please Wait..</p>';
+        echo '<p style="color:green;">You will be redirected to eBay. Please Wait...</p>';
         echo '<script>setTimeout(function() { window.location.href = "' . $authUrl . '"; }, 3000);</script>';
     }
 
