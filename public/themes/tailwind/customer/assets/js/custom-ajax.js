@@ -185,7 +185,27 @@ $(document).ready(function () {
                 alert('Please confirm your account deactivation by checking the box.');
             }
         }
-    });    
+    });   
+    
+    //Synchronise Order Manually
+    $('body').on('click', '.synchronise_order_manually', function() {
+        // Ajax Call
+        $.ajax({
+            type: 'GET',
+            url: base_url + '/customer/synchronise-order-manually',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            beforeSend: function() {
+                $('.synchronise_order_manually').prop('disabled', true);
+            },
+            success: function(response) {
+                $('.synchronise_order_manually_res').html(response);
+                $('.synchronise_order_manually').prop('disabled', false);
+            }
+        });
+    });
+
 });
 
 

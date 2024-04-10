@@ -40,7 +40,7 @@
                <a href="#"><span>User</span></a>
                <div class="sidebar-submenu">
                   <ul>
-                     <li><a href="#"><img src="{{ asset('themes/tailwind/customer/assets/images/icon-3-gray.svg') }}" class="gray-icon" /> <img src="{{ asset('themes/tailwind/customer/assets/images/icon-3-blue.svg') }}" class="blue-icon" /> Account</a></li>
+                     <li><a href="{{ url('customer/my-account') }}"><img src="{{ asset('themes/tailwind/customer/assets/images/icon-3-gray.svg') }}" class="gray-icon" /> <img src="{{ asset('themes/tailwind/customer/assets/images/icon-3-blue.svg') }}" class="blue-icon" /> Account</a></li>
                   </ul>
                </div>
             </li>

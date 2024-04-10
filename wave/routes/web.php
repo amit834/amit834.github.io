@@ -83,6 +83,7 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::post('customer/submit-delete-my-account', [Wave\Http\Controllers\Customer\ProfileController::class, 'submit_delete_my_account'])->name('submit.dlete.my.account');
 		Route::post('customer/submit-ebay-connection', [Wave\Http\Controllers\Customer\EbayConnectionController::class, 'submit_ebay_connection'])->name('customer.submit.ebay.connection');;
 		Route::get('customer/get-ebay-connection', [Wave\Http\Controllers\Customer\EbayConnectionController::class, 'ebay_authorization_callback']);
+		Route::get('customer/synchronise-order-manually', [Wave\Http\Controllers\Customer\ManuallySynchroniseController::class, 'synchronise_order_manually']);
 		
 	});
 });

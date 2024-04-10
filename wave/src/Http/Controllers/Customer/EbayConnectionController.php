@@ -42,7 +42,7 @@ class EbayConnectionController extends Controller
         // Authorization code received from eBay
         $code = $_GET['code']; 
         $api_endpoint = env('EBAY_API_URI');
-        $tokenUrl =  "https://api.sandbox.ebay.com/identity/v1/oauth2/token";
+        $tokenUrl =  $api_endpoint."/identity/v1/oauth2/token";
         $clientId = env('EBAY_APP_ID');
         $clientSecret = env('EBAY_CLIENT_SECRET');
         $redirectUri = url('/').'/customer/get-ebay-connection';
@@ -76,7 +76,7 @@ class EbayConnectionController extends Controller
         //Check if token is not null
         if($access_token){
             //update user token
-            $update_user = User::Where('id',$login_user_id)->update(['ebay_token' => $access_token, 'ebay_expires_in' => $expires_in, 'ebay_refresh_token' => $refresh_token, 'ebay_refresh_token_expires_in' => $refresh_token_expires_in]);
+            $update_user = User::Where('id',$login_user_id)->update(['ebay_token' => $access_token, 'ebay_expires_in' => $expires_in, 'ebay_refresh_token' => $refresh_token, 'ebay_refresh_token_expires_in' => $refresh_token_expires_in, 'is_active_connection' => 'Ebay']);
 
             // Redirect after successful authentication
             return redirect('customer/my-account')->with('success', 'eBay Authentication Successfully Done.');
