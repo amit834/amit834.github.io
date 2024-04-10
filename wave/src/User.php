@@ -39,6 +39,7 @@ class User extends Authenticatable implements JWTSubject
         'ebay_marketplace',
         'ebay_token',
         'phone_number',
+        'is_active_connection',
     ];
 
     /**

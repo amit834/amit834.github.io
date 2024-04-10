@@ -266,7 +266,8 @@
                 <button>Apply</button>
               </div>
               <div class="synchronise-manually">
-                <button>Synchronise manually</button>
+                <button type="button" class="synchronise_order_manually">Synchronise manually</button>
+                <div class="synchronise_order_manually_res"></div>
               </div>
             </div>
             <div class="table-header-right">
