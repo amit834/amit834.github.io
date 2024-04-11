@@ -82,7 +82,7 @@ class ManuallySynchroniseController extends Controller
             }
         } elseif($is_active_connection == "Amazon"){
             echo "Amazon";
-        } elseif($is_active_connection == "Amazon"){ 
+        } elseif($is_active_connection == "Google"){ 
             echo "Google";
         } else {
             echo '<p style="color:red;">Please Set And Configure atleast one connection for synchronise order.</p>';
