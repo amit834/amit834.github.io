@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('ebay_refresh_token_expires_in')->nullable();
             $table->string('phone_number')->nullable();
             $table->enum('user_status', ['Pending','Active','Suspend'])->default('Pending')->after('user_type')->nullable(); 
-            $table->enum('is_active_connection', ['Ebay', 'Amazon', 'Nothing'])->default('Nothing')->after('user_status')->nullable(); 
+            $table->enum('is_active_connection', ['Ebay', 'Amazon', 'Google', 'Nothing'])->default('Nothing')->after('user_status')->nullable(); 
         });
     }
 
