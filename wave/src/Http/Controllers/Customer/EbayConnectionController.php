@@ -14,48 +14,14 @@ class EbayConnectionController extends Controller
 {
     //Function to handle eBay connection and authorization
     public function submit_ebay_connection(Request $request) {
-        $ebayRefreshToken = 'v^1.1#i^1#I^3#f^0#p^3#r^1#t^Ul4xMF81OkNGN0ZEMjI1NTAwMjg3RTBERDAzRUJCQzEwNjAxRjcwXzBfMSNFXjEyODQ=';
-        // Your eBay API endpoint for token refresh
-        $tokenUrl = "https://api.sandbox.ebay.com/identity/v1/oauth2/token";
-        $clientId = env('EBAY_APP_ID');
-        $clientSecret = env('EBAY_CLIENT_SECRET');
-
-        // Data for passing
-        $data = [
-            'grant_type' => 'refresh_token',
-            'refresh_token' => $ebayRefreshToken,
-        ];
-        $authHeader = base64_encode("$clientId:$clientSecret");
-
-        // Curl call
-        $ch = curl_init($tokenUrl);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Authorization: Basic ' . $authHeader,
-            'Content-Type: application/x-www-form-urlencoded',
-        ]);
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        // Response handling
-        $responseData = json_decode($response, true);
-        $access_token = $responseData['access_token'] ?? null;
-        $expires_in = $responseData['expires_in'] ?? null;
-        $refresh_token = $responseData['refresh_token'] ?? null;
-        $refresh_token_expires_in = $responseData['refresh_token_expires_in'] ?? null;
-        echo "<pre>"; print_r($responseData);
-        
-
-        /*//Login user id
+        //Login user id
         $login_user_id = Auth::id();
         
         //update user token
         $update_user = User::Where('id',$login_user_id)->update(['is_ebay_connection' => 'enable', 'ebay_username' => $request->ebay_user_name, 'ebay_marketplace' => $request->ebay_user_marketplace]);
         
         //Call Api Perameters
-        $api_endpoint = env('EBAY_API_URI');
+        $api_endpoint = env('EBAY_API_AUTH_URI');
         $clientId = env('EBAY_APP_ID');
         $redirectUri = url('/').'/customer/get-ebay-connection';
         $scope = 'https://api.ebay.com/oauth/api_scope';
@@ -65,7 +31,7 @@ class EbayConnectionController extends Controller
 
         // Redirect user to eBay sign-in page
         echo '<p style="color:green;">You will be redirected to eBay. Please Wait...</p>';
-        echo '<script>setTimeout(function() { window.location.href = "' . $authUrl . '"; }, 3000);</script>';*/
+        echo '<script>setTimeout(function() { window.location.href = "' . $authUrl . '"; }, 3000);</script>';
     }
 
     // Function to handle eBay authorization callback
@@ -75,7 +41,7 @@ class EbayConnectionController extends Controller
 
         // Authorization code received from eBay
         $code = $_GET['code']; 
-        $api_endpoint = env('EBAY_API_URI');
+        $api_endpoint = env('EBAY_API_AUTH_URI');
         $tokenUrl =  "https://api.sandbox.ebay.com/identity/v1/oauth2/token";
         $clientId = env('EBAY_APP_ID');
         $clientSecret = env('EBAY_CLIENT_SECRET');
@@ -161,8 +127,6 @@ class EbayConnectionController extends Controller
         $responseData = json_decode($response, true);
         $access_token = $responseData['access_token'] ?? null;
         $expires_in = $responseData['expires_in'] ?? null;
-        $refresh_token = $responseData['refresh_token'] ?? null;
-        $refresh_token_expires_in = $responseData['refresh_token_expires_in'] ?? null;
 
         // Check if token is not null and update user token
         if($access_token){
@@ -170,8 +134,6 @@ class EbayConnectionController extends Controller
             $update_user = User::where('id',$login_user_id)->update([
                 'ebay_token' => $access_token,
                 'ebay_expires_in' => $expires_in,
-                'ebay_refresh_token' => $refresh_token,
-                'ebay_refresh_token_expires_in' => $refresh_token_expires_in,
                 'is_active_connection' => 'Ebay'
             ]);
 
@@ -193,10 +155,8 @@ class EbayConnectionController extends Controller
             $newAccessToken = $this->refreshEbayTokens($ebayRefreshToken);
 
             if ($newAccessToken) {
-                // Use the new access token for API calls or return it as needed
                 return $newAccessToken;
             } else {
-                // Token refresh failed, handle accordingly (log error, notify user, etc.)
                 return null;
             }
         } else {
@@ -204,10 +164,8 @@ class EbayConnectionController extends Controller
             $newAccessToken = $this->refreshEbayTokens($ebayRefreshToken);
             
             if ($newAccessToken) {
-                // Token refreshed successfully, use the new token
                 return $newAccessToken;
             } else {
-                // Token refresh failed, handle accordingly (log error, notify user, etc.)
                 return null;
             }
         }
