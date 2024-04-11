@@ -197,7 +197,7 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             beforeSend: function() {
-                $('.synchronise_order_manually').prop('disabled', true);
+               // $('.synchronise_order_manually').prop('disabled', true);
             },
             success: function(response) {
                 $('.synchronise_order_manually_res').html(response);
