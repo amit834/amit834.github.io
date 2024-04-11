@@ -39,6 +39,7 @@ class ManuallySynchroniseController extends Controller
                     'X-EBAY-API-SITEID: 0',
                     'X-EBAY-API-CALL-NAME: GetOrders',
                     'Content-Type: text/xml',
+                    'X-EBAY-API-SANDBOX-REQUEST: true',
                 );
 
                 // API request body (XML format)
@@ -54,27 +55,21 @@ class ManuallySynchroniseController extends Controller
 
                 // Initialize cURL session
                 $ch = curl_init();
-
-                // Set cURL options
                 curl_setopt($ch, CURLOPT_URL, $endpoint);
                 curl_setopt($ch, CURLOPT_POST, true);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
                 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-                // Execute cURL request
                 $response = curl_exec($ch);
-
-                // Check for errors
-                if (curl_errno($ch)) {
-                    echo 'Error: ' . curl_error($ch);
+                // Handle API response (parse JSON or XML as needed)
+                $parsedResponse = simplexml_load_string($response);
+                //check if status is Success
+                if($parsedResponse->Ack == "Success"){
+                    echo '<p style="color:green;">Order list fetched successfully.</p>';
                 } else {
-                    // Handle API response (parse JSON or XML as needed)
-                    $parsedResponse = simplexml_load_string($response);
-                    // Process $parsedResponse to extract order information
-                    echo "<pre>"; print_r($parsedResponse); // Example: Output the parsed XML response
+                    echo '<p style="color:green;">Order list fetched successfully.</p>';
                 }
-
+                echo "<pre>"; print_r($parsedResponse); 
                 // Close cURL session
                 curl_close($ch);
             } else {
