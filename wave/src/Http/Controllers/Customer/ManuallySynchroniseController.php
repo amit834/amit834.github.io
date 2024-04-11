@@ -3,6 +3,7 @@
 namespace Wave\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use Wave\Http\Controllers\Customer\EbayConnectionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -22,8 +23,10 @@ class ManuallySynchroniseController extends Controller
         $is_active_connection = $user_detail->is_active_connection;
         //Check connecton type
         if($is_active_connection == "Ebay"){
-            //Get user token
-            $ebay_token = $user_detail->ebay_token;
+            //Call Ebay Connection Controller
+            $EbayConnectionController = new EbayConnectionController();
+            $access_token = $EbayConnectionController->handleTokenRefresh($user_detail);
+          
             //eBay API endpoint
             $endpoint = 'https://api.sandbox.ebay.com/ws/api.dll';
 
@@ -39,7 +42,7 @@ class ManuallySynchroniseController extends Controller
             $body = '<?xml version="1.0" encoding="UTF-8"?>
             <GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
               <RequesterCredentials>
-                <eBayAuthToken>'.$ebay_token.'</eBayAuthToken>
+                <eBayAuthToken>'.$access_token.'</eBayAuthToken>
               </RequesterCredentials>
               <OrderIDArray>
                 <OrderID>YOUR_ORDER_ID</OrderID>
