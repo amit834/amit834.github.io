@@ -27,6 +27,102 @@ class ManuallySynchroniseController extends Controller
             $EbayConnectionController = new EbayConnectionController();
             $access_token = $EbayConnectionController->handleTokenRefresh($user_detail);
           
+       
+// eBay sandbox API endpoint
+$api_endpoint = 'https://api.sandbox.ebay.com/sell/fulfillment/v1/order';
+
+// Replace 'YourSandboxUserToken' with your actual eBay sandbox user token
+
+// Construct the XML request (example order data)
+$xml_request = <<<XML
+<?xml version="1.0" encoding="utf-8"?>
+<AddOrderRequest xmlns="urn:ebay:apis:eBLBaseComponents">
+  <RequesterCredentials>
+    <eBayAuthToken>$access_token</eBayAuthToken>
+  </RequesterCredentials>
+  <Order>
+    <!-- Call-specific Input Fields -->
+    <OrderType>Place</OrderType>
+    <CreatingUserRole>Buyer</CreatingUserRole>
+    <PaymentMethods>PayPal</PaymentMethods>
+    <SellerEmail>seller@example.com</SellerEmail>
+    <ShippingDetails>
+      <InternationalShippingServiceOption>
+        <ShippingService>USPSPriorityMailInternational</ShippingService>
+        <ShippingServiceAdditionalCost>2.50</ShippingServiceAdditionalCost>
+        <ShippingServiceCost>12.00</ShippingServiceCost>
+        <ShippingServicePriority>1</ShippingServicePriority>
+        <ShipToLocation>Worldwide</ShipToLocation>
+      </InternationalShippingServiceOption>
+      <SalesTax>
+        <SalesTaxPercent>8.5</SalesTaxPercent>
+        <SalesTaxState>CA</SalesTaxState>
+        <ShippingIncludedInTax>true</ShippingIncludedInTax>
+      </SalesTax>
+      <ShippingServiceOptions>
+        <ShippingService>USPSFirstClass</ShippingService>
+        <ShippingServiceAdditionalCost>1.00</ShippingServiceAdditionalCost>
+        <ShippingServiceCost>5.00</ShippingServiceCost>
+        <ShippingServicePriority>2</ShippingServicePriority>
+      </ShippingServiceOptions>
+      <ThirdPartyCheckout>false</ThirdPartyCheckout>
+    </ShippingDetails>
+    <Total currencyID="USD">25.00</Total>
+    <TransactionArray>
+      <Transaction>
+        <Item>
+          <ItemID>1234567890</ItemID>
+          <!-- Add other item details here -->
+        </Item>
+        <TransactionID>9876543210</TransactionID>
+      </Transaction>
+      <!-- Add more Transaction nodes for multiple items -->
+    </TransactionArray>
+  </Order>
+  <!-- Standard Input Fields -->
+  <ErrorLanguage>en_US</ErrorLanguage>
+  <InvocationID>UUID1234567890</InvocationID>
+  <MessageID>4567890</MessageID>
+  <Version>1.0</Version>
+  <WarningLevel>High</WarningLevel>
+</AddOrderRequest>
+XML;
+
+// Initialize cURL session
+$ch = curl_init();
+
+// Set cURL options
+curl_setopt_array($ch, [
+    CURLOPT_URL => $api_endpoint,
+    CURLOPT_POST => true,
+    CURLOPT_POSTFIELDS => $xml_request,
+    CURLOPT_HTTPHEADER => [
+        'Content-Type: application/xml',
+        'X-EBAY-C-MARKETPLACE-ID: ebay.com', // eBay marketplace ID
+        'Authorization: Bearer '.$access_token, // Authorization header with your access token
+    ],
+    CURLOPT_RETURNTRANSFER => true,
+]);
+
+// Execute cURL request
+$response = curl_exec($ch);
+
+// Check for errors
+if (curl_errno($ch)) {
+    echo 'Error: ' . curl_error($ch);
+} else {
+    // Process API response (handle success or error responses)
+    $parsed_response = htmlspecialchars($response);
+    // Handle $parsed_response according to your needs
+    echo "<pre>";
+    print_r($parsed_response);
+}
+
+// Close cURL session
+curl_close($ch);
+
+exit;
+
             //Check if access token is exist
             if($access_token){
                 //eBay API endpoint
