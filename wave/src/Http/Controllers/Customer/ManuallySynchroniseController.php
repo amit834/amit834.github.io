@@ -13,7 +13,7 @@ use Wave\User;
 
 class ManuallySynchroniseController extends Controller
 {
-    //Function to get synchronise order manually
+    //Function to get synchronise orders manually
     public function synchronise_order_manually(Request $request) {
         //Login user id
         $login_user_id = Auth::id();
