@@ -29,41 +29,6 @@ class ManuallySynchroniseController extends Controller
             $EbayConnectionController = new EbayConnectionController();
             $access_token = $EbayConnectionController->handleTokenRefresh($user_detail);
 
-            // eBay API endpoint
-            $api_endpoint = 'https://api.sandbox.ebay.com/sell/fulfillment/v1/order';
-            $marketplace_id = 'EBAY_US'; // Adjust for the appropriate sandbox marketplace
-            
-            $ch = curl_init();
-            
-            curl_setopt_array($ch, [
-                CURLOPT_URL => $api_endpoint,
-                CURLOPT_HTTPGET => true,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_HTTPHEADER => [
-                    'Authorization: Bearer ' . $access_token,
-                    'Content-Type: application/json',
-                    'X-EBAY-C-MARKETPLACE-ID: ' . $marketplace_id,
-                ],
-            ]);
-            
-            $response = curl_exec($ch);
-            
-            if (curl_errno($ch)) {
-                echo 'Error: ' . curl_error($ch);
-            } else {
-                $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-                if ($http_code === 200) {
-                    echo "API call successful:\n";
-                    echo $response;
-                } else {
-                    echo "Error calling API. HTTP Status Code: $http_code\n";
-                    echo $response;
-                }
-            }
-            
-            curl_close($ch);
-            exit;
-            
             //Check if access token is exist
             if($access_token){
                 //eBay API endpoint
