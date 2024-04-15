@@ -198,10 +198,14 @@ $(document).ready(function () {
             },
             beforeSend: function() {
                // $('.synchronise_order_manually').prop('disabled', true);
+               $('body').addClass("responce-load");  
+               $(".admin-loader").show(); 
             },
             success: function(response) {
                 $('.synchronise_order_manually_res').html(response);
                 $('.synchronise_order_manually').prop('disabled', false);
+                $('body').removeClass("responce-load");  
+                $(".admin-loader").hide();
             }
         });
     });
