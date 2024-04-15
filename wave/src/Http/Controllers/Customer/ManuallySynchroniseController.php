@@ -23,98 +23,43 @@ class ManuallySynchroniseController extends Controller
         //Get login user detail
         $user_detail = User::Where('id',$login_user_id)->first();
         $is_active_connection = $user_detail->is_active_connection;
+        $ebay_marketplace = $user_detail->ebay_marketplace;
         //Check connecton type
         if($is_active_connection == "Ebay"){
             //Call Ebay Connection Controller
             $EbayConnectionController = new EbayConnectionController();
             $access_token = $EbayConnectionController->handleTokenRefresh($user_detail);
 
-            // eBay API endpoint
-           // eBay sandbox API endpoint
-$api_endpoint = 'https://api.sandbox.ebay.com/sell/fulfillment/v1/order';
-
-// Initialize cURL session
-$ch = curl_init();
-
-// Set cURL options
-curl_setopt_array($ch, [
-    CURLOPT_URL => $api_endpoint,
-    CURLOPT_HTTPGET => true,
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_HTTPHEADER => [
-        'Authorization: Bearer ' . $access_token,
-        'Content-Type: application/json',
-        'X-EBAY-C-MARKETPLACE-ID: EBAY_US',
-    ],
-]);
-
-// Execute cURL request
-$response = curl_exec($ch);
-
-// Check for errors
-if (curl_errno($ch)) {
-    echo 'Error: ' . curl_error($ch);
-} else {
-    // Process API response
-    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    if ($http_code === 200) {
-        // Success
-        echo "API call successful:\n";
-        echo $response;
-    } else {
-        // Error
-        echo "Error calling API. HTTP Status Code: $http_code\n";
-        echo $response;
-    }
-}
-
-// Close cURL session
-curl_close($ch);
-            exit;
-            
             //Check if access token is exist
             if($access_token){
                 //eBay API endpoint
-                $api_endpoint = env('EBAY_API_URI');
-                $endpoint = $api_endpoint.'/ws/api.dll';
+                $api_url = env('EBAY_API_URI');
+                //eBay API endpoint
+                $api_endpoint = $api_url.'/sell/fulfillment/v1/order?limit=200&offset=0';
 
-                // API request headers
-                $headers = array(
-                    'X-EBAY-API-COMPATIBILITY-LEVEL: 967',
-                    'X-EBAY-API-SITEID: 0',
-                    'X-EBAY-API-CALL-NAME: GetOrders',
-                    'Content-Type: text/xml',
-                    'X-EBAY-API-SANDBOX-REQUEST: true',
-                );
+                // Initialize cURL session
+                $ch = curl_init();
+                curl_setopt_array($ch, [
+                    CURLOPT_URL => $api_endpoint,
+                    CURLOPT_HTTPGET => true,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => [
+                        'Authorization: Bearer ' . $access_token,
+                        'Content-Type: application/json',
+                        'X-EBAY-C-MARKETPLACE-ID: '.$ebay_marketplace,
+                    ],
+                ]);
+                $response = curl_exec($ch);
+                // Process API response
+                $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-                // API request body (XML format)
-                $body = '<?xml version="1.0" encoding="UTF-8"?>
-                  <GetOrdersRequest xmlns="urn:ebay:apis:eBLBaseComponents">
-                    <RequesterCredentials>
-                        <eBayAuthToken>'.$access_token.'</eBayAuthToken>
-                    </RequesterCredentials>
-                    <OrderIDArray>
-                      <OrderID>YOUR_ORDER_ID</OrderID>
-                    </OrderIDArray>
-                  </GetOrdersRequest>';
-
-                  // Initialize cURL session
-                  $ch = curl_init();
-                  curl_setopt($ch, CURLOPT_URL, $endpoint);
-                  curl_setopt($ch, CURLOPT_POST, true);
-                  curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
-                  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-                  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                  $response = curl_exec($ch);
-                  // Handle API response (parse JSON or XML as needed)
-                  $parsedResponse = simplexml_load_string($response);
-                  //check if status is Success
-                  if($parsedResponse->Ack == "Success"){
+                //check if status is Success
+                if ($http_code === 200) {
                     //Store dummy order data
                     $order_data_list = '{
-                      "href": "https://api.ebay.com/sell/fulfillment/v1/order?limit=200&offset=0",
+                      "href": "https://api.sandbox.ebay.com/sell/fulfillment/v1/order?limit=200&offset=0",
                       "total": 2190,
-                      "next": "https://api.ebay.com/sell/fulfillment/v1/order?limit=200&offset=200",
+                      "next": "https://api.sandbox.ebay.com/sell/fulfillment/v1/order?limit=200&offset=200",
                       "limit": 200,
                       "offset": 0,
                       "orders": [
@@ -540,12 +485,12 @@ curl_close($ch);
                     //echo "<pre>"; print_r($array_order_data_list);
                     echo '<p style="color:green;">Order list fetched successfully.</p>';
                     echo '<script>setTimeout(function() { window.location.href = ""; }, 3000);</script>';
-                } else {
-                    echo '<p style="color:red;">Oops Something wrong with eBay.</p>';
-                }
-                //echo "<pre>"; print_r($parsedResponse); 
-                // Close cURL session
-                curl_close($ch);
+              } else {
+                  echo '<p style="color:red;">Oops Something wrong with eBay.</p>';
+              }
+              //echo "<pre>"; print_r($parsedResponse); 
+              // Close cURL session
+              curl_close($ch);
             } else {
                 echo '<p style="color:Red;">Oops Something wrong with eBay authication.</p>';
             }
