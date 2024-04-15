@@ -606,27 +606,12 @@
                                        <div class="select">
                                           <select name="ebay_user_marketplace" id="ebay_user_marketplace">
                                              <option value="">Select a Marketplace...</option>
-                                             <option value="Australia -- ebay.com.au" <?php if($user_details->ebay_marketplace == 'Australia -- ebay.com.au') echo "selected"; ?>>Australia -- ebay.com.au</option>
-                                             <option value="Austria -- ebay.at" <?php if($user_details->ebay_marketplace == 'Austria -- ebay.at') echo "selected"; ?>>Austria -- ebay.at</option>
-                                             <option value="Belgium(Française) -- befr.ebay.be" <?php if($user_details->ebay_marketplace == 'Belgium(Française) -- befr.ebay.be') echo "selected"; ?>>Belgium(Française) -- befr.ebay.be</option>
-                                             <option value="Belgium (Nederlandse) -- benl.ebay.be" <?php if($user_details->ebay_marketplace == 'Belgium (Nederlandse) -- benl.ebay.be') echo "selected"; ?>> Belgium (Nederlandse) -- benl.ebay.be</option>
-                                             <option value="Canada (Française) -- cafr.ebay.ca" <?php if($user_details->ebay_marketplace == 'Canada (Française) -- cafr.ebay.ca') echo "selected"; ?>>Canada(Française) -- cafr.ebay.ca</option>
-                                             <option value="Canada -- ebay.ca" <?php if($user_details->ebay_marketplace == 'Canada -- ebay.ca') echo "selected"; ?>>Canada -- ebay.ca</option>
-                                             <option value="France -- ebay.fr" <?php if($user_details->ebay_marketplace == 'France -- ebay.fr') echo "selected"; ?>>France -- ebay.fr</option>
-                                             <option value="Germany -- ebay.de" <?php if($user_details->ebay_marketplace == 'Germany -- ebay.de') echo "selected"; ?>>Germany -- ebay.de</option>
-                                             <option value="Great Britain -- ebay.co.uk" <?php if($user_details->ebay_marketplace == 'Great Britain --ebay.co.uk') echo "selected"; ?>>Great Britain --ebay.co.uk</option>
-                                             <option value="Hong Kong -- ebay.com.hk" <?php if($user_details->ebay_marketplace == 'Hong Kong -- ebay.com.hk') echo "selected"; ?>>Hong Kong -- ebay.com.hk</option>
-                                             <option value="India -- ebay.in" <?php if($user_details->ebay_marketplace == 'India -- ebay.in') echo "selected"; ?>>India -- ebay.in</option>
-                                             <option value="Ireland -- ebay.ie" <?php if($user_details->ebay_marketplace == 'Ireland -- ebay.ie') echo "selected"; ?>>Ireland -- ebay.ie</option>
-                                             <option value="Italy -- ebay.it" <?php if($user_details->ebay_marketplace == 'Italy -- ebay.it') echo "selected"; ?>>Italy -- ebay.it</option>
-                                             <option value="Malaysia -- ebay.com.my" <?php if($user_details->ebay_marketplace == 'Malaysia -- ebay.com.my') echo "selected"; ?>>Malaysia -- ebay.com.my</option>
-                                             <option value="Netherlands -- ebay.nl" <?php if($user_details->ebay_marketplace == 'Netherlands -- ebay.nl') echo "selected"; ?>>Netherlands -- ebay.nl</option>
-                                             <option value="Philippines -- ebay.ph" <?php if($user_details->ebay_marketplace == 'Philippines -- ebay.ph') echo "selected"; ?>>Philippines -- ebay.ph</option>
-                                             <option value="Poland -- ebay.pl" <?php if($user_details->ebay_marketplace == 'Poland -- ebay.pl') echo "selected"; ?>>Poland -- ebay.pl</option>
-                                             <option value="Singapore -- ebay.com.sg" <?php if($user_details->ebay_marketplace == 'Singapore -- ebay.com.sg') echo "selected"; ?>>Singapore -- ebay.com.sg</option>
-                                             <option value="Spain -- ebay.es" <?php if($user_details->ebay_marketplace == 'Spain -- ebay.es') echo "selected"; ?>>Spain -- ebay.es</option>
-                                             <option value="Switzerland -- ebay.ch" <?php if($user_details->ebay_marketplace == 'Switzerland -- ebay.ch') echo "selected"; ?>>Switzerland -- ebay.ch</option>
-                                             <option value="United States -- ebay.com" <?php if($user_details->ebay_marketplace == 'United States -- ebay.com') echo "selected"; ?>>United States -- ebay.com</option>
+                                             <option value="EBAY_AU" <?php if($user_details->ebay_marketplace == 'EBAY_AU') echo "selected"; ?>>Australia -- ebay.com.au</option>
+                                             <option value="EBAY_CA" <?php if($user_details->ebay_marketplace == 'EBAY_CA') echo "selected"; ?>>Canada(Française) -- cafr.ebay.ca</option>
+                                             <option value="EBAY_IN" <?php if($user_details->ebay_marketplace == 'EBAY_IN') echo "selected"; ?>>India -- ebay.in</option>
+                                             <option value="EBAY_SG" <?php if($user_details->ebay_marketplace == 'EBAY_SG') echo "selected"; ?>>Singapore -- ebay.com.sg</option>
+                                             <option value="EBAY_CH" <?php if($user_details->ebay_marketplace == 'EBAY_CH') echo "selected"; ?>>Switzerland -- ebay.ch</option>
+                                             <option value="EBAY_US" <?php if($user_details->ebay_marketplace == 'EBAY_US') echo "selected"; ?>>United States -- ebay.com</option>
                                           </select>
                                        </div>
                                     </div>
