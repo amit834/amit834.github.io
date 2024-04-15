@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Redirect;
 use GuzzleHttp\Client;
 use Wave\User;
 use Wave\Order;
+use Wave\ShippinDetail;
+use Wave\BuyerDetail;
 use Wave\OrderItem;
 
 class ManuallySynchroniseController extends Controller
@@ -451,6 +453,8 @@ class ManuallySynchroniseController extends Controller
                         //Get order id and item list
                         $order_id = $order_detail['orderId'] ?? "";
                         $order_items = $order_detail['lineItems'] ?? [];
+                        $shipping_details = $order_detail['fulfillmentStartInstructions'] ?? [];
+                        $buyer_detail = $order_detail['buyer'] ?? [];
                         //update or create order
                         $updateOrCreate = Order::updateOrCreate(
                           [
@@ -480,6 +484,12 @@ class ManuallySynchroniseController extends Controller
                         //Call Create Order Line Items Function
                         $table_order_id = $updateOrCreate->id;
                         $this->ebay_create_line_items($table_order_id,$order_id,$order_items);
+
+                        //Call Create Shipping Address Function
+                        $this->ebay_create_shipping_detail($table_order_id,$order_id,$shipping_details);
+
+                        //Call Create Shipping Address Function
+                        $this->ebay_create_buyerdetail($table_order_id,$order_id,$buyer_detail);
                       }
                     }
                     //echo "<pre>"; print_r($array_order_data_list);
@@ -539,6 +549,69 @@ class ManuallySynchroniseController extends Controller
           );
         }
       }
+    }
+
+    //Function for insert order shipping Detail
+    public static function ebay_create_shipping_detail($table_order_id,$order_id,$shipping_details){
+      //Check if order items is exists or not
+      if(count($shipping_details) >= 1){
+        foreach($shipping_details as $key => $shipping_detail) {
+          //Create Shipping Address
+          ShippinDetail::updateOrCreate(
+            [
+                'table_order_id' => $table_order_id,
+                'order_id' => $order_id,
+            ],
+            [
+                'table_order_id' => $table_order_id ?? "",
+                'order_id' => $order_id ?? "",
+                'ful_fillment_instructions_type' => $shipping_detail['fulfillmentInstructionsType'] ?? "",
+                'min_estimated_delivery_date' => $shipping_detail['minEstimatedDeliveryDate'] ?? "",
+                'max_estimated_delivery_date' => $shipping_detail['maxEstimatedDeliveryDate'] ?? "",
+                'supported_fulfillment' => $shipping_detail['ebaySupportedFulfillment'] ?? "",
+                'full_name' => $shipping_detail['shippingStep']['shipTo']['fullName'] ?? "",
+                'address_line' => $shipping_detail['shippingStep']['shipTo']['contactAddress']['addressLine1'] ?? "",
+                'city' => $shipping_detail['shippingStep']['shipTo']['contactAddress']['city'] ?? "",
+                'postal_code' => $shipping_detail['shippingStep']['shipTo']['contactAddress']['postalCode'] ?? "",
+                'country_code' => $shipping_detail['shippingStep']['shipTo']['contactAddress']['countryCode'] ?? "",
+                'primary_phone' => $shipping_detail['shippingStep']['shipTo']['primaryPhone']['phoneNumber'] ?? "",
+                'email' => $shipping_detail['shippingStep']['shipTo']['email'] ?? "",
+                'carrier_code' => $shipping_detail['shippingStep']['shippingCarrierCode'] ?? "",
+                'service_code' => $shipping_detail['shippingStep']['shippingServiceCode'] ?? "",
+            ]
+          );
+        }
+      }
+    }
+
+    //Function for insert order Buyer Detail
+    public static function ebay_create_buyerdetail($table_order_id,$order_id,$buyer_detail){
+      //Check if buyer detail is exists or not
+      if(count($buyer_detail) >= 1){
+          //Create Buyer Address
+          BuyerDetail::updateOrCreate(
+            [
+                'table_order_id' => $table_order_id,
+                'order_id' => $order_id,
+            ],
+            [
+                'table_order_id' => $table_order_id ?? "",
+                'order_id' => $order_id ?? "",
+                'user_name' => $buyer_detail['username'] ?? "",
+                'tax_address_state' => $buyer_detail['taxAddress']['stateOrProvince'] ?? "",
+                'tax_address_postal_code' => $buyer_detail['taxAddress']['postalCode'] ?? "",
+                'tax_address_country_code' => $buyer_detail['taxAddress']['countryCode'] ?? "",
+                'full_name' => $buyer_detail['buyerRegistrationAddress']['fullName'] ?? "",
+                'registration_address_line' => $buyer_detail['buyerRegistrationAddress']['contactAddress']['addressLine1'] ?? "",
+                'registration_address_city' => $buyer_detail['buyerRegistrationAddress']['contactAddress']['city'] ?? "",
+                'registration_address_state' => $buyer_detail['buyerRegistrationAddress']['contactAddress']['stateOrProvince'] ?? "",
+                'registration_address_postal_code' => $buyer_detail['buyerRegistrationAddress']['contactAddress']['postalCode'] ?? "",
+                'registration_address_country_code' => $buyer_detail['buyerRegistrationAddress']['contactAddress']['countryCode'] ?? "",
+                'phone_number' =>  $buyer_detail['buyerRegistrationAddress']['primaryPhone']['phoneNumber'] ?? "",
+                'email' =>  $buyer_detail['buyerRegistrationAddress']['email'] ?? "",
+            ]
+          );
+        }
     }
 }
 
