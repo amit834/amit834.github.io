@@ -20,6 +20,9 @@
       <script src="https://cdn.ckeditor.com/ckeditor5/17.0.0/classic/ckeditor.js"></script>
    </head>
    <body class="">
+      <div class="admin-loader" style="display:none;">
+         <img src="{{ asset('themes/tailwind/customer/assets/images/loader-img.gif') }}" class="loading-image">
+      </div>
       <div class="all-dashboard-saction">
       @include('theme::customer.layouts.sidebar')
       @yield('content')
