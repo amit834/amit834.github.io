@@ -210,6 +210,13 @@ $(document).ready(function () {
         });
     });
 
+    //show more order item list 
+    $('body').on('click', '.more_order_item', function() {
+        var order_table_id = $(this).data('order_table_id');
+        //Show class
+        $(".show_order_item_list"+order_table_id).show();
+        $(this).hide(); 
+    });
 });
 
 
