@@ -6,7 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Redirect;
+
 use Wave\User;
+use Wave\Order;
+use Wave\OrderItem;
+
 class DashboardController extends Controller
 {
     public function dashboard(){
@@ -14,7 +20,14 @@ class DashboardController extends Controller
     }
 
     public function sale_overview(){
-        return view('theme::customer.sale-overview');
+        //Login user id
+        $login_user_id = Auth::id();
+
+        //Get order detail
+        $all_orders = Order::Where('user_id', $login_user_id)->With('user_detail','buyer_detail','shipping_detail','order_items')->paginate(1);  
+       
+        //echo "<pre>"; print_r($all_orders); exit;
+        return view('theme::customer.sale-overview',compact('all_orders'));
     }
 
     public function product_listing(){

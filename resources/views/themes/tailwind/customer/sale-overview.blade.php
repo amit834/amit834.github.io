@@ -276,6 +276,7 @@
               </div>
             </div>
           </div>
+          @if(count($all_orders) >= 1)
           <div class="table-recent-sales-list">
             <div class="all-check-order">
                 <div class="form-group">
@@ -299,7 +300,74 @@
                 </tr>
               </thead>
               <tbody>
+              @foreach($all_orders as $key => $order_detail)
                 <tr>
+                  <td style="width: auto;" class="check-one"><div class="form-group">
+                      <input type="checkbox" id="html">
+                      <label for="html"></label>
+                    </div></td>
+                  <td style="width: 18%;">
+                    @if($order_detail['connection_type'] == 'Ebay')
+                      <img src="{{ asset('themes/tailwind/customer/assets/images/ebay.svg') }}" />
+                    @endif
+                    @php $item_count = 1; @endphp
+                    @foreach($order_detail['order_items'] as $key2 => $item_detail) 
+                      @if($item_count <= 1)
+                        <span class="quanity">Quanity: <em>{{ $item_detail['quantity']; }}</em></span>
+                        <p class="text-long">{{ $item_detail['title']; }}</p>
+                        <span class="sku">SKU: <em>{{ $item_detail['legacy_item_id']; }}</em></span>
+                      @endif
+                      <div class="more-order-item-list show_order_item_list{{ $order_detail['id']; }}" style="display:none;">
+                        @if($item_count >= 2)
+                          <span class="quanity">Quanity: <em>{{ $item_detail['quantity']; }}</em></span>
+                          <p class="text-long">{{ $item_detail['title']; }}</p>
+                          <span class="sku">SKU: <em>{{ $item_detail['legacy_item_id']; }}</em></span>
+                        @endif
+                      </div>
+                    @php $item_count++; @endphp
+                    @endforeach
+                    @if(count($order_detail['order_items']) >= 2)
+                      <a href="javascript:avoid();" class="show-more-td more_order_item" data-order_table_id="{{ $order_detail['id']; }}">Show More Details</a>
+                    @endif
+                  </td>
+                  <td><p>{{ $order_detail['buyer_detail']['full_name'] ?? "" }}</p>
+                    <span class="list-horning">eBay name: <em>{{ $order_detail['buyer_detail']['user_name'] ?? "" }}</em></span>
+                    <span class="list-horning">Email: <em>{{ $order_detail['buyer_detail']['email'] ?? "" }}</em></span>
+                    <span class="list-horning">Country Zip: <em>{{ $order_detail['buyer_detail']['registration_address_postal_code'] ?? "" }}</em></span> <span class="list-horning">ebay feedback: <em>h</em></span> <span class="list-horning">Customer No: <em>{{ $order_detail['buyer_detail']['phone_number'] ?? "" }}</em></span></td>
+                  <td class="center">
+                    @if(isset($order_detail['creation_date']))
+                      <p>{{ \Carbon\Carbon::parse($order_detail['creation_date'])->format('d M, Y') }}</p>
+                    @endif 
+                    @if(isset($order_detail['creation_date']))
+                      <span class="sale">({{ \Carbon\Carbon::parse($order_detail['creation_date'])->format('h:i:s A') }})</span>
+                    @endif 
+                  </td>
+                  <td class="center"><p>Ebay</p>
+                    <span class="paid">{{ $order_detail['order_payment_status']; }}</span></td>
+                  <td class="right"><span class="amount">{{ $order_detail['total_fee_basis_amount_value_currency']; }} {{ $order_detail['total_fee_basis_amount_value']; }}</span> <span class="h-total">Total: <em class="total">{{ $order_detail['total_fee_basis_amount_value_currency']; }} {{ $order_detail['total_fee_basis_amount_value']; }}</em></span></td>
+                  <td><p>{{ $order_detail['shipping_detail']['carrier_code']; }}</p>
+                    <span class="panel">Tracking ID: <em>{{ $order_detail['shipping_detail']['service_code']; }}</em></span> 
+                    @if(isset($order_detail['shipping_detail']['min_estimated_delivery_date']))
+                      <span class="panel">Dispatch time: <em>{{ \Carbon\Carbon::parse($order_detail['shipping_detail']['min_estimated_delivery_date'])->format('d M, Y, h:i A') }}</em></span>
+                    @endif 
+                  </td>
+                  <td><span class="feadback">Recived:
+                    <div class="form-group">
+                      <input type="checkbox" id="recived">
+                      <label for="recived"></label>
+                    </div>
+                    </span> <span class="feadback">Given:
+                    <div class="form-group">
+                      <input type="checkbox" id="given">
+                      <label for="given"></label>
+                    </div>
+                    </span></td>
+                  <td class="action">
+                    <a href="javascript:avoid();"><img src="{{ asset('themes/tailwind/customer/assets/images/edit-square.svg') }}" /></a> 
+                    <a href="javascript:avoid();"><img src="{{ asset('themes/tailwind/customer/assets/images/pdf-download.svg') }}" /></a> <a href="javascript:avoid();"><img src="{{ asset('themes/tailwind/customer/assets/images/fi-rr-trash.svg') }}" /></a></td>
+                </tr>
+                @endforeach
+                <!--<tr>
                   <td style="width: auto;" class="check-one"><div class="form-group">
                       <input type="checkbox" id="html">
                       <label for="html"></label>
@@ -508,45 +576,17 @@
                     </div>
                     </span></td>
                   <td class="action"><a href="#"><img src="{{ asset('themes/tailwind/customer/assets/images/edit-square.svg') }}" /></a> <a href="#"><img src="{{ asset('themes/tailwind/customer/assets/images/pdf-download.svg') }}" /></a> <a href="#"><img src="{{ asset('themes/tailwind/customer/assets/images/fi-rr-trash.svg') }}" /></a></td>
-                </tr>
-                <tr>
-                  <td style="width: auto;" class="check-one"><div class="form-group">
-                      <input type="checkbox" id="html">
-                      <label for="html"></label>
-                    </div></td>
-                  <td style="width: 18%;"><img src="{{ asset('themes/tailwind/customer/assets/images/ebay.svg') }}" /> <span class="quanity">Quanity: <em>01</em></span>
-                    <p class="text-long">LEGO 7168 Hero Factory...</p>
-                    <span class="sku">SKU: <em>203879740757</em></span> <a href="#" class="show-more-td">Show More Details</a></td>
-                  <td><p>Mariya Hornig</p>
-                    <span class="list-horning">eBay name: <em>mia.mama</em></span> <span class="list-horning">Country Zip: <em>D-33181</em></span> <span class="list-horning">ebay feedback: <em>h</em></span> <span class="list-horning">Customer No: <em>482</em></span></td>
-                  <td class="center"><p>21 Mar, 2022</p>
-                    <span class="sale">(03:25:54 PM)</span></td>
-                  <td class="center"><p>Paypal</p>
-                    <span class="paid">Paid</span></td>
-                  <td class="right"><span class="amount">$15.00</span> <span class="h-total">Total: <em class="total">$15.00</em></span></td>
-                  <td><p>DE_DHL package</p>
-                    <span class="panel">Tracking ID: <em>671052857</em></span> <span class="panel">Dispatch time: <em>671052857</em></span></td>
-                  <td><span class="feadback">Recived:
-                    <div class="form-group">
-                      <input type="checkbox" id="recived">
-                      <label for="recived"></label>
-                    </div>
-                    </span> <span class="feadback">Given:
-                    <div class="form-group">
-                      <input type="checkbox" id="given">
-                      <label for="given"></label>
-                    </div>
-                    </span></td>
-                  <td class="action"><a href="#"><img src="{{ asset('themes/tailwind/customer/assets/images/edit-square.svg') }}" /></a> <a href="#"><img src="{{ asset('themes/tailwind/customer/assets/images/pdf-download.svg') }}" /></a> <a href="#"><img src="{{ asset('themes/tailwind/customer/assets/images/fi-rr-trash.svg') }}" /></a></td>
-                </tr>
+                </tr>-->
               </tbody>
-              <tbody class="show-more-table">
+              <!--<tbody class="show-more-table">
                 <tr>
                   <td colspan="9"><span id="btn">Show more</span></td>
                 </tr>
-              </tbody>
+              </tbody>-->
             </table>
+            {{ $all_orders->links() }}
           </div>
+          @endif
         </div>
       </div>
     </div>
