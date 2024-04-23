@@ -357,8 +357,8 @@
                     <a href="javascript:avoid();"><img src="{{ asset('themes/tailwind/customer/assets/images/edit-square.svg') }}" /></a> 
                     <a href="javascript:avoid();"><img src="{{ asset('themes/tailwind/customer/assets/images/pdf-download.svg') }}" /></a> <a href="javascript:avoid();"><img src="{{ asset('themes/tailwind/customer/assets/images/fi-rr-trash.svg') }}" /></a></td>
                 </tr>
-                <tr class="show_order_item_list{{ $order_detail['id']; }}" style="display:none;">
-                  <td>
+                <tr class="show_order_item_list{{ $order_detail['id']; }} inner-td-text" style="display:none;">
+                  <td colspan="9">
                     <div class="row">
                     <div class="col-md-4">
                     <h6>Additional details</h6>
@@ -375,7 +375,6 @@
                     <h6>Payment specific:</h6>
                     <span class="d-block"><span class="gray-1">Payment channel:</span> <span class="gray-3">?</span></span>
                     <span class="d-block"><span class="gray-1">payment transaction id:</span><span class="gray-3">#3879740757</span></span>
-                    </div>
                     </div>
                   </td>
                 </tr>
