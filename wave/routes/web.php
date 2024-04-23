@@ -65,6 +65,9 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::view('cancelled', 'theme::cancelled')->name('wave.cancelled');
     Route::post('switch-plans', '\Wave\Http\Controllers\SubscriptionController@switchPlans')->name('wave.switch-plans');
 
+	//Communication Module
+	Route::get('admin/communications', '\Wave\Http\Controllers\CommunicationController@index')->name('wave.communications');
+
 	//Customer Only
 	Route::group(['middleware' => 'customer'], function(){
 		Route::get('customer/dashboard', [Wave\Http\Controllers\Customer\DashboardController::class, 'dashboard']);
