@@ -210,12 +210,21 @@ $(document).ready(function () {
         });
     });
 
-    //show more order item list 
-    $('body').on('click', '.more_order_item', function() {
+    //show more order detail
+    $('body').on('click', '.more_order_detail', function() {
         var order_table_id = $(this).data('order_table_id');
         //Show class
-        $(".show_order_item_list"+order_table_id).show();
+        $(".show_order_detail"+order_table_id).show();
+        $(".more_order_detail"+order_table_id).show();
         $(this).hide(); 
+    });
+
+    //show more order detail
+    $('body').on('click', '.less_order_detail', function() {
+        var order_table_id = $(this).data('order_table_id');
+        //Show class
+        $(".show_order_detail"+order_table_id).hide();
+        $(".less_order_detail"+order_table_id).show();
     });
 });
 
