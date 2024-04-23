@@ -67,6 +67,7 @@ Route::group(['middleware' => 'auth'], function(){
 
 	//Communication Module
 	Route::get('admin/communications', '\Wave\Http\Controllers\CommunicationController@index')->name('wave.communications');
+	Route::post('admin/update-create-connections', '\Wave\Http\Controllers\CommunicationController@create_update_connections')->name('update.create.connections');
 
 	//Customer Only
 	Route::group(['middleware' => 'customer'], function(){
