@@ -1990,7 +1990,10 @@ input:focus {
 	margin: 20px 0 0 0;
 }
 .sales-overview-table table td {
-	border-bottom: 1px solid #E6E7EB;
+	border-top: 1px solid #E6E7EB;
+}
+.inner-td-text td {
+	border: none !important;
 }
 .tbale-show-more .content {
 	height: auto;
