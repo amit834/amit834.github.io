@@ -301,7 +301,7 @@
               </thead>
               <tbody>
               @foreach($all_orders as $key => $order_detail)
-                <tr>
+                <tr class="main-row">
                   <td style="width: auto;" class="check-one"><div class="form-group">
                       <input type="checkbox" id="html">
                       <label for="html"></label>
@@ -313,22 +313,13 @@
                     @php $item_count = 1; @endphp
                     @foreach($order_detail['order_items'] as $key2 => $item_detail) 
                       @if($item_count <= 1)
-                        <span class="quanity">Quanity: <em>{{ $item_detail['quantity']; }}</em></span>
+                        <span class="quanity">Quantity: <em>{{ $item_detail['quantity']; }}</em></span>
                         <p class="text-long">{{ $item_detail['title']; }}</p>
                         <span class="sku">SKU: <em>{{ $item_detail['legacy_item_id']; }}</em></span>
                       @endif
-                      <div class="more-order-item-list show_order_item_list{{ $order_detail['id']; }}" style="display:none;">
-                        @if($item_count >= 2)
-                          <span class="quanity">Quanity: <em>{{ $item_detail['quantity']; }}</em></span>
-                          <p class="text-long">{{ $item_detail['title']; }}</p>
-                          <span class="sku">SKU: <em>{{ $item_detail['legacy_item_id']; }}</em></span>
-                        @endif
-                      </div>
-                    @php $item_count++; @endphp
+                      @php $item_count++; @endphp
                     @endforeach
-                    @if(count($order_detail['order_items']) >= 2)
-                      <a href="javascript:avoid();" class="show-more-td more_order_item" data-order_table_id="{{ $order_detail['id']; }}">Show More Details</a>
-                    @endif
+                    <a href="javascript:avoid();" class="show-more-td more_order_item" data-order_table_id="{{ $order_detail['id']; }}">Show More Details</a>
                   </td>
                   <td><p>{{ $order_detail['buyer_detail']['full_name'] ?? "" }}</p>
                     <span class="list-horning">eBay name: <em>{{ $order_detail['buyer_detail']['user_name'] ?? "" }}</em></span>
@@ -365,6 +356,27 @@
                   <td class="action">
                     <a href="javascript:avoid();"><img src="{{ asset('themes/tailwind/customer/assets/images/edit-square.svg') }}" /></a> 
                     <a href="javascript:avoid();"><img src="{{ asset('themes/tailwind/customer/assets/images/pdf-download.svg') }}" /></a> <a href="javascript:avoid();"><img src="{{ asset('themes/tailwind/customer/assets/images/fi-rr-trash.svg') }}" /></a></td>
+                </tr>
+                <tr class="show_order_item_list{{ $order_detail['id']; }} inner-td-text" style="display:none;">
+                  <td colspan="9">
+                    <div class="row">
+                    <div class="col-md-4">
+                    <h6>Additional details</h6>
+                    <span class="d-block"><span class="gray-1">Phone:</span> <span class="gray-3">+91-491593830</span></span>
+                    <span class="d-block"><span class="gray-1">mail:</span> <span class="gray-3">277b71df6e77dd28665@m3mbers.ebay.com</span></span>
+                    <span class="d-block"><span class="gray-1">Optional delivery address:</span> <span class="gray-3">2C/503 Natures Glory, Parsiknagar, kalwa, Thane, Kalwa, Thane</span></span>
+                    </div>
+                    <div class="col-md-4">
+                    <h6>Channel specific:</h6>
+                    <span class="d-block"><span class="gray-1">Channel order number:</span> <span class="gray-3">203879740757</span></span>
+                    <span class="d-block"><span class="gray-1">Customer response time stamp:</span> <span class="gray-3">21 Mar, 2022 (03:35:04 PM)</span></span> 
+                    </div>
+                    <div class="col-md-4">
+                    <h6>Payment specific:</h6>
+                    <span class="d-block"><span class="gray-1">Payment channel:</span> <span class="gray-3">?</span></span>
+                    <span class="d-block"><span class="gray-1">payment transaction id:</span><span class="gray-3">#3879740757</span></span>
+                    </div>
+                  </td>
                 </tr>
                 @endforeach
                 <!--<tr>

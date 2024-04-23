@@ -1990,7 +1990,10 @@ input:focus {
 	margin: 20px 0 0 0;
 }
 .sales-overview-table table td {
-	border-bottom: 1px solid #E6E7EB;
+	border-top: 1px solid #E6E7EB;
+}
+.inner-td-text td {
+	border: none !important;
 }
 .tbale-show-more .content {
 	height: auto;
@@ -6357,4 +6360,28 @@ input:checked + .slider::before {
 	width: 100%;
 	display: inline-block;
 	margin: 30px 0 0 0;
+}
+
+.inner-td-text h6 {
+	font-weight: 700;
+	color: #000;
+	font-size: 18px;
+	width: 100%;
+	display: inline-block;
+}
+.inner-td-text .d-block {
+	display: inline-block;
+	width: 100%;
+	margin: 8px 0 0 0;
+}
+.inner-td-text .gray-1 {
+	color: #35363C;
+	opacity: 0.5;
+	font-size: 17px;
+	text-transform: capitalize;
+}
+.inner-td-text .gray-3 {
+	color: #646B7F;
+	font-size: 17px;
+	font-weight: 500;
 }
