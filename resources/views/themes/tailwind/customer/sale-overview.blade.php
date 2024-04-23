@@ -319,11 +319,10 @@
                       @endif
                       @php $item_count++; @endphp
                     @endforeach
-                    <a href="javascript:avoid();" class="show-more-td more_order_item" data-order_table_id="{{ $order_detail['id']; }}">Show More Details</a>
+                    <a href="javascript:avoid();" class="show-more-td more_order_detail less_order_detail{{ $order_detail['id']; }}" data-order_table_id="{{ $order_detail['id']; }}">Show More Details</a>
                   </td>
                   <td><p>{{ $order_detail['buyer_detail']['full_name'] ?? "" }}</p>
                     <span class="list-horning">eBay name: <em>{{ $order_detail['buyer_detail']['user_name'] ?? "" }}</em></span>
-                    <span class="list-horning">Email: <em>{{ $order_detail['buyer_detail']['email'] ?? "" }}</em></span>
                     <span class="list-horning">Country Zip: <em>{{ $order_detail['buyer_detail']['registration_address_postal_code'] ?? "" }}</em></span> <span class="list-horning">ebay feedback: <em>h</em></span> <span class="list-horning">Customer No: <em>{{ $order_detail['buyer_detail']['phone_number'] ?? "" }}</em></span></td>
                   <td class="center">
                     @if(isset($order_detail['creation_date']))
@@ -355,27 +354,30 @@
                     </span></td>
                   <td class="action">
                     <a href="javascript:avoid();"><img src="{{ asset('themes/tailwind/customer/assets/images/edit-square.svg') }}" /></a> 
-                    <a href="javascript:avoid();"><img src="{{ asset('themes/tailwind/customer/assets/images/pdf-download.svg') }}" /></a> <a href="javascript:avoid();"><img src="{{ asset('themes/tailwind/customer/assets/images/fi-rr-trash.svg') }}" /></a></td>
+                    <a href="javascript:avoid();"><img src="{{ asset('themes/tailwind/customer/assets/images/pdf-download.svg') }}" /></a> <a href="javascript:avoid();"><img src="{{ asset('themes/tailwind/customer/assets/images/fi-rr-trash.svg') }}" /></a>
+                  </td>
                 </tr>
-                <tr class="show_order_item_list{{ $order_detail['id']; }} inner-td-text" style="display:none;">
+                <tr class="show_order_detail{{ $order_detail['id']; }} inner-td-text" style="display:none;">
                   <td colspan="9">
                     <div class="row">
                     <div class="col-md-4">
-                    <h6>Additional details</h6>
-                    <span class="d-block"><span class="gray-1">Phone:</span> <span class="gray-3">+91-491593830</span></span>
-                    <span class="d-block"><span class="gray-1">mail:</span> <span class="gray-3">277b71df6e77dd28665@m3mbers.ebay.com</span></span>
-                    <span class="d-block"><span class="gray-1">Optional delivery address:</span> <span class="gray-3">2C/503 Natures Glory, Parsiknagar, kalwa, Thane, Kalwa, Thane</span></span>
+                    <h6>Additional Details</h6>
+                    <span class="d-block"><span class="gray-1">Phone:</span> <span class="gray-3">{{ $order_detail['buyer_detail']['phone_number'] ?? "" }}</span></span>
+                    <span class="d-block"><span class="gray-1">Mail:</span> <span class="gray-3">{{ $order_detail['buyer_detail']['email'] ?? "" }}</span></span>
+                    <span class="d-block"><span class="gray-1">Optional Delivery Address:</span> <span class="gray-3">{{ $order_detail['shipping_detail']['full_name'] ?? "" }}, {{ $order_detail['shipping_detail']['address_line'] ?? "" }}, {{ $order_detail['shipping_detail']['city'] ?? "" }}, {{ $order_detail['shipping_detail']['postal_code'] ?? "" }}, {{ $order_detail['shipping_detail']['country_code'] ?? "" }}</span></span>
                     </div>
                     <div class="col-md-4">
-                    <h6>Channel specific:</h6>
-                    <span class="d-block"><span class="gray-1">Channel order number:</span> <span class="gray-3">203879740757</span></span>
-                    <span class="d-block"><span class="gray-1">Customer response time stamp:</span> <span class="gray-3">21 Mar, 2022 (03:35:04 PM)</span></span> 
+                    <h6>Channel Specific:</h6>
+                    <span class="d-block"><span class="gray-1">Channel Order Number:</span> <span class="gray-3">{{ $order_detail['shipping_detail']['order_id'] ?? "" }}</span></span>
+                    <span class="d-block"><span class="gray-1">Customer Response Time Stamp:</span> <span class="gray-3">{{ \Carbon\Carbon::parse($order_detail['shipping_detail']['min_estimated_delivery_date'])->format('d M, Y, h:i A') }}</span></span> 
                     </div>
                     <div class="col-md-4">
-                    <h6>Payment specific:</h6>
-                    <span class="d-block"><span class="gray-1">Payment channel:</span> <span class="gray-3">?</span></span>
-                    <span class="d-block"><span class="gray-1">payment transaction id:</span><span class="gray-3">#3879740757</span></span>
+                    <h6>Payment Specific:</h6>
+                    <span class="d-block"><span class="gray-1">Payment Channel:</span> <span class="gray-3">{{ $order_detail['connection_type'] ?? "" }}</span></span>
+                    <span class="d-block"><span class="gray-1">Payment Status:</span><span class="gray-3">#{{ $order_detail['order_payment_status'] ?? "" }}</span></span>
+                    <span class="d-block"><span class="gray-1">payment Transaction Id:</span><span class="gray-3">#{{ $order_detail['legacy_order_id'] ?? "" }}</span></span>
                     </div>
+                    <a href="javascript:avoid();" class="show-more-td less_order_detail more_order_detail{ $order_detail['id']; }}" data-order_table_id="{{ $order_detail['id']; }}">Show Less Details</a>
                   </td>
                 </tr>
                 @endforeach

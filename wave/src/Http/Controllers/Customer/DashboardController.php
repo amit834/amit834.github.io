@@ -24,7 +24,7 @@ class DashboardController extends Controller
         $login_user_id = Auth::id();
 
         //Get order detail
-        $all_orders = Order::Where('user_id', $login_user_id)->With('user_detail','buyer_detail','shipping_detail','order_items')->paginate(1);  
+        $all_orders = Order::Where('user_id', $login_user_id)->With('user_detail','buyer_detail','shipping_detail','order_items')->paginate(10);  
        
         //echo "<pre>"; print_r($all_orders); exit;
         return view('theme::customer.sale-overview',compact('all_orders'));
