@@ -21,13 +21,6 @@ class CommunicationController extends Controller
     
     //function for update or create communications
     public function create_update_connections(Request $request){
-        $validatedData = $request->validate([
-            'app_id' => 'required|string',
-            'dev_id' => 'required|string',
-            'client_secret' => 'required|string',
-            'api_uri' => 'required|string',
-            'api_auth_uri' => 'required|string',
-        ]);
         //update or create data
         $records = Connection::updateOrCreate(
             [
@@ -44,7 +37,7 @@ class CommunicationController extends Controller
         );
         //check it is created or updated or not
         if ($records) {
-            return redirect()->back()->with('success', 'Record saved successfully.');
+            return redirect()->back()->with('success', 'Connection Saved Successfully.');
         } else {
             return redirect()->back()->with('error', 'Failed to save record.');
         }
@@ -52,26 +45,21 @@ class CommunicationController extends Controller
 
     //function for change status
     public function change_connection_status(Request $request){
-        $status =  $request->status;
+        //Get Request
         $id =  $request->id;
-        if ($status === 'disable') {
-            Connection::where('id', $id)->update(['is_active' => 'enable']);
-            //upadte other ids
-            Connection::where('id', '!=', $id)->update(['is_active' => 'disable']);
-            //response
-            echo '<p style="color:green;">Connection switched succesfully.</p>';
+        //Update status
+        Connection::where('is_active', 'enable')->OrWhere('is_active', 'disable')->update(['is_active' => 'disable']);
+        //Update Status with use id
+        $is_updated = Connection::where('id', $id)->update(['is_active' => 'enable']);
+        if($is_updated){
+            echo '<p style="color:green;">Connection Switched Succesfully.</p>';
             echo "<script>
                 setTimeout(function() {
-                    window.location.reload();
+                    window.location.href = '';
                 }, 3000);
             </script>";
         } else {
             echo '<p style="color:red;">Oops something went wrong!</p>';
-            echo "<script>
-                setTimeout(function() {
-                    window.location.reload();
-                }, 3000);
-            </script>";
         }     
     }
 }
