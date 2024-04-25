@@ -25,7 +25,7 @@ $(document).ready(function () {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 beforeSend: function () {
-                    //$('.disable-submit').prop('disabled', true);
+                    $('.disable-submit').prop('disabled', true);
                 },
                 success: function (response) {
                     $('.submit_ebay_connetion_res').html(response);
