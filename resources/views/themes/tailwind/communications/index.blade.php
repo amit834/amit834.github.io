@@ -4,9 +4,9 @@
    var base_url = '{{ url("/") }}'; 
 </script>
 @section('content')
-<div class="flex px-8 mx-auto my-6 max-w-7xl xl:px-5">
+<div class="px-8 mx-auto my-6 max-w-7xl xl:px-5">
    <!-- End Settings Menu -->
-   <div class="flex flex-col w-full bg-white border rounded-lg md:w-4/5 border-gray-150">
+   <div class="flex-col communications-saction">
       <div class="uk-card-body">
          @if(session('success'))
          <div class="alert alert-success">

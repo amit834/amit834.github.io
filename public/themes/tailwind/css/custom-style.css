@@ -65,3 +65,36 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.communications-saction {
+	border: 1px solid #dcdcdc;
+	border-radius: 10px;
+	padding: 25px;
+	margin: 25px 0 0 0;
+}
+.communications-saction .tab-buttons button {
+	background-color: #046afe;
+	color: #ffff;
+	border: none;
+	border-radius: 7px;
+	padding: 8px 20px;
+	font-weight: 700;
+}
+.communications-saction table th {
+	border: 1px solid #dcdcdc;
+	background-color: #ebebeb;
+	color: #000;
+	padding: 8px 15px;
+	font-weight: 600;
+	font-size: 14px;
+}
+.communications-saction table {
+	width: 100%;
+	margin: 20px 0 0 0;
+}
+.communications-saction table td {
+	border: 1px solid #dcdcdc;
+	padding: 7px 15px;
+	color: #666;
+	font-size: 15px;
+}
