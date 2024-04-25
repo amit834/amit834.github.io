@@ -1,4 +1,5 @@
 <?php
+use Wave\Connection;
 
 if (!class_exists(WaveKeyValueConvertible::class)) {
     class WaveKeyValueConvertible
@@ -116,4 +117,18 @@ if(!function_exists('tailwindPlanColor')){
 	  return $code;
 	}
 
+}
+
+//Function for handle is active ebay connection details
+function is_active_ebay_connection_api_detail(){
+    //Get Connection Api details
+    $api_detail = Connection::Where('is_active','enable')->Where('type','ebay')->first();
+    //Check if active connection is exist or not
+    if($api_detail){
+        //Return Responce
+        return $api_detail->ToArray();
+    } else {
+        //Return Responce
+        return [];   
+    }
 }
