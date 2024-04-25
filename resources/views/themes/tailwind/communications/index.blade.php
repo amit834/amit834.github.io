@@ -1,74 +1,9 @@
 @extends('voyager::master')
+<link rel="stylesheet" href="{{ asset('themes/tailwind/css/custom-style.css') }}">
+<script> 
+    var base_url = '{{ url("/") }}'; 
+</script>
 @section('content')
-<style>
-/* Styles for tabs */
-.tab {
-    display: none;
-}
-
-.tab.active {
-    display: block;
-}
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-.switch input { 
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-</style>
 <div class="flex px-8 mx-auto my-6 max-w-7xl xl:px-5">
     <!-- Left Settings Menu -->
     <div class="w-16 mr-6 md:w-1/5">
@@ -335,50 +270,7 @@ input:checked + .slider:before {
         </div>
     </div>
 </div>
-<script>
-// Function to switch tabs
-function openTab(evt, tabName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tab");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
-// Show default tab on page load
-document.getElementById("all").style.display = "block";
-</script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    // send status request
-    $(document).ready(function() {
-        // Click event handler for the button
-        $('body').on('click', '.check-status', function() {
-            // Get the is_active value from the data attribute
-            var status = $(this).data('is-active');
-            var id = $(this).data('id');
-            base_url = 'http://localhost/ebay-connection/admin'
-            // Send AJAX request
-            $.ajax({
-                url: base_url+'/change-connection-status', // Replace with your route name
-                method: 'POST',
-                data: {
-                    status: status,
-                    id: id,
-                    _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
-                },
-                success: function(response) {
-                    // Handle success response
-                    $('#response-message').html(response);
-                }
-            });
-        });
-    });
-</script>
+<script src="{{ asset('themes/tailwind/js/custom-ajax.js') }}"></script>
+<script src="{{ asset('themes/tailwind/js/custom-js.js') }}"></script>
 @endsection
