@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('location_availability_quantity')->nullable();
             $table->string('condition')->nullable();
             $table->string('product_title')->nullable();
-            $table->textarea('product_description')->nullable();
+            $table->longtext('product_description')->nullable();
             $table->string('product_brand')->nullable();
-            $table->textarea('product_aspects')->nullable();
+            $table->longtext('product_aspects')->nullable();
             $table->string('product_mpn')->nullable();
             $table->timestamps();
         });
