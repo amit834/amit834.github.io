@@ -197,7 +197,7 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             beforeSend: function() {
-               // $('.synchronise_order_manually').prop('disabled', true);
+               $('.synchronise_order_manually').prop('disabled', true);
                $('body').addClass("responce-load");  
                $(".admin-loader").show(); 
             },
@@ -225,6 +225,29 @@ $(document).ready(function () {
         //Show class
         $(".show_order_detail"+order_table_id).hide();
         $(".less_order_detail"+order_table_id).show();
+    });
+
+    //Synchronise Listing Manually
+    $('body').on('click', '.synchronise_listing_manually', function() {
+        // Ajax Call
+        $.ajax({
+            type: 'GET',
+            url: base_url + '/customer/synchronise-listing-manually',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            beforeSend: function() {
+               $('.synchronise_listing_manually').prop('disabled', true);
+               $('body').addClass("responce-load");  
+               $(".admin-loader").show(); 
+            },
+            success: function(response) {
+                $('.synchronise_listing_manually_res').html(response);
+                $('.synchronise_listing_manually').prop('disabled', false);
+                $('body').removeClass("responce-load");  
+                $(".admin-loader").hide();
+            }
+        });
     });
 });
 

@@ -38,10 +38,6 @@ class DashboardController extends Controller
         return view('theme::customer.products');
     }
 
-    public function add_new_prodcut(){
-        return view('theme::customer.add-new-prodcut');
-    }
-
     public function manage_listing(){
         return view('theme::customer.manage-listing');
     }

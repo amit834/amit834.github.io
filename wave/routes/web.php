@@ -76,7 +76,6 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::get('customer/sale-overview', [Wave\Http\Controllers\Customer\DashboardController::class, 'sale_overview']);
 		Route::get('customer/product-listing', [Wave\Http\Controllers\Customer\DashboardController::class, 'product_listing']);
 		Route::get('customer/products', [Wave\Http\Controllers\Customer\DashboardController::class, 'products']);
-		Route::get('customer/add-new-prodcut', [Wave\Http\Controllers\Customer\DashboardController::class, 'add_new_prodcut']);
 		Route::get('customer/manage-listing', [Wave\Http\Controllers\Customer\DashboardController::class, 'manage_listing']);
 		Route::get('customer/manage-rules', [Wave\Http\Controllers\Customer\DashboardController::class, 'manage_rules']);
 		Route::get('customer/product-images', [Wave\Http\Controllers\Customer\DashboardController::class, 'product_images']);
@@ -89,7 +88,9 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::post('customer/submit-ebay-connection', [Wave\Http\Controllers\Customer\EbayConnectionController::class, 'submit_ebay_connection'])->name('customer.submit.ebay.connection');;
 		Route::get('customer/get-ebay-connection', [Wave\Http\Controllers\Customer\EbayConnectionController::class, 'ebay_authorization_callback']);
 		Route::get('customer/synchronise-order-manually', [Wave\Http\Controllers\Customer\ManuallySynchroniseController::class, 'synchronise_order_manually']);
-		
+		Route::get('customer/synchronise-listing-manually', [Wave\Http\Controllers\Customer\ManuallySynchroniseController::class, 'synchronise_listing_manually']);
+		Route::get('customer/add-new-product', [Wave\Http\Controllers\Customer\ProductController::class, 'add_new_product']);
+		Route::post('customer/submit-product', [Wave\Http\Controllers\Customer\ProductController::class, 'submit_product'])->name('customer.submit.product');
 	});
 });
 
