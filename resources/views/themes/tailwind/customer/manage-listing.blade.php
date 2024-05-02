@@ -17,7 +17,9 @@
                            <li class="active"><span data-href="#tab-1">Live</span></li>
                            <li><span data-href="#tab-2">Schedule</span></li>
                            <li><span data-href="#tab-3">Draft</span></li>
+                           <li><button type="button" class="synchronise_listing_manually">Synchronise Manually</button></li>
                         </ul>
+                        <div class="synchronise_listing_manually_res"></div>
                         <div class="seacrh-filter-listing">
                            <div class="input-search">
                               <input type="search" placeholder="Sku, Product name, UPC">

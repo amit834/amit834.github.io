@@ -14,6 +14,8 @@ use Wave\Order;
 use Wave\ShippinDetail;
 use Wave\BuyerDetail;
 use Wave\OrderItem;
+use Wave\Listing;
+use Wave\ListingItem;
 
 class ManuallySynchroniseController extends Controller
 {
@@ -499,12 +501,12 @@ class ManuallySynchroniseController extends Controller
                         //echo "<pre>"; print_r($array_order_data_list);
                         echo '<p style="color:green;">Order list fetched successfully.</p>';
                         echo '<script>setTimeout(function() { window.location.href = ""; }, 3000);</script>';
-                } else {
-                    echo '<p style="color:red;">Oops Something wrong with eBay.</p>';
-                }
-                //echo "<pre>"; print_r($parsedResponse); 
-                // Close cURL session
-                curl_close($ch);
+                    } else {
+                        echo '<p style="color:red;">Oops Something wrong with eBay.</p>';
+                    }
+                    //echo "<pre>"; print_r($parsedResponse); 
+                    // Close cURL session
+                    curl_close($ch);
                 } else {
                     echo '<p style="color:Red;">Oops Something wrong with eBay authication.</p>';
                 }
@@ -618,6 +620,157 @@ class ManuallySynchroniseController extends Controller
                 'email' =>  $buyer_detail['buyerRegistrationAddress']['email'] ?? "",
             ]
           );
+        }
+    }
+
+    //Function to get synchronise listing manually
+    public function synchronise_listing_manually(Request $request) {
+        //Login user id
+        $login_user_id = Auth::id();
+        
+         //Get login user detail
+         $user_detail = User::Where('id',$login_user_id)->first();
+         $is_active_connection = $user_detail->is_active_connection;
+         $ebay_marketplace = $user_detail->ebay_marketplace;
+         //Check connecton type
+         if($is_active_connection == "Ebay"){
+             //Call Ebay connection details
+             $ebay_connection_detail = is_active_ebay_connection_api_detail();
+             //Check if Active or not
+             if(count($ebay_connection_detail) >= 1){
+                //Call Ebay Connection Controller
+                $EbayConnectionController = new EbayConnectionController();
+                $access_token = $EbayConnectionController->handleTokenRefresh($user_detail);
+ 
+                //Check if access token is exist
+                if($access_token){
+                    //Store dummy listing data
+                    $jsonData = '{
+                        "responses": [
+                            {
+                                "statusCode": 200,
+                                "listingId": "1**********1",
+                                "inventoryItemGroupKey": "d********3",
+                                "marketplaceId": "EBAY_US",
+                                "inventoryItems": [
+                                    {
+                                        "sku": "d********2",
+                                        "offerId": "5********1"
+                                    },
+                                    {
+                                        "sku": "d********3",
+                                        "offerId": "5********2"
+                                    },
+                                    {
+                                        "sku": "d********1",
+                                        "offerId": "5********3"
+                                    },
+                                    {
+                                        "sku": "d********4",
+                                        "offerId": "5********4"
+                                    }
+                                ]
+                            },
+                            {
+                                "statusCode": 200,
+                                "listingId": "1**********2",
+                                "marketplaceId": "EBAY_US",
+                                "inventoryItems": [
+                                    {
+                                        "sku": "d********t",
+                                        "offerId": "5********5"
+                                    }
+                                ]
+                            },
+                            {
+                                "statusCode": 400,
+                                "marketplaceId": "EBAY_US",
+                                "errors": [
+                                    {
+                                        "errorId": 25001,
+                                        "domain": "API_INVENTORY",
+                                        "subdomain": "Selling",
+                                        "category": "REQUEST",
+                                        "message": "item sku cannot be null or empty.",
+                                        "parameters": []
+                                    }
+                                ]
+                            }
+                        ]
+                    }';
+                    // Decode JSON data into an associative array
+                    $arrayData = json_decode($jsonData, true);
+                    //Check if data is exit or not
+                    if(count($arrayData['responses']) >= 1){
+                        // Loop through responses
+                        $check_added_updated = false;
+                        foreach($arrayData['responses'] as $response) {
+                            //Flag true
+                            $check_added_updated = true;
+                            // Check if statusCode is 200
+                            if($response['statusCode'] == 200 && isset($response['inventoryItems'])) {
+                                //Get values
+                                $listing_id = $response['listingId'] ?? "";
+                                $market_place_id = $response['marketplaceId'] ?? "";
+                                $inventory_item_group_key = $response['inventoryItemGroupKey'] ?? "";
+
+                                //update or create listing
+                                $updateOrCreate = Listing::updateOrCreate(
+                                    [
+                                        'user_id' => $login_user_id,
+                                        'listing_id' =>  $listing_id,
+                                        'connection_type' => 'Ebay'
+                                    ],
+                                    [
+                                        'user_id' => $login_user_id,
+                                        'listing_id' => $listing_id,
+                                        'market_place_id' => $market_place_id,
+                                        'status' => 'Active',
+                                        'connection_type' => 'Ebay',
+                                    ]
+                                );
+
+                                // Loop through inventoryItems
+                                foreach ($response['inventoryItems'] as $item) {
+                                    //update or create listing Items
+                                    $updateOrCreate = ListingItem::updateOrCreate(
+                                        [
+                                            'listing_id' =>  $listing_id ?? "",
+                                            'sku' => $item['sku'] ?? "",
+                                            'offer_id' => $item['offerId'] ?? "",
+                                        ],
+                                        [
+                                            'listing_id' =>  $listing_id ?? "",
+                                            'sku' => $item['sku'] ?? "",
+                                            'offer_id' => $item['offerId'] ?? "",
+                                        ]
+                                    );
+                                }
+                            } 
+                        }
+
+                        //Check if Listing added or updated
+                        if($check_added_updated == true){
+                            echo '<p style="color:green;">Listing Inventory Items Added Successfully.</p>';
+                            echo '<script>setTimeout(function() { window.location.href = ""; }, 3000);</script>';
+                        } else {
+                            echo '<p style="color:red;">Listing Not Updated. Please Try Again.</p>';
+                        }
+                    } else {
+                        echo '<p style="color:red;">No Listing Found. Please Try Again.</p>';
+                    }
+                } else {
+                    echo '<p style="color:red;">Oops Something wrong with eBay authication.</p>';
+                }
+            } else {
+                echo '<p style="color:red;">eBay Connection Not Enabled. Please Contact With Support.</p>';
+            }
+        } elseif($is_active_connection == "Amazon"){
+            echo "Amazon";
+        } elseif($is_active_connection == "Google"){ 
+            echo "Google";
+        } else {
+            echo '<p style="color:red;">Please Set And Configure Atleast one connection for synchronise order.</p>';
         }
     }
 }
