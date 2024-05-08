@@ -36,7 +36,7 @@ class ProductController extends Controller
     public function submit_product(Request $request){
         //Login user id
         $login_user_id = Auth::id();
-
+      
         //Get login user detail
         $user_detail = User::Where('id',$login_user_id)->first();
         $is_active_connection = $user_detail->is_active_connection;
@@ -95,21 +95,78 @@ class ProductController extends Controller
                     ]; 
                     
                     // Initialize cURL session
-                    $ch = curl_init();
-                    curl_setopt_array($ch, [
-                        CURLOPT_URL => $api_endpoint,
-                        CURLOPT_HTTPGET => true,
+                    $product_ch = curl_init();
+                    curl_setopt_array($product_ch, [
+                        CURLOPT_URL => 'https://api.sandbox.ebay.com/sell/inventory/v1/inventory_item/G********1',
                         CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_CUSTOMREQUEST => 'PUT', // Use PUT method
+                        CURLOPT_POSTFIELDS => '{
+                            "availability": {
+                                "shipToLocationAvailability": {
+                                    "quantity": 50
+                                }
+                            },
+                            "condition": "NEW",
+                            "product": {
+                                "title": "GoPro Hero4 Helmet Cam",
+                                "description": "New GoPro Hero4 Helmet Cam. Unopened box.",
+                                "aspects": {
+                                    "Brand": [
+                                        "GoPro"
+                                    ],
+                                    "Type": [
+                                        "Helmet/Action"
+                                    ],
+                                    "Storage Type": [
+                                        "Removable"
+                                    ],
+                                    "Recording Definition": [
+                                        "High Definition"
+                                    ],
+                                    "Media Format": [
+                                        "Flash Drive (SSD)"
+                                    ],
+                                    "Optical Zoom": [
+                                        "10x"
+                                    ]
+                                },
+                                "brand": "GoPro",
+                                "mpn": "CHDHX-401",
+                                "imageUrls": [
+                                    "https://i*****g.com/0**********/**********1.jpg",
+                                    "https://i*****g.com/0**********/**********2.jpg",
+                                    "https://i*****g.com/0**********/**********3.jpg"
+                                ]
+                            }
+                        }', // Set the data to be sent
                         CURLOPT_HTTPHEADER => [
                             'Authorization: Bearer ' . $access_token,
                             'Content-Type: application/json',
-                            'X-EBAY-C-MARKETPLACE-ID: '.$ebay_marketplace,
+                            'X-EBAY-C-MARKETPLACE-ID: ' . $ebay_marketplace,
+                            'Content-Language: en-US' // Add Content-Language header
                         ],
                     ]);
-                    $response = curl_exec($ch);
-                    // Process API response
-                    $product_data_payload = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-                    echo "<pre>"; print_r($product_data_payload); exit;
+
+                    $response = curl_exec($product_ch);
+                    $httpCode = curl_getinfo($product_ch, CURLINFO_HTTP_CODE);
+                    echo $httpCode;
+                    exit;
+                    // Check HTTP response code and process response
+                    if ($httpCode >= 200 && $httpCode < 300) {
+                        // Success
+                        echo "Inventory item updated successfully.";
+                        echo "Response: " . $response; // Print response for debugging
+                        print_r($response);
+                    } else {
+                        // Error handling
+                        echo "Error updating inventory item. HTTP Code: " . $httpCode;
+                        echo "Response: " . $response; // Print response for debugging
+                    }
+
+                    // Close cURL session
+                    curl_close($product_ch);
+                    exit;
+
 
                     return back()->with('success', 'connection for synchronise order');
                 } else {

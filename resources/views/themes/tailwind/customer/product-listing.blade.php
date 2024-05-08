@@ -114,7 +114,7 @@
                               </div>
                            </div>
                            <input type="button" name="next" class="next action-button" value="Get Started" />
-                           <a href="{{ url('admin/add-new-prodcut') }}" class="create-new">Create New Product</a>
+                           <a href="{{ url('customer/add-new-product') }}" class="create-new">Create New Product</a>
                         </fieldset>
                         <fieldset>
                            <div class="tab-product-box-inner">

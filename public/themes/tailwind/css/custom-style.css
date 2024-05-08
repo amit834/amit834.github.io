@@ -65,3 +65,71 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.communications-saction {
+	border: 1px solid #dcdcdc;
+	border-radius: 10px;
+	padding: 25px;
+	margin: 25px 0 0 0;
+}
+.communications-saction .tab-buttons button {
+	background-color: #046afe;
+	color: #ffff;
+	border: none;
+	border-radius: 7px;
+	padding: 8px 20px;
+	font-weight: 700;
+}
+.communications-saction table th {
+	border: 1px solid #dcdcdc;
+	background-color: #ebebeb;
+	color: #000;
+	padding: 8px 15px;
+	font-weight: 600;
+	font-size: 14px;
+}
+.communications-saction table {
+	width: 100%;
+	margin: 20px 0 0 0;
+}
+.communications-saction table td {
+	border: 1px solid #dcdcdc;
+	padding: 7px 15px;
+	color: #666;
+	font-size: 15px;
+}
+.communications-saction h2 {
+	color: #000;
+	font-size: 24px;
+	font-weight: 600;
+	width: 100%;
+	display: inline-block;
+}
+.communications-saction form {
+	margin: 20px 0 0 0;
+}
+.communications-saction form label {
+	display: inline-block;
+	width: 100%;
+	color: #000;
+	font-weight: 700;
+}
+.communications-saction form input {
+	width: 30%;
+	background-color: #fff;
+	border: 1px solid #dcdcdc;
+	border-radius: 4px;
+	height: 54px;
+	padding: 0 10px;
+	margin-bottom: 20px;
+}
+.communications-saction form button {
+	background-color: #046afe;
+	border: none;
+	border-radius: 4px;
+	color: #fff;
+	padding: 12px 50px;
+	font-weight: 600;
+	font-size: 20px;
+	text-transform: capitalize;
+}
